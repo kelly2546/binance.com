@@ -27,7 +27,7 @@ export default function MobileAppSection() {
               <div className="flex items-center space-x-4">
                 <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center p-2">
                   <img 
-                    src="https://i.postimg.cc/fy6hsYgb/Screenshot-2025-06-16-145038.png" 
+                    src="https://bnb-prod-mbx-forum-uploads.s3.dualstack.ap-northeast-1.amazonaws.com/original/2X/0/0e442411b062e790c86bc9718463d4d045b882b4.png" 
                     alt="QR Code"
                     className="w-full h-full object-cover rounded"
                   />
