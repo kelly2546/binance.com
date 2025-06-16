@@ -8,6 +8,7 @@ import type { User } from "@shared/schema";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("Holding");
+  const [activeSection, setActiveSection] = useState("Dashboard");
   
   const { isLoading, user } = useTestAuth() as { 
     isAuthenticated: boolean; 
@@ -56,6 +57,279 @@ export default function Dashboard() {
   };
 
   const filteredCryptoData = getFilteredCryptoData();
+
+  // Function to render content based on active section
+  const renderMainContent = () => {
+    switch (activeSection) {
+      case "Assets":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Assets</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your cryptocurrency assets and portfolio overview will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Orders":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Orders</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your trading orders and order history will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Rewards Hub":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Rewards Hub</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your rewards, bonuses, and promotional offers will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Referral":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Referral</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your referral program details and earnings will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Account":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Account</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your account settings and profile information will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Sub Accounts":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Sub Accounts</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your sub-account management will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Settings":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Settings</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your application settings and preferences will appear here.</p>
+            </div>
+          </div>
+        );
+      default:
+        return (
+          <>
+            {/* User Profile Header */}
+            <div className="px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <Avatar className="h-12 w-12">
+                    <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
+                    <AvatarFallback className="bg-[#f0b90b] text-black font-bold">
+                      M
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex items-center space-x-2">
+                    <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h1 className="text-[#EAECEF] text-lg font-semibold">Mr_crypto_</h1>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-12 text-sm">
+                  <div className="text-center">
+                    <div className="text-[#848e9c]">UID</div>
+                    <div className="text-[#848e9c]">799181588</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-[#848e9c]">VIP Level</div>
+                    <div className="flex items-center space-x-1">
+                      <span className="text-[#848e9c]">Regular User</span>
+                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-[#848e9c]">Following</div>
+                    <div className="text-[#EAECEF] font-medium">14</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-[#848e9c]">Followers</div>
+                    <div className="text-[#EAECEF] font-medium">3</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Balance Section */}
+            <div className="px-6 py-4">
+              <div className="rounded-lg p-6 mb-6 border border-[#2b3139]">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2">
+                    <h2 className="text-[#EAECEF] text-base font-semibold">Estimated Balance</h2>
+                    <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                      Deposit
+                    </Button>
+                    <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                      Withdraw
+                    </Button>
+                    <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                      Cash In
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="flex items-baseline space-x-2 mb-2">
+                  <span className="text-[#EAECEF] text-3xl font-bold">0.02631079</span>
+                  <span className="text-[#848e9c] text-base font-medium">USDT</span>
+                  <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
+                </div>
+                
+                <div className="text-[#848e9c] text-sm mb-3">≈ $0.03</div>
+                
+                <div className="flex items-center space-x-2 mb-4">
+                  <span className="text-[#848e9c] text-sm">Today's PnL</span>
+                  <div className="flex items-center space-x-1">
+                    <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-[#0ecb81] text-sm font-medium">+ $0.00(0.71%)</span>
+                  </div>
+                </div>
+                
+                {/* Chart */}
+                <div className="h-12 bg-[#1e2329] rounded-lg relative overflow-hidden">
+                  <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
+                    <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="#FCD535" strokeWidth="2" fill="none"/>
+                  </svg>
+                </div>
+              </div>
+
+              {/* Markets Section */}
+              <div className="rounded-lg p-6 border border-[#2b3139]">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-[#EAECEF] text-base font-semibold">Markets</h2>
+                  <Button variant="ghost" className="text-[#FCD535] hover:text-[#e6c230] text-sm h-auto p-0 font-semibold">
+                    More {'>'}
+                  </Button>
+                </div>
+                
+                {/* Tabs */}
+                <div className="flex space-x-6 mb-6 border-b border-[#1e2329]">
+                  {["Holding", "Hot", "New Listing", "Favorite", "Top Gainers", "24h Volume"].map((tab) => (
+                    <button 
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      className={`pb-3 text-sm font-medium transition-colors ${
+                        activeTab === tab 
+                          ? "text-white border-b-2 border-[#f0b90b]" 
+                          : "text-[#848e9c] hover:text-white"
+                      }`}
+                    >
+                      {tab}
+                    </button>
+                  ))}
+                </div>
+                
+                {/* Table Header */}
+                <div className="grid grid-cols-5 gap-4 text-xs text-[#848e9c] mb-4 px-0">
+                  <div className="flex items-center">
+                    <span>Coin</span>
+                    <ChevronDown className="h-3 w-3 ml-1" />
+                  </div>
+                  <div className="flex items-center">
+                    <span>Amount</span>
+                    <ChevronDown className="h-3 w-3 ml-1" />
+                  </div>
+                  <div className="flex items-center">
+                    <span>Coin Price / Cost Price</span>
+                    <svg className="w-3 h-3 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="flex items-center">
+                    <span>24H Change</span>
+                    <ChevronDown className="h-3 w-3 ml-1" />
+                  </div>
+                  <div>Trade</div>
+                </div>
+                
+                {/* Cryptocurrency Rows */}
+                <div className="space-y-2">
+                  {filteredCryptoData.map((crypto: any, index: number) => (
+                    <div key={crypto.id} className="grid grid-cols-5 gap-4 items-center py-2 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full flex items-center justify-center overflow-hidden">
+                          <img 
+                            src={crypto.image} 
+                            alt={crypto.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">{crypto.symbol?.toUpperCase()}</div>
+                          <div className="text-[#848e9c] text-xs">{crypto.name}</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">
+                          {activeTab === "Holding" ? (Math.random() * 10).toFixed(2) : "--"}
+                        </div>
+                        <div className="text-[#848e9c] text-xs">
+                          ${crypto.current_price ? parseFloat(crypto.current_price).toFixed(2) : "0.00"}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">
+                          ${crypto.current_price ? parseFloat(crypto.current_price).toFixed(2) : "0.00"}
+                        </div>
+                        <div className="text-[#848e9c] text-xs">--</div>
+                      </div>
+                      <div>
+                        <span className={`text-sm font-medium ${
+                          parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
+                            ? 'text-[#0ecb81]' 
+                            : 'text-[#f6465d]'
+                        }`}>
+                          {parseFloat(crypto.price_change_percentage_24h || '0') >= 0 ? '+' : ''}
+                          {parseFloat(crypto.price_change_percentage_24h || '0').toFixed(2)}%
+                        </span>
+                      </div>
+                      <div>
+                        <Button variant="outline" size="sm" className="border-[#FCD535] text-[#FCD535] hover:bg-[#FCD535] hover:text-black text-xs h-6 px-3 font-semibold">
+                          Trade
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        );
+    }
+  };
 
   if (isLoading) {
     return (
@@ -134,7 +408,14 @@ export default function Dashboard() {
           <div className="p-4">
             {/* Dashboard */}
             <div className="mb-6">
-              <div className="flex items-center px-3 py-2 text-white rounded text-sm bg-[#181a20]">
+              <div 
+                onClick={() => setActiveSection("Dashboard")}
+                className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                  activeSection === "Dashboard" 
+                    ? "text-white bg-[#474d57]" 
+                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                }`}
+              >
                 <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                 </svg>
@@ -144,7 +425,14 @@ export default function Dashboard() {
             
             {/* Navigation */}
             <nav className="space-y-1">
-              <div className="flex items-center justify-between px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+              <div 
+                onClick={() => setActiveSection("Assets")}
+                className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                  activeSection === "Assets" 
+                    ? "text-white bg-[#474d57]" 
+                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                }`}
+              >
                 <div className="flex items-center">
                   <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
@@ -154,7 +442,14 @@ export default function Dashboard() {
                 <ChevronDown className="h-3 w-3" />
               </div>
               
-              <div className="flex items-center justify-between px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+              <div 
+                onClick={() => setActiveSection("Orders")}
+                className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                  activeSection === "Orders" 
+                    ? "text-white bg-[#474d57]" 
+                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                }`}
+              >
                 <div className="flex items-center">
                   <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
@@ -164,21 +459,42 @@ export default function Dashboard() {
                 <ChevronDown className="h-3 w-3" />
               </div>
               
-              <div className="flex items-center px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+              <div 
+                onClick={() => setActiveSection("Rewards Hub")}
+                className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                  activeSection === "Rewards Hub" 
+                    ? "text-white bg-[#474d57]" 
+                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                }`}
+              >
                 <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
                 </svg>
                 Rewards Hub
               </div>
               
-              <div className="flex items-center px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+              <div 
+                onClick={() => setActiveSection("Referral")}
+                className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                  activeSection === "Referral" 
+                    ? "text-white bg-[#474d57]" 
+                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                }`}
+              >
                 <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                 </svg>
                 Referral
               </div>
               
-              <div className="flex items-center justify-between px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+              <div 
+                onClick={() => setActiveSection("Account")}
+                className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                  activeSection === "Account" 
+                    ? "text-white bg-[#474d57]" 
+                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                }`}
+              >
                 <div className="flex items-center">
                   <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
@@ -188,14 +504,28 @@ export default function Dashboard() {
                 <ChevronDown className="h-3 w-3" />
               </div>
               
-              <div className="flex items-center px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+              <div 
+                onClick={() => setActiveSection("Sub Accounts")}
+                className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                  activeSection === "Sub Accounts" 
+                    ? "text-white bg-[#474d57]" 
+                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                }`}
+              >
                 <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                 </svg>
                 Sub Accounts
               </div>
               
-              <div className="flex items-center px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+              <div 
+                onClick={() => setActiveSection("Settings")}
+                className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                  activeSection === "Settings" 
+                    ? "text-white bg-[#474d57]" 
+                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                }`}
+              >
                 <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
                 </svg>
@@ -207,205 +537,7 @@ export default function Dashboard() {
 
         {/* Main Content */}
         <div className="flex-1 bg-[#181A20]">
-          {/* User Profile Header */}
-          <div className="px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Avatar className="h-12 w-12">
-                  <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
-                  <AvatarFallback className="bg-[#f0b90b] text-black font-bold">
-                    M
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex items-center space-x-2">
-                  <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
-                  </svg>
-                </div>
-                <div>
-                  <h1 className="text-[#EAECEF] text-lg font-semibold">Mr_crypto_</h1>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-12 text-sm">
-                <div className="text-center">
-                  <div className="text-[#848e9c]">UID</div>
-                  <div className="text-[#848e9c]">799181588</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-[#848e9c]">VIP Level</div>
-                  <div className="flex items-center space-x-1">
-                    <span className="text-[#848e9c]">Regular User</span>
-                    <ChevronDown className="h-3 w-3 text-[#848e9c]" />
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-[#848e9c]">Following</div>
-                  <div className="text-[#EAECEF] font-medium">14</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-[#848e9c]">Followers</div>
-                  <div className="text-[#EAECEF] font-medium">3</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Balance Section */}
-          <div className="px-6 py-4">
-            <div className="rounded-lg p-6 mb-6 border border-[#2b3139]">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-2">
-                  <h2 className="text-[#EAECEF] text-base font-semibold">Estimated Balance</h2>
-                  <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
-                    Deposit
-                  </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
-                    Withdraw
-                  </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
-                    Cash In
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="flex items-baseline space-x-2 mb-2">
-                <span className="text-[#EAECEF] text-3xl font-bold">0.02631079</span>
-                <span className="text-[#848e9c] text-base font-medium">USDT</span>
-                <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
-              </div>
-              
-              <div className="text-[#848e9c] text-sm mb-3">≈ $0.03</div>
-              
-              <div className="flex items-center space-x-2 mb-4">
-                <span className="text-[#848e9c] text-sm">Today's PnL</span>
-                <div className="flex items-center space-x-1">
-                  <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-[#0ecb81] text-sm font-medium">+ $0.00(0.71%)</span>
-                </div>
-              </div>
-              
-              {/* Chart */}
-              <div className="h-12 bg-[#1e2329] rounded-lg relative overflow-hidden">
-                <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
-                  <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="#FCD535" strokeWidth="2" fill="none"/>
-                </svg>
-              </div>
-            </div>
-
-            {/* Markets Section */}
-            <div className="rounded-lg p-6 border border-[#2b3139]">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-[#EAECEF] text-base font-semibold">Markets</h2>
-                <Button variant="ghost" className="text-[#FCD535] hover:text-[#e6c230] text-sm h-auto p-0 font-semibold">
-                  More {'>'}
-                </Button>
-              </div>
-              
-              {/* Tabs */}
-              <div className="flex space-x-6 mb-6 border-b border-[#1e2329]">
-                {["Holding", "Hot", "New Listing", "Favorite", "Top Gainers", "24h Volume"].map((tab) => (
-                  <button 
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`pb-3 text-sm font-medium transition-colors ${
-                      activeTab === tab 
-                        ? "text-white border-b-2 border-[#f0b90b]" 
-                        : "text-[#848e9c] hover:text-white"
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-              
-              {/* Table Header */}
-              <div className="grid grid-cols-5 gap-4 text-xs text-[#848e9c] mb-4 px-0">
-                <div className="flex items-center">
-                  <span>Coin</span>
-                  <ChevronDown className="h-3 w-3 ml-1" />
-                </div>
-                <div className="flex items-center">
-                  <span>Amount</span>
-                  <ChevronDown className="h-3 w-3 ml-1" />
-                </div>
-                <div className="flex items-center">
-                  <span>Coin Price / Cost Price</span>
-                  <svg className="w-3 h-3 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div className="flex items-center">
-                  <span>24H Change</span>
-                  <ChevronDown className="h-3 w-3 ml-1" />
-                </div>
-                <div>Trade</div>
-              </div>
-              
-              {/* Cryptocurrency Rows */}
-              <div className="space-y-2">
-                {filteredCryptoData.map((crypto: any, index: number) => (
-                  <div key={crypto.id} className="grid grid-cols-5 gap-4 items-center py-2 px-0 hover:bg-[#1e2329] rounded">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-6 h-6 rounded-full flex items-center justify-center overflow-hidden">
-                        <img 
-                          src={crypto.image} 
-                          alt={crypto.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <div className="text-[#EAECEF] text-sm font-semibold">{crypto.symbol?.toUpperCase()}</div>
-                        <div className="text-[#848e9c] text-xs">{crypto.name}</div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-[#EAECEF] text-sm font-medium">
-                        {activeTab === "Holding" ? (Math.random() * 10).toFixed(2) : "--"}
-                      </div>
-                      <div className="text-[#848e9c] text-xs">
-                        ${crypto.current_price ? parseFloat(crypto.current_price).toFixed(2) : "0.00"}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-[#EAECEF] text-sm font-medium">
-                        ${crypto.current_price ? parseFloat(crypto.current_price).toFixed(2) : "0.00"}
-                      </div>
-                      <div className="text-[#848e9c] text-xs">--</div>
-                    </div>
-                    <div>
-                      <span className={`text-sm font-medium ${
-                        parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
-                          ? 'text-[#0ecb81]' 
-                          : 'text-[#f6465d]'
-                      }`}>
-                        {parseFloat(crypto.price_change_percentage_24h || '0') >= 0 ? '+' : ''}
-                        {parseFloat(crypto.price_change_percentage_24h || '0').toFixed(2)}%
-                      </span>
-                    </div>
-                    <div>
-                      <Button variant="outline" size="sm" className="border-[#FCD535] text-[#FCD535] hover:bg-[#FCD535] hover:text-black text-xs h-6 px-3 font-semibold">
-                        Trade
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          {renderMainContent()}
         </div>
       </div>
     </div>
