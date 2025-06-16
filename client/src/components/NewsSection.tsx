@@ -23,16 +23,19 @@ export default function NewsSection() {
           ))
         ) : newsData ? (
           newsData.map((news) => (
-            <div 
+            <a 
               key={news.id}
-              className="text-sm text-[#EAECEF] hover:text-[#FCD535] cursor-pointer transition-colors"
+              href={news.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-sm text-[#EAECEF] hover:text-[#FCD535] cursor-pointer transition-colors"
             >
               {news.title}
-            </div>
+            </a>
           ))
         ) : (
           <div className="text-[#848e9c] text-sm">
-            News service currently unavailable. Please check back later.
+            No news available at the moment.
           </div>
         )}
       </div>
