@@ -304,11 +304,11 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">0.00007735</div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00000000</div>
                         <div className="text-[#848e9c] text-xs">$0.00</div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">0.29%</div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
                       </div>
                       <div>
                         <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
