@@ -55,8 +55,12 @@ export function useFirebaseAuth() {
             setUserProfile(profile);
           } else {
             // Fallback profile if no Firestore data exists
+            const generateNumericUID = () => {
+              return Math.floor(100000000 + Math.random() * 900000000).toString();
+            };
+            
             const fallbackProfile: UserProfile = {
-              uid: firebaseUser.uid,
+              uid: generateNumericUID(),
               email: firebaseUser.email || '',
               displayName: firebaseUser.displayName || 'Anonymous User',
               photoURL: firebaseUser.photoURL || '',

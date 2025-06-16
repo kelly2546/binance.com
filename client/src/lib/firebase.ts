@@ -85,12 +85,12 @@ export const signInWithGoogle = async () => {
   console.log('Auth state:', auth.currentUser);
   console.log('Provider config:', googleProvider);
   console.log('Firebase config domain:', firebaseConfig.authDomain);
-  
+
   try {
     console.log('Calling signInWithRedirect...');
     console.log('Using auth instance:', auth);
     console.log('Using provider:', googleProvider);
-    
+
     await signInWithRedirect(auth, googleProvider);
     console.log('signInWithRedirect call completed - redirect should happen now');
     // The page will redirect, so we don't return anything here
@@ -100,7 +100,7 @@ export const signInWithGoogle = async () => {
     if (error?.code) console.error("Error code:", error.code);
     if (error?.message) console.error("Error message:", error.message);
     if (error?.stack) console.error("Error stack:", error.stack);
-    
+
     // Check for common redirect issues
     if (error?.code === 'auth/unauthorized-domain') {
       console.error('Domain not authorized. Current domain:', window.location.origin);
@@ -112,7 +112,7 @@ export const signInWithGoogle = async () => {
     } else if (error?.code === 'auth/invalid-api-key') {
       console.error('Invalid API key in Firebase config');
     }
-    
+
     throw error;
   }
 };
@@ -124,14 +124,14 @@ export const handleRedirectResult = async () => {
     if (result) {
       console.log('Redirect sign-in successful:', result);
       const user = result.user;
-      
+
       // Try to create or update user profile in Firestore
       try {
         await createOrUpdateUserProfile(user);
       } catch (firestoreError) {
         console.log("Firestore access limited, using Firebase Auth data only");
       }
-      
+
       return user;
     }
     return null;
@@ -158,18 +158,18 @@ export const createEmailPasswordAccount = async (email: string, password: string
     console.log('Creating account with email:', email);
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    
+
     // Send email verification
     await sendEmailVerification(user);
     console.log('Verification email sent');
-    
+
     // Create user profile in Firestore
     await createOrUpdateUserProfile(user);
-    
+
     return user;
   } catch (error: any) {
     console.error("Error creating account:", error);
-    
+
     let errorMessage = 'Failed to create account';
     if (error?.code === 'auth/email-already-in-use') {
       errorMessage = 'An account with this email already exists';
@@ -180,7 +180,7 @@ export const createEmailPasswordAccount = async (email: string, password: string
     } else if (error?.message) {
       errorMessage = error.message;
     }
-    
+
     throw new Error(errorMessage);
   }
 };
@@ -190,14 +190,14 @@ export const signInWithEmailPassword = async (email: string, password: string) =
     console.log('Signing in with email:', email);
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    
+
     // Update user profile in Firestore
     await createOrUpdateUserProfile(user);
-    
+
     return user;
   } catch (error: any) {
     console.error("Error signing in:", error);
-    
+
     let errorMessage = 'Failed to sign in';
     if (error?.code === 'auth/user-not-found') {
       errorMessage = 'No account found with this email';
@@ -210,7 +210,7 @@ export const signInWithEmailPassword = async (email: string, password: string) =
     } else if (error?.message) {
       errorMessage = error.message;
     }
-    
+
     throw new Error(errorMessage);
   }
 };
@@ -230,9 +230,9 @@ export const createOrUpdateUserProfile = async (user: User) => {
   try {
     const userRef = doc(db, 'users', user.uid);
     const userSnap = await getDoc(userRef);
-    
+
     const now = Date.now();
-    
+
     if (!userSnap.exists()) {
       // Create new user profile with default crypto balances
       const userProfile: UserProfile = {
@@ -248,7 +248,7 @@ export const createOrUpdateUserProfile = async (user: User) => {
         portfolioBalance: 0,
         cryptoBalances: [...DEFAULT_CRYPTO_BALANCES]
       };
-      
+
       await setDoc(userRef, userProfile);
       return userProfile;
     } else {
@@ -259,14 +259,18 @@ export const createOrUpdateUserProfile = async (user: User) => {
         displayName: user.displayName || userSnap.data().displayName,
         photoURL: user.photoURL || userSnap.data().photoURL
       });
-      
+
       return userSnap.data() as UserProfile;
     }
   } catch (error) {
     console.error("Error creating/updating user profile:", error);
     // Return a basic profile using Firebase user data if Firestore fails
+    const generateNumericUID = () => {
+      return Math.floor(100000000 + Math.random() * 900000000).toString();
+    };
+
     return {
-      uid: user.uid,
+      uid: generateNumericUID(),
       email: user.email || '',
       displayName: user.displayName || 'Anonymous User',
       photoURL: user.photoURL || '',
@@ -285,7 +289,7 @@ export const getUserProfile = async (uid: string): Promise<UserProfile | null> =
   try {
     const userRef = doc(db, 'users', uid);
     const userSnap = await getDoc(userRef);
-    
+
     if (userSnap.exists()) {
       return userSnap.data() as UserProfile;
     }
@@ -323,7 +327,7 @@ export const updateUserCryptoBalance = async (uid: string, symbol: string, newBa
   try {
     const userRef = doc(db, 'users', uid);
     const userSnap = await getDoc(userRef);
-    
+
     if (userSnap.exists()) {
       const userData = userSnap.data() as UserProfile;
       const updatedBalances = userData.cryptoBalances.map(crypto => 
@@ -331,11 +335,11 @@ export const updateUserCryptoBalance = async (uid: string, symbol: string, newBa
           ? { ...crypto, balance: newBalance }
           : crypto
       );
-      
+
       await updateDoc(userRef, {
         cryptoBalances: updatedBalances
       });
-      
+
       return true;
     }
     return false;
