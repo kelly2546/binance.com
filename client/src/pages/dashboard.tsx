@@ -128,14 +128,13 @@ export default function Dashboard() {
           </div>
         </div>
       </header>
-
       <div className="flex">
         {/* Sidebar */}
         <div className="w-48 bg-[#181a20] min-h-[calc(100vh-64px)]">
           <div className="p-4">
             {/* Dashboard */}
             <div className="mb-6">
-              <div className="flex items-center px-3 py-2 text-white bg-[#474d57] rounded text-sm">
+              <div className="flex items-center px-3 py-2 text-white rounded text-sm bg-[#181a20]">
                 <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                 </svg>
