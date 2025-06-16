@@ -68,7 +68,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-[#181A20]">
       {/* Header */}
-      <header className="bg-[#181A20] border-b border-[#2b3139] h-16">
+      <header className="bg-[#181A20] h-16">
         <div className="h-full px-6 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
