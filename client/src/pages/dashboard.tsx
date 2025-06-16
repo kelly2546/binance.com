@@ -216,7 +216,7 @@ export default function Dashboard() {
 
           {/* Balance Section */}
           <div className="px-6 py-6">
-            <div className="bg-[#1e2329] rounded p-6 mb-6">
+            <div className="bg-[#2b3139] rounded p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
                   <h2 className="text-white text-base font-normal">Estimated Balance</h2>
@@ -256,7 +256,7 @@ export default function Dashboard() {
               </div>
               
               {/* Chart */}
-              <div className="h-12 bg-[#2b3139] rounded relative overflow-hidden">
+              <div className="h-12 bg-[#1e2329] rounded relative overflow-hidden">
                 <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
                   <path d="M0,42 L40,40 L80,38 L120,20 L160,18" stroke="#f0b90b" strokeWidth="2" fill="none"/>
                 </svg>
