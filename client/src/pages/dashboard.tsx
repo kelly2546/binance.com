@@ -727,7 +727,7 @@ export default function Dashboard() {
           <>
             {/* User Profile Header */}
             <div className="px-8 py-6 bg-[#181A20]">
-              <div className="flex items-center gap-12">
+              <div className="flex items-center justify-between w-full">
                 <div className="flex items-center space-x-3">
                   <Avatar className="h-10 w-10">
                     <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
@@ -748,7 +748,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 
-                <div className="flex items-center text-xs">
+                <div className="flex items-center space-x-16 text-xs">
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">UID</div>
                     <div className="flex items-center space-x-1">
@@ -761,9 +761,7 @@ export default function Dashboard() {
                       </button>
                     </div>
                   </div>
-                </div>
-                
-                <div className="flex items-center text-xs">
+                  
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">VIP Level</div>
                     <div className="flex items-center space-x-1 cursor-pointer group">
@@ -771,16 +769,12 @@ export default function Dashboard() {
                       <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
                     </div>
                   </div>
-                </div>
-                
-                <div className="flex items-center text-xs">
+                  
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">Following</div>
                     <div className="text-[#EAECEF] font-medium font-semibold">14</div>
                   </div>
-                </div>
-                
-                <div className="flex items-center text-xs">
+                  
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">Followers</div>
                     <div className="text-[#EAECEF] font-medium font-semibold">3</div>
