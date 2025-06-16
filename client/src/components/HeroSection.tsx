@@ -6,7 +6,7 @@ import NewsSection from "./NewsSection";
 import SignUpModal from "./SignUpModal";
 
 export default function HeroSection() {
-  const [userCount, setUserCount] = useState(277372927);
+  const [userCount, setUserCount] = useState(277373228);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
   useEffect(() => {
@@ -23,10 +23,10 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            <div className="text-6xl md:text-7xl font-bold text-[#FCD535] mb-4">
+            <div className="md:text-7xl font-bold text-[#FCD535] mb-4 text-[80px]">
               {userCount.toLocaleString()}
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#EAECEF]">
+            <h1 className="md:text-5xl font-bold mb-8 text-[#EAECEF] text-[96px]">
               USERS<br />TRUST US
             </h1>
             
@@ -104,7 +104,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      
       <SignUpModal 
         isOpen={isSignUpModalOpen} 
         onClose={() => setIsSignUpModalOpen(false)} 
