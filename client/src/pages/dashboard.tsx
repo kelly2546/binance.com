@@ -280,8 +280,8 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-xs">0.00000000</div>
-                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                        <div className="text-[#EAECEF] text-xs">{totalBalance.toFixed(8)}</div>
+                        <div className="text-[#848e9c] text-xs">${totalBalance.toFixed(2)}</div>
                       </div>
                       <div>
                         <div className="text-[#EAECEF] text-xs">0.00%</div>
@@ -306,8 +306,8 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">0.00000000</div>
-                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                        <div className="text-[#EAECEF] text-sm font-medium">{totalBalance.toFixed(8)}</div>
+                        <div className="text-[#848e9c] text-xs">${totalBalance.toFixed(2)}</div>
                       </div>
                       <div>
                         <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
@@ -332,8 +332,8 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
-                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                        <div className="text-[#EAECEF] text-sm font-medium">{totalBalance.toFixed(8)}</div>
+                        <div className="text-[#848e9c] text-xs">${totalBalance.toFixed(2)}</div>
                       </div>
                       <div>
                         <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
@@ -358,8 +358,8 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
-                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                        <div className="text-[#EAECEF] text-sm font-medium">{totalBalance.toFixed(8)}</div>
+                        <div className="text-[#848e9c] text-xs">${totalBalance.toFixed(2)}</div>
                       </div>
                       <div>
                         <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
