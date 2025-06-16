@@ -258,7 +258,7 @@ export default function Dashboard() {
               {/* Chart */}
               <div className="h-12 bg-[#2b3139] rounded relative overflow-hidden">
                 <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 48" preserveAspectRatio="none">
-                  <path d="M0,36 L40,32 L80,28 L120,30 L160,26 L200,24 L240,20 L280,18 L320,14 L360,12 L400,8" stroke="#f0b90b" strokeWidth="1.5" fill="none"/>
+                  <path d="M0,44 L80,42 L160,40 L240,38 L320,20 L400,18" stroke="#f0b90b" strokeWidth="2" fill="none"/>
                 </svg>
               </div>
             </div>
