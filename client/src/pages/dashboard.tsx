@@ -748,8 +748,8 @@ export default function Dashboard() {
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between flex-1 text-xs">
-                  <div className="text-left min-w-0">
+                <div className="flex items-center space-x-12 text-xs">
+                  <div className="text-left">
                     <div className="text-[#848e9c] mb-1">UID</div>
                     <div className="flex items-center space-x-1">
                       <span className="text-[#EAECEF] font-medium">799181588</span>
@@ -761,18 +761,18 @@ export default function Dashboard() {
                       </button>
                     </div>
                   </div>
-                  <div className="text-left min-w-0">
+                  <div className="text-left">
                     <div className="text-[#848e9c] mb-1">VIP Level</div>
                     <div className="flex items-center space-x-1 cursor-pointer group">
                       <span className="text-[#EAECEF] font-medium group-hover:text-[#FCD535] transition-colors">Regular User</span>
                       <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
                     </div>
                   </div>
-                  <div className="text-left min-w-0">
+                  <div className="text-left">
                     <div className="text-[#848e9c] mb-1">Following</div>
                     <div className="text-[#EAECEF] font-medium">14</div>
                   </div>
-                  <div className="text-left min-w-0">
+                  <div className="text-left">
                     <div className="text-[#848e9c] mb-1">Followers</div>
                     <div className="text-[#EAECEF] font-medium">3</div>
                   </div>
