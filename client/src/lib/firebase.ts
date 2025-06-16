@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, User } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXFmXzvL4XFzYF6couM_oVEolxcw_gBeg",
@@ -23,6 +23,47 @@ googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
+export interface CryptoBalance {
+  symbol: string;
+  name: string;
+  balance: number;
+  icon: string;
+}
+
+// Predefined cryptocurrencies that all users will have
+export const DEFAULT_CRYPTO_BALANCES: CryptoBalance[] = [
+  {
+    symbol: 'BTC',
+    name: 'Bitcoin',
+    balance: 0,
+    icon: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
+  },
+  {
+    symbol: 'ETH',
+    name: 'Ethereum',
+    balance: 0,
+    icon: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
+  },
+  {
+    symbol: 'USDT',
+    name: 'Tether',
+    balance: 0,
+    icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png'
+  },
+  {
+    symbol: 'BNB',
+    name: 'BNB',
+    balance: 0,
+    icon: 'https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png'
+  },
+  {
+    symbol: 'XRP',
+    name: 'XRP',
+    balance: 0,
+    icon: 'https://assets.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png'
+  }
+];
+
 export interface UserProfile {
   uid: string;
   email: string;
@@ -34,6 +75,7 @@ export interface UserProfile {
   following: number;
   followers: number;
   portfolioBalance: number;
+  cryptoBalances: CryptoBalance[];
 }
 
 // Auth functions
@@ -107,7 +149,7 @@ export const createOrUpdateUserProfile = async (user: User) => {
     const now = Date.now();
     
     if (!userSnap.exists()) {
-      // Create new user profile
+      // Create new user profile with default crypto balances
       const userProfile: UserProfile = {
         uid: user.uid,
         email: user.email || '',
@@ -118,7 +160,8 @@ export const createOrUpdateUserProfile = async (user: User) => {
         vipLevel: 'Regular User',
         following: 0,
         followers: 0,
-        portfolioBalance: 0
+        portfolioBalance: 0,
+        cryptoBalances: [...DEFAULT_CRYPTO_BALANCES]
       };
       
       await setDoc(userRef, userProfile);
@@ -147,7 +190,8 @@ export const createOrUpdateUserProfile = async (user: User) => {
       vipLevel: 'Regular User',
       following: 0,
       followers: 0,
-      portfolioBalance: 0
+      portfolioBalance: 0,
+      cryptoBalances: [...DEFAULT_CRYPTO_BALANCES]
     } as UserProfile;
   }
 };
@@ -171,4 +215,47 @@ export const getUserProfile = async (uid: string): Promise<UserProfile | null> =
 // Auth state observer
 export const onAuthStateChange = (callback: (user: User | null) => void) => {
   return onAuthStateChanged(auth, callback);
+};
+
+// Real-time user profile listener
+export const onUserProfileChange = (uid: string, callback: (profile: UserProfile | null) => void) => {
+  const userRef = doc(db, 'users', uid);
+  return onSnapshot(userRef, (doc) => {
+    if (doc.exists()) {
+      const profile = doc.data() as UserProfile;
+      callback(profile);
+    } else {
+      callback(null);
+    }
+  }, (error) => {
+    console.error("Error listening to user profile changes:", error);
+    callback(null);
+  });
+};
+
+// Update user crypto balance
+export const updateUserCryptoBalance = async (uid: string, symbol: string, newBalance: number) => {
+  try {
+    const userRef = doc(db, 'users', uid);
+    const userSnap = await getDoc(userRef);
+    
+    if (userSnap.exists()) {
+      const userData = userSnap.data() as UserProfile;
+      const updatedBalances = userData.cryptoBalances.map(crypto => 
+        crypto.symbol === symbol 
+          ? { ...crypto, balance: newBalance }
+          : crypto
+      );
+      
+      await updateDoc(userRef, {
+        cryptoBalances: updatedBalances
+      });
+      
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error("Error updating crypto balance:", error);
+    return false;
+  }
 };

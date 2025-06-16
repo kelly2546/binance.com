@@ -54,7 +54,8 @@ export function useFirebaseAuth() {
               vipLevel: 'Regular User',
               following: 0,
               followers: 0,
-              portfolioBalance: 0
+              portfolioBalance: 0,
+              cryptoBalances: []
             };
             setUserProfile(fallbackProfile);
           }
@@ -71,7 +72,8 @@ export function useFirebaseAuth() {
             vipLevel: 'Regular User',
             following: 0,
             followers: 0,
-            portfolioBalance: 0
+            portfolioBalance: 0,
+            cryptoBalances: []
           };
           setUserProfile(fallbackProfile);
         }
