@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy } from "lucide-react";
 import type { User } from "@shared/schema";
 import { useLocation } from "wouter";
+import CryptoPriceCard from "@/components/CryptoPriceCard";
+import NewsSection from "@/components/NewsSection";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("Holding");

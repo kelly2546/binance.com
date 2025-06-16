@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import CryptoPriceCard from "./CryptoPriceCard";
+import NewsSection from "./NewsSection";
 import SignUpModal from "./SignUpModal";
 
 export default function HeroSection() {
@@ -96,8 +97,11 @@ export default function HeroSection() {
             </div>
           </div>
           
-          {/* Right Content - Crypto Prices */}
-          <CryptoPriceCard />
+          {/* Right Content - Crypto Prices and News */}
+          <div className="space-y-6">
+            <CryptoPriceCard />
+            <NewsSection />
+          </div>
         </div>
       </div>
       
