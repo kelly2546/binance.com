@@ -12,7 +12,7 @@ interface LoginModalProps {
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [email, setEmail] = useState("");
-  const { login } = useFirebaseAuth();
+  const { login, error, loading } = useFirebaseAuth();
 
   const handleLogin = async () => {
     await login();
@@ -20,8 +20,15 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   };
 
   const handleGoogleLogin = async () => {
-    await login();
-    onClose();
+    console.log('LoginModal: Google login button clicked');
+    try {
+      await login();
+      // Only close modal if login succeeds (though with redirect, this may not be reached)
+      onClose();
+    } catch (err) {
+      console.error('LoginModal: Error during Google login:', err);
+      // Modal will stay open to show error
+    }
   };
 
   return (
@@ -61,6 +68,12 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
         </DialogHeader>
         
         <div className="space-y-6 pt-4">
+          {error && (
+            <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-3">
+              <p className="text-red-400 text-sm">{error}</p>
+            </div>
+          )}
+          
           <div>
             <label className="text-sm font-medium mb-2 block">
               Email/Phone number
@@ -101,13 +114,14 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
               onClick={handleGoogleLogin}
+              disabled={loading}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
                 alt="Google" 
                 className="w-5 h-5 mr-3" 
               />
-              Continue with Google
+              {loading ? 'Redirecting...' : 'Continue with Google'}
             </Button>
             
             <Button

@@ -81,24 +81,36 @@ export interface UserProfile {
 // Auth functions
 export const signInWithGoogle = async () => {
   console.log('Starting Google Sign-In with redirect...');
+  console.log('Current domain:', window.location.origin);
   console.log('Auth state:', auth.currentUser);
   console.log('Provider config:', googleProvider);
+  console.log('Firebase config domain:', firebaseConfig.authDomain);
   
   try {
     console.log('Calling signInWithRedirect...');
+    console.log('Using auth instance:', auth);
+    console.log('Using provider:', googleProvider);
+    
     await signInWithRedirect(auth, googleProvider);
     console.log('signInWithRedirect call completed - redirect should happen now');
     // The page will redirect, so we don't return anything here
   } catch (error: any) {
     console.error("Error starting Google Sign-In redirect:", error);
+    console.error("Full error object:", error);
     if (error?.code) console.error("Error code:", error.code);
     if (error?.message) console.error("Error message:", error.message);
+    if (error?.stack) console.error("Error stack:", error.stack);
     
     // Check for common redirect issues
     if (error?.code === 'auth/unauthorized-domain') {
-      console.error('Domain not authorized. Add your domain to Firebase console authorized domains.');
+      console.error('Domain not authorized. Current domain:', window.location.origin);
+      console.error('Add your domain to Firebase console authorized domains.');
+      console.error('Firebase project:', firebaseConfig.projectId);
     } else if (error?.code === 'auth/operation-not-allowed') {
       console.error('Google sign-in not enabled in Firebase console.');
+      console.error('Check Authentication > Sign-in method in Firebase console');
+    } else if (error?.code === 'auth/invalid-api-key') {
+      console.error('Invalid API key in Firebase config');
     }
     
     throw error;

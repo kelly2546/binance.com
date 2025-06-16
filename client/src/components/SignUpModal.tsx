@@ -14,7 +14,7 @@ interface SignUpModalProps {
 export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const { login } = useFirebaseAuth();
+  const { login, error, loading } = useFirebaseAuth();
 
   const handleSignUp = async () => {
     if (email && agreedToTerms) {
@@ -24,8 +24,13 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   };
 
   const handleGoogleSignUp = async () => {
-    await login();
-    onClose();
+    console.log('SignUpModal: Google signup button clicked');
+    try {
+      await login();
+      onClose();
+    } catch (err) {
+      console.error('SignUpModal: Error during Google signup:', err);
+    }
   };
 
   return (
@@ -49,6 +54,12 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
         </DialogHeader>
         
         <div className="space-y-6 pt-4">
+          {error && (
+            <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-3">
+              <p className="text-red-400 text-sm">{error}</p>
+            </div>
+          )}
+          
           <div>
             <label className="text-sm font-medium mb-2 block">
               Email/Phone number
@@ -99,13 +110,14 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
               onClick={handleGoogleSignUp}
+              disabled={loading}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
                 alt="Google" 
                 className="w-5 h-5 mr-3" 
               />
-              Continue with Google
+              {loading ? 'Redirecting...' : 'Continue with Google'}
             </Button>
             
             <Button

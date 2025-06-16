@@ -93,29 +93,40 @@ export function useFirebaseAuth() {
 
   const login = async () => {
     console.log('useFirebaseAuth: login() called');
+    console.log('Current URL:', window.location.href);
+    console.log('Firebase auth instance:', auth);
+    console.log('Current user before login:', auth.currentUser);
+    
     try {
       setError(null);
       setLoading(true);
       console.log('useFirebaseAuth: Starting signInWithGoogle redirect...');
+      console.log('About to call signInWithGoogle()');
       await signInWithGoogle();
       // The page will redirect, so we don't need to handle the result here
-      console.log('useFirebaseAuth: Redirect initiated');
+      console.log('useFirebaseAuth: Redirect initiated - this should not be reached if redirect works');
     } catch (err: any) {
       console.error('useFirebaseAuth: Login failed with error:', err);
       console.error('Error code:', err?.code);
       console.error('Error message:', err?.message);
+      console.error('Full error object:', err);
       
       let errorMessage = 'Login failed';
       if (err?.code === 'auth/unauthorized-domain') {
-        errorMessage = 'Domain not authorized for Firebase authentication';
+        errorMessage = 'Domain not authorized for Firebase authentication. Check Firebase console authorized domains.';
       } else if (err?.code === 'auth/operation-not-allowed') {
-        errorMessage = 'Google sign-in not enabled in Firebase';
+        errorMessage = 'Google sign-in not enabled in Firebase console';
+      } else if (err?.code === 'auth/popup-blocked') {
+        errorMessage = 'Popup was blocked by browser';
+      } else if (err?.code === 'auth/cancelled-popup-request') {
+        errorMessage = 'Another popup request was cancelled';
       } else if (err?.message) {
         errorMessage = err.message;
       }
       
       setError(errorMessage);
       setLoading(false);
+      alert(`Authentication Error: ${errorMessage}`);
     }
   };
 
