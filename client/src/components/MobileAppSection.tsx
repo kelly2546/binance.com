@@ -1,3 +1,5 @@
+import phoneImage from "@assets/image_1750071666454.png";
+
 export default function MobileAppSection() {
   return (
     <section className="bg-[var(--binance-dark)] py-20">
@@ -5,11 +7,13 @@ export default function MobileAppSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left - Phone Mockup */}
           <div className="flex justify-center">
-            <img 
-              src="https://bin.bnbstatic.com/image/julia/new-homepage/download-lite-dark-en.svg" 
-              alt="Binance Mobile App" 
-              className="max-w-sm w-full"
-            />
+            <div className="relative max-w-sm">
+              <img 
+                src={phoneImage} 
+                alt="Binance Mobile App" 
+                className="w-full h-auto rounded-3xl shadow-2xl"
+              />
+            </div>
           </div>
           
           {/* Right - Content */}
@@ -21,16 +25,12 @@ export default function MobileAppSection() {
             {/* QR Code Section */}
             <div className="bg-[var(--binance-card)] rounded-lg p-6 mb-8 max-w-md">
               <div className="flex items-center space-x-4">
-                <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center">
-                  {/* QR Code placeholder */}
-                  <div className="w-20 h-20 bg-black rounded grid grid-cols-8 gap-px p-1">
-                    {Array.from({ length: 64 }).map((_, i) => (
-                      <div 
-                        key={i} 
-                        className={`${Math.random() > 0.5 ? 'bg-white' : 'bg-black'}`}
-                      />
-                    ))}
-                  </div>
+                <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center p-2">
+                  <img 
+                    src="https://www.svgrepo.com/show/339458/qr-code.svg" 
+                    alt="QR Code"
+                    className="w-full h-full"
+                  />
                 </div>
                 <div>
                   <p className="text-[var(--binance-gray)] text-sm mb-1">Scan to Download App</p>
@@ -42,20 +42,25 @@ export default function MobileAppSection() {
             {/* Platform Downloads */}
             <div className="grid grid-cols-3 gap-4 max-w-md">
               <div className="text-center">
-                <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer">
-                  <i className="fab fa-apple text-2xl"></i>
+                <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer p-4">
+                  <img src="https://www.svgrepo.com/show/303125/apple-logo.svg" alt="Apple" className="w-full h-full" />
                 </div>
                 <p className="text-sm text-[var(--binance-gray)]">macOS</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer">
-                  <i className="fab fa-windows text-2xl"></i>
+                <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer p-4">
+                  <svg className="w-full h-full text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M0 12l1.608-1.608L12 20.784l10.392-10.392L24 12 12 24 0 12z"/>
+                    <path d="M0 0l1.608 1.608L12 12l10.392-10.392L24 0 12 12 0 0z"/>
+                  </svg>
                 </div>
                 <p className="text-sm text-[var(--binance-gray)]">Windows</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer">
-                  <i className="fab fa-linux text-2xl"></i>
+                <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer p-4">
+                  <svg className="w-full h-full text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                  </svg>
                 </div>
                 <p className="text-sm text-[var(--binance-gray)]">Linux</p>
               </div>
