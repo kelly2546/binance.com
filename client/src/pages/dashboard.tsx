@@ -729,9 +729,9 @@ export default function Dashboard() {
               <div className="flex items-center w-full font-semibold text-[16px]">
                 <div className="flex items-center space-x-3 min-w-0">
                   <Avatar className="h-10 w-10">
-                    <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
+                    <AvatarImage src={userProfile?.photoURL || user?.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.uid}`} />
                     <AvatarFallback className="bg-[#FCD535] text-[#0B0E11] font-bold text-sm">
-                      M
+                      {userProfile?.displayName?.charAt(0) || user?.displayName?.charAt(0) || 'U'}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex items-center space-x-2">
@@ -764,19 +764,19 @@ export default function Dashboard() {
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">VIP Level</div>
                     <div className="flex items-center space-x-1 cursor-pointer group">
-                      <span className="text-[#EAECEF] font-medium font-semibold group-hover:text-[#FCD535] transition-colors">Regular User</span>
+                      <span className="text-[#EAECEF] font-medium font-semibold group-hover:text-[#FCD535] transition-colors">{userProfile?.vipLevel || 'Regular User'}</span>
                       <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
                     </div>
                   </div>
                   
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">Following</div>
-                    <div className="text-[#EAECEF] font-medium font-semibold">14</div>
+                    <div className="text-[#EAECEF] font-medium font-semibold">{userProfile?.following || 0}</div>
                   </div>
                   
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">Followers</div>
-                    <div className="text-[#EAECEF] font-medium font-semibold">3</div>
+                    <div className="text-[#EAECEF] font-medium font-semibold">{userProfile?.followers || 0}</div>
                   </div>
                 </div>
               </div>
@@ -949,6 +949,22 @@ export default function Dashboard() {
     return (
       <div className="min-h-screen bg-[#181a20] flex items-center justify-center">
         <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#181A20] flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-white text-2xl mb-4">Please log in to access your dashboard</h1>
+          <Button 
+            onClick={() => setLocation("/")}
+            className="bg-[#FCD535] text-[#0B0E11] hover:bg-[#e6c230] px-6 py-2"
+          >
+            Go to Login
+          </Button>
+        </div>
       </div>
     );
   }

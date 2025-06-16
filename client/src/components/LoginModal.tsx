@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X, QrCode } from "lucide-react";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -11,6 +12,16 @@ interface LoginModalProps {
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [email, setEmail] = useState("");
+  const { login, loading, error } = useFirebaseAuth();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await login();
+      onClose();
+    } catch (err) {
+      console.error('Login failed:', err);
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -85,14 +96,22 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
+              onClick={handleGoogleSignIn}
+              disabled={loading}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
                 alt="Google" 
                 className="w-5 h-5 mr-3" 
               />
-              Continue with Google
+              {loading ? 'Signing in...' : 'Continue with Google'}
             </Button>
+            
+            {error && (
+              <div className="text-red-400 text-sm text-center mt-2">
+                {error}
+              </div>
+            )}
             
             <Button
               variant="outline"
