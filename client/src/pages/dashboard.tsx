@@ -923,51 +923,57 @@ export default function Dashboard() {
                   </div>
                 </div>
                 
-                <div className="flex items-baseline space-x-2 mb-2">
-                  <span className="text-[#EAECEF] text-3xl font-bold">{totalBalance.toFixed(8)}</span>
-                  <span className="text-[#848e9c] text-base font-medium">USDT</span>
-                  <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
-                </div>
-                
-                <div className="text-[#848e9c] text-sm mb-3">≈ ${totalBalance.toFixed(2)}</div>
-                
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="text-[#848e9c] text-sm">Today's PnL</span>
-                  <div className="flex items-center space-x-1">
-                    <svg className={`w-3 h-3 ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`} fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d={todayPnL >= 0 ? "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" : "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"} clipRule="evenodd" />
-                    </svg>
-                    <span className={`text-sm font-medium ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
-                      {todayPnL >= 0 ? '+' : ''} ${todayPnL.toFixed(2)}({pnlPercentage.toFixed(2)}%)
-                    </span>
+                {/* Main content - two columns */}
+                <div className="flex items-start justify-between">
+                  {/* Left side - Balance info */}
+                  <div className="flex-1">
+                    <div className="flex items-baseline space-x-2 mb-2">
+                      <span className="text-[#EAECEF] text-3xl font-bold">{totalBalance.toFixed(8)}</span>
+                      <span className="text-[#848e9c] text-base font-medium">USDT</span>
+                      <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
+                    </div>
+                    
+                    <div className="text-[#848e9c] text-sm mb-3">≈ ${totalBalance.toFixed(2)}</div>
+                    
+                    <div className="flex items-center space-x-2">
+                      <span className="text-[#848e9c] text-sm">Today's PnL</span>
+                      <div className="flex items-center space-x-1">
+                        <svg className={`w-3 h-3 ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`} fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d={todayPnL >= 0 ? "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" : "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"} clipRule="evenodd" />
+                        </svg>
+                        <span className={`text-sm font-medium ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
+                          {todayPnL >= 0 ? '+' : ''} ${todayPnL.toFixed(2)}({pnlPercentage.toFixed(2)}%)
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
-                {/* Chart */}
-                <div className="h-12 rounded-lg relative overflow-hidden bg-[transparent]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={chartData}>
-                      <Line 
-                        type="monotone" 
-                        dataKey="value" 
-                        stroke="#FCD535" 
-                        strokeWidth={2}
-                        dot={false}
-                        activeDot={{ r: 4, fill: "#FCD535" }}
-                      />
-                      <Tooltip 
-                        contentStyle={{
-                          backgroundColor: '#2B3139',
-                          border: '1px solid #4B5563',
-                          borderRadius: '6px',
-                          color: '#EAECEF'
-                        }}
-                        labelStyle={{ color: '#848E9C' }}
-                        formatter={(value: any) => [`$${parseFloat(value).toFixed(2)}`, 'Portfolio Value']}
-                        labelFormatter={(label) => `Time: ${label}`}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  
+                  {/* Right side - Chart */}
+                  <div className="w-64 h-20 ml-8">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={chartData}>
+                        <Line 
+                          type="monotone" 
+                          dataKey="value" 
+                          stroke="#FCD535" 
+                          strokeWidth={2}
+                          dot={false}
+                          activeDot={{ r: 4, fill: "#FCD535" }}
+                        />
+                        <Tooltip 
+                          contentStyle={{
+                            backgroundColor: '#2B3139',
+                            border: '1px solid #4B5563',
+                            borderRadius: '6px',
+                            color: '#EAECEF'
+                          }}
+                          labelStyle={{ color: '#848E9C' }}
+                          formatter={(value: any) => [`$${parseFloat(value).toFixed(2)}`, 'Portfolio Value']}
+                          labelFormatter={(label) => `Time: ${label}`}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
                 </div>
               </div>
 
