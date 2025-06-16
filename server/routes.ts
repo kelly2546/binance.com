@@ -1,9 +1,40 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { setupAuth, isAuthenticated } from "./replitAuth";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Auth middleware
+  await setupAuth(app);
+
+  // Auth routes
+  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+      res.json(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      res.status(500).json({ message: "Failed to fetch user" });
+    }
+  });
+
+  // User holdings route
+  app.get('/api/user/holdings', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const holdings = await storage.getUserHoldings(user.id);
+      res.json(holdings);
+    } catch (error) {
+      console.error("Error fetching user holdings:", error);
+      res.status(500).json({ message: "Failed to fetch holdings" });
+    }
+  });
   // Get cryptocurrency data from CoinGecko API
   app.get("/api/crypto", async (req, res) => {
     try {
