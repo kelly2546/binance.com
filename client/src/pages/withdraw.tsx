@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, Bell, Globe, Settings, MoreHorizontal, ChevronDown, Copy, QrCode } from "lucide-react";
+import { useCryptoData } from "@/hooks/useCryptoData";
+import { useUserHoldings } from "@/hooks/useUserHoldings";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Withdraw() {
   const [selectedCoin, setSelectedCoin] = useState("BTC");
@@ -11,6 +14,24 @@ export default function Withdraw() {
   const [address, setAddress] = useState("");
   const [network, setNetwork] = useState("");
   const [amount, setAmount] = useState("");
+
+  // Fetch user data and crypto prices
+  const { user, isAuthenticated } = useAuth();
+  const { data: cryptoData } = useCryptoData();
+  const { data: userHoldings } = useUserHoldings(undefined) as { data: any[] | undefined };
+
+  // Calculate available balance for selected coin
+  const getAvailableBalance = () => {
+    if (!userHoldings || !Array.isArray(userHoldings)) return 0;
+    
+    const holding = userHoldings.find((h: any) => 
+      h.symbol.toLowerCase() === selectedCoin.toLowerCase()
+    );
+    
+    return holding ? holding.amount : 0;
+  };
+
+  const availableBalance = getAvailableBalance();
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(address);
@@ -245,8 +266,13 @@ export default function Withdraw() {
                   className="bg-[#1e2329] border-[#2b3139] text-white placeholder:text-[#848e9c] text-right rounded-2xl"
                 />
                 <div className="flex items-center justify-between mt-2 text-xs text-[#848e9c]">
-                  <span>Available: 0.00125834 BTC</span>
-                  <button className="text-[#FCD535] hover:text-[#e6c230]">Max</button>
+                  <span>Available: {availableBalance.toFixed(8)} {selectedCoin}</span>
+                  <button 
+                    className="text-[#FCD535] hover:text-[#e6c230]"
+                    onClick={() => setAmount(availableBalance.toString())}
+                  >
+                    Max
+                  </button>
                 </div>
               </div>
 

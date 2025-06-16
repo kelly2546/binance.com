@@ -144,22 +144,24 @@ export default function Dashboard() {
               </div>
               
               <div className="flex items-baseline space-x-2 mb-2">
-                <span className="text-[#EAECEF] text-xl font-semibold">0.00000000</span>
+                <span className="text-[#EAECEF] text-xl font-semibold">{totalBalance.toFixed(8)}</span>
                 <span className="text-[#848e9c] text-sm">USDT</span>
                 <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
               </div>
               
               <div className="text-[#848e9c] text-xs mb-3">
-                ≈ $0.00
+                ≈ ${totalBalance.toFixed(2)}
               </div>
               
               <div className="flex items-center space-x-2 mb-4">
                 <span className="text-[#848e9c] text-xs">Today's PnL</span>
                 <div className="flex items-center space-x-1">
-                  <svg className="w-3 h-3 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" />
+                  <svg className={`w-3 h-3 ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`} fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d={todayPnL >= 0 ? "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" : "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"} clipRule="evenodd" />
                   </svg>
-                  <span className="text-xs text-[#848e9c]">$0.000 (0.0%)</span>
+                  <span className={`text-xs ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
+                    {todayPnL >= 0 ? '+' : ''}${Math.abs(todayPnL).toFixed(3)} ({pnlPercentage.toFixed(1)}%)
+                  </span>
                 </div>
               </div>
               
