@@ -1034,7 +1034,7 @@ export default function Dashboard() {
                         </span>
                       </div>
                       <div>
-                        <button className="text-[#FCD535] hover:text-[#e6c230] text-xs font-semibold cursor-pointer">
+                        <button className="text-[#FCD535] hover:text-[#e6c230] text-sm font-bold cursor-pointer">
                           Trade
                         </button>
                       </div>
