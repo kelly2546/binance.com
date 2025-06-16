@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTestAuth } from "@/hooks/useTestAuth";
 import { useQuery } from "@tanstack/react-query";
+import { useAssetsData } from "@/hooks/useAssetsData";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp } from "lucide-react";
@@ -27,6 +28,9 @@ export default function Dashboard() {
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
   }) as { data: any[] | undefined };
+
+  // Fetch assets data for Overview section
+  const { data: assetsData, isLoading: assetsLoading } = useAssetsData();
 
   // Helper function to get filtered crypto data based on active tab
   const getFilteredCryptoData = () => {
@@ -95,20 +99,70 @@ export default function Dashboard() {
               </div>
               
               <div className="flex items-baseline space-x-2 mb-2">
-                <span className="text-[#EAECEF] text-3xl font-bold">0.02629081</span>
+                <span className="text-[#EAECEF] text-3xl font-bold">
+                  {assetsData && assetsData.length > 0 ? (
+                    (() => {
+                      const holdings = [2.22, 0.00781662, 5.56, 0.00002101, 1.45, 0.125];
+                      const totalValue = assetsData.slice(0, 6).reduce((sum, asset, index) => {
+                        const holdingAmount = holdings[index] || 0;
+                        return sum + (holdingAmount * asset.current_price);
+                      }, 0);
+                      return totalValue.toFixed(8);
+                    })()
+                  ) : '0.02629081'}
+                </span>
                 <span className="text-[#848e9c] text-base font-medium">USDT</span>
                 <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
               </div>
               
-              <div className="text-[#848e9c] text-sm mb-3">≈ $0.03</div>
+              <div className="text-[#848e9c] text-sm mb-3">
+                ≈ ${assetsData && assetsData.length > 0 ? (
+                  (() => {
+                    const holdings = [2.22, 0.00781662, 5.56, 0.00002101, 1.45, 0.125];
+                    const totalValue = assetsData.slice(0, 6).reduce((sum, asset, index) => {
+                      const holdingAmount = holdings[index] || 0;
+                      return sum + (holdingAmount * asset.current_price);
+                    }, 0);
+                    return totalValue.toFixed(2);
+                  })()
+                ) : '0.03'}
+              </div>
               
               <div className="flex items-center space-x-2 mb-4">
                 <span className="text-[#848e9c] text-sm">Today's PnL</span>
                 <div className="flex items-center space-x-1">
-                  <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-[#0ecb81] text-sm font-medium">+ $0.000 (65%)</span>
+                  {assetsData && assetsData.length > 0 ? (
+                    (() => {
+                      const holdings = [2.22, 0.00781662, 5.56, 0.00002101, 1.45, 0.125];
+                      const totalPnL = assetsData.slice(0, 6).reduce((sum, asset, index) => {
+                        const holdingAmount = holdings[index] || 0;
+                        return sum + (holdingAmount * asset.current_price * (asset.price_change_percentage_24h / 100));
+                      }, 0);
+                      const totalValue = assetsData.slice(0, 6).reduce((sum, asset, index) => {
+                        const holdingAmount = holdings[index] || 0;
+                        return sum + (holdingAmount * asset.current_price);
+                      }, 0);
+                      const pnlPercentage = totalValue > 0 ? (totalPnL / totalValue) * 100 : 0;
+                      
+                      return (
+                        <>
+                          <svg className={`w-3 h-3 ${totalPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`} fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d={totalPnL >= 0 ? "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" : "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"} clipRule="evenodd" />
+                          </svg>
+                          <span className={`text-sm font-medium ${totalPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
+                            {totalPnL >= 0 ? '+' : ''} ${Math.abs(totalPnL).toFixed(3)} ({pnlPercentage.toFixed(1)}%)
+                          </span>
+                        </>
+                      );
+                    })()
+                  ) : (
+                    <>
+                      <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.000 (65%)</span>
+                    </>
+                  )}
                 </div>
               </div>
               
@@ -169,121 +223,64 @@ export default function Dashboard() {
               
               {/* Assets Rows */}
               <div className="space-y-2">
-                {/* BANANAS31 */}
-                <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full bg-[#f0b90b] flex items-center justify-center">
-                      <span className="text-black text-xs font-bold">🍌</span>
-                    </div>
-                    <div>
-                      <div className="text-[#EAECEF] text-sm font-semibold">BANANAS31</div>
-                      <div className="text-[#848e9c] text-xs">Banana For...</div>
-                    </div>
+                {assetsLoading ? (
+                  <div className="text-center py-8">
+                    <div className="text-[#848e9c]">Loading assets...</div>
                   </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-medium">2.22</div>
-                    <div className="text-[#848e9c] text-xs">$0.01</div>
+                ) : assetsData && assetsData.length > 0 ? (
+                  assetsData.slice(0, 6).map((asset, index) => {
+                    // Simulate different holding amounts for each asset
+                    const holdings = [2.22, 0.00781662, 5.56, 0.00002101, 1.45, 0.125];
+                    const holdingAmount = holdings[index] || 0;
+                    const holdingValue = holdingAmount * asset.current_price;
+                    
+                    return (
+                      <div key={asset.id} className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-6 h-6 rounded-full overflow-hidden">
+                            <img 
+                              src={asset.image} 
+                              alt={asset.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                              }}
+                            />
+                          </div>
+                          <div>
+                            <div className="text-[#EAECEF] text-sm font-semibold">{asset.symbol.toUpperCase()}</div>
+                            <div className="text-[#848e9c] text-xs">{asset.name.length > 15 ? asset.name.substring(0, 12) + "..." : asset.name}</div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-medium">{holdingAmount.toFixed(8)}</div>
+                          <div className="text-[#848e9c] text-xs">${holdingValue.toFixed(2)}</div>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-medium">${asset.current_price.toFixed(2)}</div>
+                          <div className="text-[#848e9c] text-xs">--</div>
+                        </div>
+                        <div>
+                          <div className="flex items-center space-x-1">
+                            <span className={`text-sm font-medium ${
+                              asset.price_change_percentage_24h >= 0 
+                                ? 'text-[#0ecb81]' 
+                                : 'text-[#f6465d]'
+                            }`}>
+                              {asset.price_change_percentage_24h >= 0 ? '+' : ''}
+                              ${(holdingAmount * asset.current_price * (asset.price_change_percentage_24h / 100)).toFixed(3)}
+                            </span>
+                            <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="text-center py-8">
+                    <div className="text-[#848e9c]">No assets data available</div>
                   </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-medium">$0.01</div>
-                    <div className="text-[#848e9c] text-xs">--</div>
-                  </div>
-                  <div>
-                    <div className="flex items-center space-x-1">
-                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.00</span>
-                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* USDT */}
-                <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full overflow-hidden">
-                      <img 
-                        src="https://cryptologos.cc/logos/tether-usdt-logo.png" 
-                        alt="USDT"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-[#EAECEF] text-sm font-semibold">USDT</div>
-                      <div className="text-[#848e9c] text-xs">TetherUS</div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-medium">0.00781662</div>
-                    <div className="text-[#848e9c] text-xs">$0.01</div>
-                  </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-medium">$1.00</div>
-                    <div className="text-[#848e9c] text-xs">--</div>
-                  </div>
-                  <div>
-                    <div className="flex items-center space-x-1">
-                      <span className="text-[#848e9c] text-sm font-medium">--</span>
-                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* HMSTR */}
-                <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full bg-[#ff6b35] flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">🐹</span>
-                    </div>
-                    <div>
-                      <div className="text-[#EAECEF] text-sm font-semibold">HMSTR</div>
-                      <div className="text-[#848e9c] text-xs">Hamster</div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-medium">5.56</div>
-                    <div className="text-[#848e9c] text-xs">$0.01</div>
-                  </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-medium">$0.00</div>
-                    <div className="text-[#848e9c] text-xs">--</div>
-                  </div>
-                  <div>
-                    <div className="flex items-center space-x-1">
-                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.00</span>
-                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* TON */}
-                <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full overflow-hidden">
-                      <img 
-                        src="https://cryptologos.cc/logos/toncoin-ton-logo.png" 
-                        alt="TON"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-[#EAECEF] text-sm font-semibold">TON</div>
-                      <div className="text-[#848e9c] text-xs">The Open Network</div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-medium">0.00002101</div>
-                    <div className="text-[#848e9c] text-xs">$0.01</div>
-                  </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-medium">$3.01</div>
-                    <div className="text-[#848e9c] text-xs">--</div>
-                  </div>
-                  <div>
-                    <div className="flex items-center space-x-1">
-                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.00</span>
-                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
