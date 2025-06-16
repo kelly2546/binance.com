@@ -215,32 +215,32 @@ export default function Dashboard() {
           </div>
 
           {/* Balance Section */}
-          <div className="px-6 py-6">
+          <div className="px-6 py-4">
             <div className="bg-[#2b3139] rounded p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
-                  <h2 className="text-white text-base font-normal">Estimated Balance</h2>
+                  <h2 className="text-white text-base font-medium">Estimated Balance</h2>
                   <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-6 px-3 rounded">
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3 rounded">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-6 px-3 rounded">
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3 rounded">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-6 px-3 rounded">
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3 rounded">
                     Cash In
                   </Button>
                 </div>
               </div>
               
-              <div className="flex items-baseline space-x-2 mb-1">
+              <div className="flex items-baseline space-x-2 mb-2">
                 <span className="text-white text-3xl font-bold">0.02631079</span>
-                <span className="text-[#848e9c] text-sm font-medium">USDT</span>
-                <ChevronDown className="h-3 w-3 text-[#848e9c] mt-1" />
+                <span className="text-[#848e9c] text-base font-medium">USDT</span>
+                <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
               </div>
               
               <div className="text-[#848e9c] text-sm mb-3">≈ $0.03</div>
@@ -251,7 +251,7 @@ export default function Dashboard() {
                   <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-[#0ecb81] text-sm font-medium">+ $0.000 (71%)</span>
+                  <span className="text-[#0ecb81] text-sm font-medium">+ $0.00(0.71%)</span>
                 </div>
               </div>
               
@@ -264,17 +264,17 @@ export default function Dashboard() {
             </div>
 
             {/* Markets Section */}
-            <div className="bg-[#1e2329] rounded-lg p-6">
+            <div className="bg-[#2b3139] rounded p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-white text-lg font-medium">Markets</h2>
-                <Button variant="ghost" className="text-[#f0b90b] hover:text-[#d9a709] text-sm h-auto p-0">
-                  More
+                <h2 className="text-white text-base font-medium">Markets</h2>
+                <Button variant="ghost" className="text-[#f0b90b] hover:text-[#d9a709] text-sm h-auto p-0 font-medium">
+                  More {'>'}
                 </Button>
               </div>
               
               {/* Tabs */}
-              <div className="flex space-x-8 mb-6 border-b border-[#2b3139]">
-                <button className="text-white pb-3 border-b-2 border-[#f0b90b] text-sm">Holding</button>
+              <div className="flex space-x-6 mb-6 border-b border-[#1e2329]">
+                <button className="text-white pb-3 border-b-2 border-[#f0b90b] text-sm font-medium">Holding</button>
                 <button className="text-[#848e9c] pb-3 text-sm hover:text-white">Hot</button>
                 <button className="text-[#848e9c] pb-3 text-sm hover:text-white">New Listing</button>
                 <button className="text-[#848e9c] pb-3 text-sm hover:text-white">Favorite</button>
@@ -283,16 +283,30 @@ export default function Dashboard() {
               </div>
               
               {/* Table Header */}
-              <div className="grid grid-cols-5 gap-4 text-xs text-[#848e9c] mb-4 px-2">
-                <div>Coin</div>
-                <div>Amount</div>
-                <div>Coin Price / Cost Price</div>
-                <div>24H Change</div>
+              <div className="grid grid-cols-5 gap-4 text-xs text-[#848e9c] mb-4 px-0">
+                <div className="flex items-center">
+                  <span>Coin</span>
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </div>
+                <div className="flex items-center">
+                  <span>Amount</span>
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </div>
+                <div className="flex items-center">
+                  <span>Coin Price / Cost Price</span>
+                  <svg className="w-3 h-3 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="flex items-center">
+                  <span>24H Change</span>
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </div>
                 <div>Trade</div>
               </div>
               
               {/* BANANAS31 Row */}
-              <div className="grid grid-cols-5 gap-4 items-center py-3 px-2 hover:bg-[#2b3139] rounded">
+              <div className="grid grid-cols-5 gap-4 items-center py-2 px-0 hover:bg-[#1e2329] rounded">
                 <div className="flex items-center space-x-3">
                   <div className="w-6 h-6 bg-[#f0b90b] rounded-full flex items-center justify-center">
                     <span className="text-black font-bold text-xs">🍌</span>
@@ -310,12 +324,11 @@ export default function Dashboard() {
                   <div className="text-white text-sm">$0.01</div>
                   <div className="text-[#848e9c] text-xs">--</div>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <TrendingUp className="h-3 w-3 text-[#0ecb81]" />
-                  <span className="text-[#0ecb81] text-sm">+0.64%</span>
+                <div>
+                  <span className="text-[#0ecb81] text-sm font-medium">+0.40%</span>
                 </div>
                 <div>
-                  <Button variant="outline" size="sm" className="border-[#f0b90b] text-[#f0b90b] hover:bg-[#f0b90b] hover:text-black text-xs h-6 px-3">
+                  <Button variant="outline" size="sm" className="border-[#f0b90b] text-[#f0b90b] hover:bg-[#f0b90b] hover:text-black text-xs h-6 px-3 font-medium">
                     Trade
                   </Button>
                 </div>
