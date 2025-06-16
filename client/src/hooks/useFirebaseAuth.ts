@@ -20,13 +20,43 @@ export function useFirebaseAuth() {
       setUser(firebaseUser);
       
       if (firebaseUser) {
-        // Fetch user profile from Firestore
+        // Try to fetch user profile from Firestore, fallback to Firebase Auth data
         try {
           const profile = await getUserProfile(firebaseUser.uid);
-          setUserProfile(profile);
+          if (profile) {
+            setUserProfile(profile);
+          } else {
+            // Fallback to creating profile from Firebase Auth data
+            const fallbackProfile: UserProfile = {
+              uid: firebaseUser.uid,
+              email: firebaseUser.email || '',
+              displayName: firebaseUser.displayName || 'Anonymous User',
+              photoURL: firebaseUser.photoURL || '',
+              createdAt: Date.now(),
+              lastLoginAt: Date.now(),
+              vipLevel: 'Regular User',
+              following: 0,
+              followers: 0,
+              portfolioBalance: 0
+            };
+            setUserProfile(fallbackProfile);
+          }
         } catch (err) {
           console.error('Error fetching user profile:', err);
-          setError('Failed to fetch user profile');
+          // Use Firebase Auth data as fallback
+          const fallbackProfile: UserProfile = {
+            uid: firebaseUser.uid,
+            email: firebaseUser.email || '',
+            displayName: firebaseUser.displayName || 'Anonymous User',
+            photoURL: firebaseUser.photoURL || '',
+            createdAt: Date.now(),
+            lastLoginAt: Date.now(),
+            vipLevel: 'Regular User',
+            following: 0,
+            followers: 0,
+            portfolioBalance: 0
+          };
+          setUserProfile(fallbackProfile);
         }
       } else {
         setUserProfile(null);
@@ -43,8 +73,44 @@ export function useFirebaseAuth() {
       setError(null);
       setLoading(true);
       const user = await signInWithGoogle();
-      const profile = await getUserProfile(user.uid);
-      setUserProfile(profile);
+      
+      // Try to get profile, but don't fail if Firestore is not accessible
+      try {
+        const profile = await getUserProfile(user.uid);
+        if (profile) {
+          setUserProfile(profile);
+        } else {
+          // Use Firebase Auth data directly
+          const authProfile: UserProfile = {
+            uid: user.uid,
+            email: user.email || '',
+            displayName: user.displayName || 'Anonymous User',
+            photoURL: user.photoURL || '',
+            createdAt: Date.now(),
+            lastLoginAt: Date.now(),
+            vipLevel: 'Regular User',
+            following: 0,
+            followers: 0,
+            portfolioBalance: 0
+          };
+          setUserProfile(authProfile);
+        }
+      } catch (profileErr) {
+        // Fallback to Firebase Auth data if Firestore fails
+        const authProfile: UserProfile = {
+          uid: user.uid,
+          email: user.email || '',
+          displayName: user.displayName || 'Anonymous User',
+          photoURL: user.photoURL || '',
+          createdAt: Date.now(),
+          lastLoginAt: Date.now(),
+          vipLevel: 'Regular User',
+          following: 0,
+          followers: 0,
+          portfolioBalance: 0
+        };
+        setUserProfile(authProfile);
+      }
     } catch (err: any) {
       setError(err.message || 'Login failed');
     } finally {
