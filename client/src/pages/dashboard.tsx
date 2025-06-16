@@ -216,7 +216,7 @@ export default function Dashboard() {
 
           {/* Balance Section */}
           <div className="px-6 py-4">
-            <div className="bg-[#2b3139] rounded-lg p-6 mb-6 shadow-lg border border-[#1e2329]">
+            <div className="rounded-lg p-6 mb-6 border border-[#2b3139]">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
                   <h2 className="text-[#EAECEF] text-base font-semibold">Estimated Balance</h2>
@@ -264,7 +264,7 @@ export default function Dashboard() {
             </div>
 
             {/* Markets Section */}
-            <div className="bg-[#2b3139] rounded-lg p-6 shadow-lg border border-[#1e2329]">
+            <div className="rounded-lg p-6 border border-[#2b3139]">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-[#EAECEF] text-base font-semibold">Markets</h2>
                 <Button variant="ghost" className="text-[#FCD535] hover:text-[#e6c230] text-sm h-auto p-0 font-semibold">
