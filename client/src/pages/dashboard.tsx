@@ -195,6 +195,60 @@ export default function Dashboard() {
             </div>
           </div>
         );
+      case "Identification":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Identification</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your identity verification status and documents will be displayed here.</p>
+            </div>
+          </div>
+        );
+      case "Security":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Security</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your account security settings including 2FA and login history will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Payment":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Payment</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your payment methods and banking information will be shown here.</p>
+            </div>
+          </div>
+        );
+      case "API Management":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">API Management</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your API keys and trading bot configurations will be displayed here.</p>
+            </div>
+          </div>
+        );
+      case "Account Statement":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Account Statement</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your detailed account statements and balance history will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Financial Reports":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Financial Reports</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your comprehensive financial reports and tax documents will be shown here.</p>
+            </div>
+          </div>
+        );
       case "Rewards Hub":
         return (
           <div className="px-6 py-4">
@@ -759,21 +813,89 @@ export default function Dashboard() {
                 Referral
               </div>
               
-              <div 
-                onClick={() => setActiveSection("Account")}
-                className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
-                  activeSection === "Account" 
-                    ? "text-white bg-[#474d57]" 
-                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
-                }`}
-              >
-                <div className="flex items-center">
-                  <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
-                  </svg>
-                  Account
+              <div>
+                <div 
+                  onClick={() => toggleMenu("Account")}
+                  className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                    expandedMenus["Account"] 
+                      ? "text-white bg-[#474d57]" 
+                      : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                    </svg>
+                    Account
+                  </div>
+                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Account"] ? "rotate-180" : ""}`} />
                 </div>
-                <ChevronDown className="h-3 w-3" />
+                
+                {/* Account Submenu */}
+                {expandedMenus["Account"] && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    <div 
+                      onClick={() => setActiveSection("Identification")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Identification" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Identification
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Security")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Security" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Security
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Payment")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Payment" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Payment
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("API Management")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "API Management" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      API Management
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Account Statement")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Account Statement" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Account Statement
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Financial Reports")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Financial Reports" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Financial Reports
+                    </div>
+                  </div>
+                )}
               </div>
               
               <div 
