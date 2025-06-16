@@ -99,30 +99,42 @@ export default function Dashboard() {
 
   const { totalBalance, todayPnL, pnlPercentage } = calculatePortfolioBalance();
 
-  // Generate portfolio performance data for the chart
+  // Generate portfolio performance data for the chart with wavy patterns
   const generatePortfolioData = () => {
     if (!userProfile?.cryptoBalances || !cryptoData) return [];
     
     const currentTime = Date.now();
     const data = [];
     
-    // Generate 24 data points for the last 24 hours
-    for (let i = 23; i >= 0; i--) {
-      const timeStamp = currentTime - (i * 60 * 60 * 1000); // Each hour
+    // Generate 48 data points for smoother, wavier curve (every 30 minutes)
+    for (let i = 47; i >= 0; i--) {
+      const timeStamp = currentTime - (i * 30 * 60 * 1000); // Every 30 minutes
       let portfolioValue = 0;
       
       userProfile.cryptoBalances.forEach((holding: any) => {
         const crypto = cryptoData.find((c: any) => c.symbol.toLowerCase() === holding.symbol.toLowerCase());
         if (crypto) {
-          // Simulate price variation over time based on current 24h change
           const priceChange = parseFloat(crypto.price_change_percentage_24h || '0');
           const currentPrice = parseFloat(crypto.current_price);
           
-          // Create realistic price fluctuation over 24 hours
-          const hourlyVariation = (priceChange / 24) * (i / 23); // Gradual change
-          const randomVariation = (Math.random() - 0.5) * (Math.abs(priceChange) * 0.1); // Small random variations
-          const historicalPrice = currentPrice * (1 - (hourlyVariation + randomVariation) / 100);
+          // Create wavy patterns with sine waves and random fluctuations
+          const timeProgress = (47 - i) / 47; // 0 to 1
           
+          // Multiple sine waves for wavy effect
+          const wave1 = Math.sin(timeProgress * Math.PI * 4) * 0.3; // Primary wave
+          const wave2 = Math.sin(timeProgress * Math.PI * 8) * 0.15; // Secondary wave
+          const wave3 = Math.sin(timeProgress * Math.PI * 12) * 0.08; // Tertiary wave
+          
+          // Overall trend based on 24h change
+          const trendVariation = (priceChange / 24) * (i / 47);
+          
+          // Random market fluctuations
+          const randomVariation = (Math.random() - 0.5) * (Math.abs(priceChange) * 0.2);
+          
+          // Combine all variations for wavy effect
+          const totalVariation = trendVariation + (wave1 + wave2 + wave3) * Math.abs(priceChange) * 0.3 + randomVariation;
+          
+          const historicalPrice = currentPrice * (1 - totalVariation / 100);
           portfolioValue += holding.balance * historicalPrice;
         }
       });
@@ -950,12 +962,13 @@ export default function Dashboard() {
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
                         <Line 
-                          type="monotone" 
+                          type="cardinal" 
                           dataKey="value" 
                           stroke="#FCD535" 
                           strokeWidth={2}
                           dot={false}
                           activeDot={{ r: 3, fill: "#FCD535", strokeWidth: 0 }}
+                          tension={0.4}
                         />
                         <XAxis 
                           dataKey="time" 
