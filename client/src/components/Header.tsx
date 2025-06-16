@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, Globe, Moon, Menu } from "lucide-react";
+import SignUpModal from "./SignUpModal";
+import LoginModal from "./LoginModal";
 
 export default function Header() {
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   return (
     <header className="bg-[var(--binance-dark)] border-b border-[var(--binance-border)] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,10 +69,14 @@ export default function Header() {
             <Button 
               variant="outline" 
               className="text-white hover:text-[var(--binance-yellow)] border-[var(--binance-border)] hover:border-[var(--binance-yellow)] bg-transparent"
+              onClick={() => setIsLoginModalOpen(true)}
             >
               Log In
             </Button>
-            <Button className="bg-[var(--binance-yellow)] text-black hover:bg-yellow-400 font-medium">
+            <Button 
+              className="bg-[var(--binance-yellow)] text-black hover:bg-yellow-400 font-medium"
+              onClick={() => setIsSignUpModalOpen(true)}
+            >
               Sign Up
             </Button>
             <Button variant="ghost" size="icon" className="md:hidden text-white">
@@ -76,6 +85,15 @@ export default function Header() {
           </div>
         </div>
       </div>
+      
+      <SignUpModal 
+        isOpen={isSignUpModalOpen} 
+        onClose={() => setIsSignUpModalOpen(false)} 
+      />
+      <LoginModal 
+        isOpen={isLoginModalOpen} 
+        onClose={() => setIsLoginModalOpen(false)} 
+      />
     </header>
   );
 }

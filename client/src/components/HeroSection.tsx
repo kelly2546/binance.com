@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import CryptoPriceCard from "./CryptoPriceCard";
+import SignUpModal from "./SignUpModal";
 
 export default function HeroSection() {
   const [userCount, setUserCount] = useState(277372927);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,7 +37,10 @@ export default function HeroSection() {
                   placeholder="Email/Phone number" 
                   className="flex-1 bg-[#2b3139] border-[#474d57] rounded-lg text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-12 px-4"
                 />
-                <Button className="bg-[var(--binance-yellow)] text-black rounded-lg font-medium hover:bg-yellow-400 h-12 px-8 border-0">
+                <Button 
+                  className="bg-[var(--binance-yellow)] text-black rounded-lg font-medium hover:bg-yellow-400 h-12 px-8 border-0"
+                  onClick={() => setIsSignUpModalOpen(true)}
+                >
                   Sign Up
                 </Button>
               </div>
