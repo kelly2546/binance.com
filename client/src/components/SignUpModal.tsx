@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X } from "lucide-react";
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
-import { useLocation } from "wouter";
 
 interface SignUpModalProps {
   isOpen: boolean;
@@ -16,21 +15,13 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const { login, loading, error } = useFirebaseAuth();
-  const [, setLocation] = useLocation();
 
   const handleGoogleSignUp = async () => {
-    console.log('Google Sign Up clicked');
     try {
-      console.log('Attempting to login...');
       await login();
-      console.log('Login call completed');
       onClose();
     } catch (err) {
       console.error('Sign up failed:', err);
-      // Show error to user
-      if (err instanceof Error) {
-        alert(`Sign up failed: ${err.message}`);
-      }
     }
   };
 
@@ -88,7 +79,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
           <Button
             className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-12"
             disabled={!email || !agreedToTerms}
-            onClick={() => window.location.href = "/api/login"}
+            onClick={handleGoogleSignUp}
           >
             Next
           </Button>
