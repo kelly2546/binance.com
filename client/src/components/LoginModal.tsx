@@ -23,6 +23,23 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     }
   };
 
+  const handleDirectLogin = () => {
+    // For demo purposes, create a mock user session and redirect to dashboard
+    const mockUser = {
+      uid: 'demo-user-' + Date.now(),
+      email: email,
+      displayName: email.split('@')[0] || 'Demo User',
+      photoURL: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+    };
+    
+    // Store mock user in localStorage for demo
+    localStorage.setItem('mockUser', JSON.stringify(mockUser));
+    localStorage.setItem('isAuthenticated', 'true');
+    
+    onClose();
+    window.location.href = '/dashboard';
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="bg-[#1e2329] border-[#474d57] text-white max-w-md">
@@ -73,7 +90,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           <Button
             className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-12"
             disabled={!email}
-            onClick={handleGoogleSignIn}
+            onClick={handleDirectLogin}
           >
             Next
           </Button>

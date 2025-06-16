@@ -103,7 +103,19 @@ export function useFirebaseAuth() {
       console.log('useFirebaseAuth: Redirect initiated');
     } catch (err: any) {
       console.error('useFirebaseAuth: Login failed with error:', err);
-      setError(err.message || 'Login failed');
+      console.error('Error code:', err?.code);
+      console.error('Error message:', err?.message);
+      
+      let errorMessage = 'Login failed';
+      if (err?.code === 'auth/unauthorized-domain') {
+        errorMessage = 'Domain not authorized for Firebase authentication';
+      } else if (err?.code === 'auth/operation-not-allowed') {
+        errorMessage = 'Google sign-in not enabled in Firebase';
+      } else if (err?.message) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
       setLoading(false);
     }
   };
