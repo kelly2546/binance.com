@@ -63,7 +63,47 @@
   }
 
   body {
-    @apply font-sans antialiased bg-[var(--binance-dark)] text-white;
+    @apply font-sans antialiased bg-[var(--binance-dark)] text-white text-lg font-medium;
+  }
+  
+  /* Base text improvements for better visibility */
+  h1 {
+    @apply text-6xl font-bold;
+  }
+  
+  h2 {
+    @apply text-4xl font-bold;
+  }
+  
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+  
+  h4 {
+    @apply text-xl font-semibold;
+  }
+  
+  h5 {
+    @apply text-lg font-semibold;
+  }
+  
+  p {
+    @apply text-lg font-medium;
+  }
+  
+  /* Improve button text visibility */
+  button {
+    @apply font-semibold;
+  }
+  
+  /* Improve form text visibility */
+  input, textarea, select {
+    @apply text-lg font-medium;
+  }
+  
+  /* Improve table text visibility */
+  table {
+    @apply text-base font-medium;
   }
 }
 
