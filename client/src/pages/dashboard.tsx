@@ -997,61 +997,61 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-[#181A20]">
       {/* Header */}
-      <header className="bg-[#181A20] h-16">
-        <div className="h-full px-6 flex items-center justify-between">
+      <header className="bg-[#181A20] border-b border-[#2B3139] h-14">
+        <div className="h-full px-4 flex items-center justify-between max-w-full">
           {/* Logo */}
           <div className="flex items-center">
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" 
               alt="Binance" 
-              className="h-6 w-auto"
+              className="h-5 w-auto"
             />
           </div>
           
           {/* Navigation */}
-          <nav className="flex items-center space-x-8">
-            <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Buy Crypto</a>
-            <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Markets</a>
-            <div className="flex items-center space-x-1">
-              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Trade</a>
-              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+          <nav className="flex items-center space-x-6">
+            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] text-sm font-medium transition-colors">Buy Crypto</a>
+            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] text-sm font-medium transition-colors">Markets</a>
+            <div className="flex items-center space-x-1 cursor-pointer group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] text-sm font-medium transition-colors">Trade</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
             </div>
-            <div className="flex items-center space-x-1">
-              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Futures</a>
-              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+            <div className="flex items-center space-x-1 cursor-pointer group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] text-sm font-medium transition-colors">Futures</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
             </div>
-            <div className="flex items-center space-x-1">
-              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Earn</a>
-              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+            <div className="flex items-center space-x-1 cursor-pointer group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] text-sm font-medium transition-colors">Earn</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
             </div>
-            <div className="flex items-center space-x-1">
-              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Square</a>
-              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+            <div className="flex items-center space-x-1 cursor-pointer group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] text-sm font-medium transition-colors">Square</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
             </div>
-            <div className="flex items-center space-x-1">
-              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">More</a>
-              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+            <div className="flex items-center space-x-1 cursor-pointer group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] text-sm font-medium transition-colors">More</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
             </div>
           </nav>
           
           {/* Right side */}
-          <div className="flex items-center space-x-3">
-            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] h-8 w-8 rounded-sm">
               <Search className="h-4 w-4" />
             </Button>
-            <Button className="bg-[#FCD535] text-black hover:bg-[#e6c230] h-8 px-6 text-sm font-semibold">
+            <Button className="bg-[#FCD535] text-[#0B0E11] hover:bg-[#e6c230] h-8 px-4 text-sm font-semibold rounded-sm">
               Deposit
             </Button>
-            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] h-8 w-8 rounded-sm">
               <Bell className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] h-8 w-8 rounded-sm">
               <Globe className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] h-8 w-8 rounded-sm">
               <Settings className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] h-8 w-8 rounded-sm">
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </div>
@@ -1059,7 +1059,7 @@ export default function Dashboard() {
       </header>
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-48 bg-[#181a20] min-h-[calc(100vh-64px)]">
+        <div className="w-48 bg-[#181a20] min-h-[calc(100vh-56px)]">
           <div className="p-4">
             {/* Dashboard */}
             <div className="mb-6">
