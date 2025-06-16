@@ -36,27 +36,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
       return;
     }
 
-    setIsValidatingEmail(true);
-    
-    try {
-      // Create a temporary password for the account creation
-      const tempPassword = Math.random().toString(36).slice(-12) + 'A1!';
-      
-      // Create the account with Firebase
-      await createEmailAccount(email, tempPassword);
-      
-      setIsValidatingEmail(false);
-      setShowEmailVerification(true);
-    } catch (error: any) {
-      setIsValidatingEmail(false);
-      console.error('Error creating account:', error);
-      // Handle specific error cases
-      if (error.message.includes('email-already-in-use')) {
-        alert('An account with this email already exists. Please try logging in instead.');
-      } else {
-        alert(`Error: ${error.message}`);
-      }
-    }
+    setShowPasswordSetup(true);
   };
 
   const handleGoogleSignUp = async () => {

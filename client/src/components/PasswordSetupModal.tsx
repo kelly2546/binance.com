@@ -52,6 +52,8 @@ export default function PasswordSetupModal({ isOpen, onClose, email }: PasswordS
 
     try {
       await createEmailAccount(email, password);
+      // Show success message and inform user about email verification
+      alert('Account created successfully! Please check your email and verify your account before accessing the dashboard.');
       onClose();
     } catch (err: any) {
       setError(err.message || "Failed to create account");
