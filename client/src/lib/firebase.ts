@@ -39,13 +39,26 @@ export interface UserProfile {
 // Auth functions
 export const signInWithGoogle = async () => {
   console.log('Starting Google Sign-In with redirect...');
+  console.log('Auth state:', auth.currentUser);
+  console.log('Provider config:', googleProvider);
+  
   try {
+    console.log('Calling signInWithRedirect...');
     await signInWithRedirect(auth, googleProvider);
+    console.log('signInWithRedirect call completed - redirect should happen now');
     // The page will redirect, so we don't return anything here
   } catch (error: any) {
     console.error("Error starting Google Sign-In redirect:", error);
     if (error?.code) console.error("Error code:", error.code);
     if (error?.message) console.error("Error message:", error.message);
+    
+    // Check for common redirect issues
+    if (error?.code === 'auth/unauthorized-domain') {
+      console.error('Domain not authorized. Add your domain to Firebase console authorized domains.');
+    } else if (error?.code === 'auth/operation-not-allowed') {
+      console.error('Google sign-in not enabled in Firebase console.');
+    }
+    
     throw error;
   }
 };

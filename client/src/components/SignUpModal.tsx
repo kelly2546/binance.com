@@ -21,11 +21,14 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
     try {
       console.log('Attempting to login...');
       await login();
-      // The redirect will handle navigation to dashboard
-      console.log('Redirect initiated');
+      console.log('Login call completed');
       onClose();
     } catch (err) {
       console.error('Sign up failed:', err);
+      // Show error to user
+      if (err instanceof Error) {
+        alert(`Sign up failed: ${err.message}`);
+      }
     }
   };
 
