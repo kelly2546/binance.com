@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -38,6 +38,9 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
           <DialogTitle className="text-2xl font-bold text-center mt-4">
             Welcome to Binance
           </DialogTitle>
+          <DialogDescription className="text-center text-[#848e9c] mt-2">
+            Create your account to start trading cryptocurrencies
+          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-6 pt-4">

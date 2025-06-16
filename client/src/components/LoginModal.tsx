@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X, QrCode } from "lucide-react";
@@ -50,6 +50,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           <DialogTitle className="text-3xl font-bold text-left mt-4">
             Log in
           </DialogTitle>
+          <DialogDescription className="text-left text-[#848e9c] mt-2">
+            Sign in to your account to access your crypto portfolio
+          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-6 pt-4">

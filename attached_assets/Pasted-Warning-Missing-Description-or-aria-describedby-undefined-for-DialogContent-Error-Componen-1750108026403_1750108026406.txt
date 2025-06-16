@@ -1,0 +1,73 @@
+Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. Error Component Stack
+    at DescriptionWarning (@radix-ui_react-dialog.js?v=a21ec0d0:332:29)
+    at @radix-ui_react-dialog.js?v=a21ec0d0:236:13
+    at @radix-ui_react-dialog.js?v=a21ec0d0:159:58
+    at Presence (chunk-UP2PCCS3.js?v=a21ec0d0:24:11)
+    at @radix-ui_react-dialog.js?v=a21ec0d0:150:64
+    at chunk-5S42QOQO.js?v=a21ec0d0:79:13
+    at chunk-5S42QOQO.js?v=a21ec0d0:56:13
+    at chunk-GVTGVYSA.js?v=a21ec0d0:42:13
+    at chunk-VY5IIJY2.js?v=a21ec0d0:260:22
+    at Presence (chunk-UP2PCCS3.js?v=a21ec0d0:24:11)
+    at Provider (chunk-VJRUVGTI.js?v=a21ec0d0:38:15)
+    at DialogPortal (@radix-ui_react-dialog.js?v=a21ec0d0:112:11)
+    at _c3 (dialog.tsx:35:6)
+    at Provider (chunk-VJRUVGTI.js?v=a21ec0d0:38:15)
+    at Dialog (@radix-ui_react-dialog.js?v=a21ec0d0:53:5)
+    at SignUpModal (SignUpModal.tsx:14:39)
+    at header (<anonymous>)
+    at Header (Header.tsx:10:53)
+    at div (<anonymous>)
+    at Home (<anonymous>)
+    at Route (wouter.js?v=a21ec0d0:323:16)
+    at Switch (wouter.js?v=a21ec0d0:379:17)
+    at Router (<anonymous>)
+    at div (<anonymous>)
+    at Provider (chunk-VJRUVGTI.js?v=a21ec0d0:38:15)
+    at TooltipProvider (@radix-ui_react-tooltip.js?v=a21ec0d0:61:5)
+    at QueryClientProvider (@tanstack_react-query.js?v=a21ec0d0:2805:3)
+    at App (<anonymous>)
+overrideMethod @ hook.js:608Understand this warning
+hook.js:608 Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. Error Component Stack
+    at DescriptionWarning (@radix-ui_react-dialog.js?v=a21ec0d0:332:29)
+    at @radix-ui_react-dialog.js?v=a21ec0d0:236:13
+    at @radix-ui_react-dialog.js?v=a21ec0d0:159:58
+    at Presence (chunk-UP2PCCS3.js?v=a21ec0d0:24:11)
+    at @radix-ui_react-dialog.js?v=a21ec0d0:150:64
+    at chunk-5S42QOQO.js?v=a21ec0d0:79:13
+    at chunk-5S42QOQO.js?v=a21ec0d0:56:13
+    at chunk-GVTGVYSA.js?v=a21ec0d0:42:13
+    at chunk-VY5IIJY2.js?v=a21ec0d0:260:22
+    at Presence (chunk-UP2PCCS3.js?v=a21ec0d0:24:11)
+    at Provider (chunk-VJRUVGTI.js?v=a21ec0d0:38:15)
+    at DialogPortal (@radix-ui_react-dialog.js?v=a21ec0d0:112:11)
+    at _c3 (dialog.tsx:35:6)
+    at Provider (chunk-VJRUVGTI.js?v=a21ec0d0:38:15)
+    at Dialog (@radix-ui_react-dialog.js?v=a21ec0d0:53:5)
+    at LoginModal (LoginModal.tsx:13:38)
+    at header (<anonymous>)
+    at Header (Header.tsx:10:53)
+    at div (<anonymous>)
+    at Home (<anonymous>)
+    at Route (wouter.js?v=a21ec0d0:323:16)
+    at Switch (wouter.js?v=a21ec0d0:379:17)
+    at Router (<anonymous>)
+    at div (<anonymous>)
+    at Provider (chunk-VJRUVGTI.js?v=a21ec0d0:38:15)
+    at TooltipProvider (@radix-ui_react-tooltip.js?v=a21ec0d0:61:5)
+    at QueryClientProvider (@tanstack_react-query.js?v=a21ec0d0:2805:3)
+    at App (<anonymous>)
+overrideMethod @ hook.js:608
+(anonymous) @ @radix-ui_react-dialog.js?v=a21ec0d0:340
+commitHookEffectListMount @ chunk-WERSD76P.js?v=a21ec0d0:16915
+commitPassiveMountOnFiber @ chunk-WERSD76P.js?v=a21ec0d0:18156
+commitPassiveMountEffects_complete @ chunk-WERSD76P.js?v=a21ec0d0:18129
+commitPassiveMountEffects_begin @ chunk-WERSD76P.js?v=a21ec0d0:18119
+commitPassiveMountEffects @ chunk-WERSD76P.js?v=a21ec0d0:18109
+flushPassiveEffectsImpl @ chunk-WERSD76P.js?v=a21ec0d0:19490
+flushPassiveEffects @ chunk-WERSD76P.js?v=a21ec0d0:19447
+commitRootImpl @ chunk-WERSD76P.js?v=a21ec0d0:19416
+commitRoot @ chunk-WERSD76P.js?v=a21ec0d0:19277
+performSyncWorkOnRoot @ chunk-WERSD76P.js?v=a21ec0d0:18895
+flushSyncCallbacks @ chunk-WERSD76P.js?v=a21ec0d0:9119
+(anonymous) @ chunk-WERSD76P.js?v=a21ec0d0:18627Understand this warning
