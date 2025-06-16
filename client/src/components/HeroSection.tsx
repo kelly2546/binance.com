@@ -6,7 +6,7 @@ import NewsSection from "./NewsSection";
 import SignUpModal from "./SignUpModal";
 
 export default function HeroSection() {
-  const [userCount, setUserCount] = useState(277373228);
+  const [userCount, setUserCount] = useState(277422475);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
   useEffect(() => {
