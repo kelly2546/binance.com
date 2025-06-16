@@ -19,6 +19,11 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     onClose();
   };
 
+  const handleGoogleLogin = async () => {
+    await login();
+    onClose();
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="bg-[#1e2329] border-[#474d57] text-white max-w-md">
@@ -95,8 +100,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
-              onClick={handleLogin}
-              disabled={!email}
+              onClick={handleGoogleLogin}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
