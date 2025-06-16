@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X, QrCode } from "lucide-react";
-import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useMockAuth } from "@/hooks/useMockAuth";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -12,32 +12,11 @@ interface LoginModalProps {
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [email, setEmail] = useState("");
-  const { login, loading, error } = useFirebaseAuth();
+  const { login } = useMockAuth();
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await login();
-      onClose();
-    } catch (err) {
-      console.error('Login failed:', err);
-    }
-  };
-
-  const handleDirectLogin = () => {
-    // For demo purposes, create a mock user session and redirect to dashboard
-    const mockUser = {
-      uid: 'demo-user-' + Date.now(),
-      email: email,
-      displayName: email.split('@')[0] || 'Demo User',
-      photoURL: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
-    };
-    
-    // Store mock user in localStorage for demo
-    localStorage.setItem('mockUser', JSON.stringify(mockUser));
-    localStorage.setItem('isAuthenticated', 'true');
-    
+  const handleLogin = async () => {
+    await login(email);
     onClose();
-    window.location.href = '/dashboard';
   };
 
   return (
@@ -90,7 +69,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           <Button
             className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-12"
             disabled={!email}
-            onClick={handleDirectLogin}
+            onClick={handleLogin}
           >
             Next
           </Button>
@@ -113,22 +92,16 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
-              onClick={handleGoogleSignIn}
-              disabled={loading}
+              onClick={handleLogin}
+              disabled={!email}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
                 alt="Google" 
                 className="w-5 h-5 mr-3" 
               />
-              {loading ? 'Signing in...' : 'Continue with Google'}
+              Continue with Google
             </Button>
-            
-            {error && (
-              <div className="text-red-400 text-sm text-center mt-2">
-                {error}
-              </div>
-            )}
             
             <Button
               variant="outline"

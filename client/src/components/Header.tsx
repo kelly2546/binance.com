@@ -9,7 +9,7 @@ import { useLocation } from "wouter";
 export default function Header() {
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { isAuthenticated, user, logout } = useFirebaseAuth();
+  const { isAuthenticated, user, logout } = useMockAuth();
   const [, setLocation] = useLocation();
   return (
     <header className="bg-[#181A20] border-b border-[#2b3139] sticky top-0 z-50">

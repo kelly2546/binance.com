@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X } from "lucide-react";
-import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useMockAuth } from "@/hooks/useMockAuth";
 
 interface SignUpModalProps {
   isOpen: boolean;
@@ -14,32 +14,11 @@ interface SignUpModalProps {
 export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const { login, loading, error } = useFirebaseAuth();
+  const { login } = useMockAuth();
 
-  const handleGoogleSignUp = async () => {
-    try {
-      await login();
-      onClose();
-    } catch (err) {
-      console.error('Sign up failed:', err);
-    }
-  };
-
-  const handleDirectSignUp = () => {
-    // For demo purposes, create a mock user session and redirect to dashboard
-    const mockUser = {
-      uid: 'demo-user-' + Date.now(),
-      email: email,
-      displayName: email.split('@')[0] || 'Demo User',
-      photoURL: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
-    };
-    
-    // Store mock user in localStorage for demo
-    localStorage.setItem('mockUser', JSON.stringify(mockUser));
-    localStorage.setItem('isAuthenticated', 'true');
-    
+  const handleSignUp = async () => {
+    await login(email);
     onClose();
-    window.location.href = '/dashboard';
   };
 
   return (
@@ -96,7 +75,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
           <Button
             className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-12"
             disabled={!email || !agreedToTerms}
-            onClick={handleDirectSignUp}
+            onClick={handleSignUp}
           >
             Next
           </Button>
@@ -109,22 +88,16 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
-              onClick={handleGoogleSignUp}
-              disabled={loading}
+              onClick={handleSignUp}
+              disabled={!email || !agreedToTerms}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
                 alt="Google" 
                 className="w-5 h-5 mr-3" 
               />
-              {loading ? 'Signing up...' : 'Continue with Google'}
+              Continue with Google
             </Button>
-            
-            {error && (
-              <div className="text-red-400 text-sm text-center mt-2">
-                {error}
-              </div>
-            )}
             
             <Button
               variant="outline"

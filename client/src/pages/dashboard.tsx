@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useMockAuth } from "@/hooks/useMockAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useAssetsData } from "@/hooks/useAssetsData";
 import { useUserHoldings } from "@/hooks/useUserHoldings";
@@ -32,7 +32,7 @@ export default function Dashboard() {
     }
   };
   
-  const { user, userProfile, loading: isLoading, isAuthenticated, logout } = useFirebaseAuth();
+  const { user, loading: isLoading, isAuthenticated, logout } = useMockAuth();
 
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
@@ -729,9 +729,9 @@ export default function Dashboard() {
               <div className="flex items-center w-full font-semibold text-[16px]">
                 <div className="flex items-center space-x-3 min-w-0">
                   <Avatar className="h-10 w-10">
-                    <AvatarImage src={userProfile?.photoURL || user?.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.uid}`} />
+                    <AvatarImage src={user?.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.uid}`} />
                     <AvatarFallback className="bg-[#FCD535] text-[#0B0E11] font-bold text-sm">
-                      {userProfile?.displayName?.charAt(0) || user?.displayName?.charAt(0) || 'U'}
+                      {user?.displayName?.charAt(0) || 'U'}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex items-center space-x-2">
