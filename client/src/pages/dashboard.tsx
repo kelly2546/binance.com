@@ -216,49 +216,49 @@ export default function Dashboard() {
 
           {/* Balance Section */}
           <div className="px-6 py-6">
-            <div className="bg-[#1e2329] rounded-lg p-6 mb-6">
-              <div className="flex items-center justify-between mb-6">
+            <div className="bg-[#1e2329] rounded p-6 mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
-                  <h2 className="text-white text-lg font-medium">Estimated Balance</h2>
+                  <h2 className="text-white text-base font-normal">Estimated Balance</h2>
                   <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3">
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-6 px-3 rounded">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3">
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-6 px-3 rounded">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3">
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-6 px-3 rounded">
                     Cash In
                   </Button>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-2 mb-2">
-                <span className="text-white text-2xl font-bold">0.02631079</span>
-                <span className="text-[#848e9c] text-sm">USDT</span>
-                <ChevronDown className="h-4 w-4 text-[#848e9c]" />
+              <div className="flex items-baseline space-x-2 mb-1">
+                <span className="text-white text-3xl font-bold">0.02631079</span>
+                <span className="text-[#848e9c] text-sm font-medium">USDT</span>
+                <ChevronDown className="h-3 w-3 text-[#848e9c] mt-1" />
               </div>
               
-              <div className="text-[#848e9c] text-sm mb-4">≈ $0.03</div>
+              <div className="text-[#848e9c] text-sm mb-3">≈ $0.03</div>
               
-              <div className="flex items-center space-x-4 mb-4">
+              <div className="flex items-center space-x-2 mb-4">
                 <span className="text-[#848e9c] text-sm">Today's PnL</span>
                 <div className="flex items-center space-x-1">
                   <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-[#0ecb81] text-sm">$0.000 (71%)</span>
+                  <span className="text-[#0ecb81] text-sm font-medium">+ $0.000 (71%)</span>
                 </div>
               </div>
               
               {/* Chart */}
-              <div className="h-16 bg-[#2b3139] rounded relative overflow-hidden">
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 64" preserveAspectRatio="none">
-                  <path d="M0,50 L50,45 L100,40 L150,42 L200,38 L250,35 L300,30 L350,25 L400,20" stroke="#f0b90b" strokeWidth="2" fill="none"/>
+              <div className="h-12 bg-[#2b3139] rounded relative overflow-hidden">
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 48" preserveAspectRatio="none">
+                  <path d="M0,36 L40,32 L80,28 L120,30 L160,26 L200,24 L240,20 L280,18 L320,14 L360,12 L400,8" stroke="#f0b90b" strokeWidth="1.5" fill="none"/>
                 </svg>
               </div>
             </div>
