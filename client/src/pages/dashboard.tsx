@@ -72,9 +72,219 @@ export default function Dashboard() {
       case "Overview":
         return (
           <div className="px-6 py-4">
-            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Assets Overview</h1>
+            {/* Estimated Balance Section */}
+            <div className="rounded-lg p-6 mb-6 border border-[#2b3139]">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-2">
+                  <h2 className="text-[#EAECEF] text-base font-semibold">Estimated Balance</h2>
+                  <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="flex space-x-2">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                    Deposit
+                  </Button>
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                    Withdraw
+                  </Button>
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                    Transfer
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="flex items-baseline space-x-2 mb-2">
+                <span className="text-[#EAECEF] text-3xl font-bold">0.02629081</span>
+                <span className="text-[#848e9c] text-base font-medium">USDT</span>
+                <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
+              </div>
+              
+              <div className="text-[#848e9c] text-sm mb-3">≈ $0.03</div>
+              
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="text-[#848e9c] text-sm">Today's PnL</span>
+                <div className="flex items-center space-x-1">
+                  <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-[#0ecb81] text-sm font-medium">+ $0.000 (65%)</span>
+                </div>
+              </div>
+              
+              {/* Chart */}
+              <div className="h-12 bg-[#1e2329] rounded-lg relative overflow-hidden">
+                <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
+                  <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="#FCD535" strokeWidth="2" fill="none"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* My Assets Section */}
             <div className="rounded-lg p-6 border border-[#2b3139]">
-              <p className="text-[#848e9c]">Complete overview of all your cryptocurrency assets and portfolio performance.</p>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-[#EAECEF] text-lg font-semibold">My Assets</h2>
+                <div className="flex items-center space-x-4">
+                  <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+                    <Search className="h-4 w-4" />
+                  </Button>
+                  <div className="flex items-center space-x-2 text-sm text-[#848e9c]">
+                    <input type="checkbox" className="w-4 h-4 rounded border-[#2b3139]" />
+                    <span>Hide assets &lt;1 USD</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Assets Tabs */}
+              <div className="flex space-x-8 mb-6 border-b border-[#1e2329]">
+                <button className="pb-3 text-sm font-medium text-white border-b-2 border-[#f0b90b]">
+                  Coin View
+                </button>
+                <button className="pb-3 text-sm font-medium text-[#848e9c] hover:text-white">
+                  Account View
+                </button>
+              </div>
+              
+              {/* Assets Table Header */}
+              <div className="grid grid-cols-4 gap-4 text-xs text-[#848e9c] mb-4 px-0">
+                <div className="flex items-center">
+                  <span>Coin</span>
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </div>
+                <div className="flex items-center">
+                  <span>Amount</span>
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </div>
+                <div className="flex items-center">
+                  <span>Coin Price / Cost Price</span>
+                  <svg className="w-3 h-3 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="flex items-center">
+                  <span>Today's PnL</span>
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </div>
+              </div>
+              
+              {/* Assets Rows */}
+              <div className="space-y-2">
+                {/* BANANAS31 */}
+                <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 rounded-full bg-[#f0b90b] flex items-center justify-center">
+                      <span className="text-black text-xs font-bold">🍌</span>
+                    </div>
+                    <div>
+                      <div className="text-[#EAECEF] text-sm font-semibold">BANANAS31</div>
+                      <div className="text-[#848e9c] text-xs">Banana For...</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[#EAECEF] text-sm font-medium">2.22</div>
+                    <div className="text-[#848e9c] text-xs">$0.01</div>
+                  </div>
+                  <div>
+                    <div className="text-[#EAECEF] text-sm font-medium">$0.01</div>
+                    <div className="text-[#848e9c] text-xs">--</div>
+                  </div>
+                  <div>
+                    <div className="flex items-center space-x-1">
+                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.00</span>
+                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* USDT */}
+                <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 rounded-full overflow-hidden">
+                      <img 
+                        src="https://cryptologos.cc/logos/tether-usdt-logo.png" 
+                        alt="USDT"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <div className="text-[#EAECEF] text-sm font-semibold">USDT</div>
+                      <div className="text-[#848e9c] text-xs">TetherUS</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[#EAECEF] text-sm font-medium">0.00781662</div>
+                    <div className="text-[#848e9c] text-xs">$0.01</div>
+                  </div>
+                  <div>
+                    <div className="text-[#EAECEF] text-sm font-medium">$1.00</div>
+                    <div className="text-[#848e9c] text-xs">--</div>
+                  </div>
+                  <div>
+                    <div className="flex items-center space-x-1">
+                      <span className="text-[#848e9c] text-sm font-medium">--</span>
+                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* HMSTR */}
+                <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 rounded-full bg-[#ff6b35] flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">🐹</span>
+                    </div>
+                    <div>
+                      <div className="text-[#EAECEF] text-sm font-semibold">HMSTR</div>
+                      <div className="text-[#848e9c] text-xs">Hamster</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[#EAECEF] text-sm font-medium">5.56</div>
+                    <div className="text-[#848e9c] text-xs">$0.01</div>
+                  </div>
+                  <div>
+                    <div className="text-[#EAECEF] text-sm font-medium">$0.00</div>
+                    <div className="text-[#848e9c] text-xs">--</div>
+                  </div>
+                  <div>
+                    <div className="flex items-center space-x-1">
+                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.00</span>
+                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* TON */}
+                <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 rounded-full overflow-hidden">
+                      <img 
+                        src="https://cryptologos.cc/logos/toncoin-ton-logo.png" 
+                        alt="TON"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <div className="text-[#EAECEF] text-sm font-semibold">TON</div>
+                      <div className="text-[#848e9c] text-xs">The Open Network</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[#EAECEF] text-sm font-medium">0.00002101</div>
+                    <div className="text-[#848e9c] text-xs">$0.01</div>
+                  </div>
+                  <div>
+                    <div className="text-[#EAECEF] text-sm font-medium">$3.01</div>
+                    <div className="text-[#848e9c] text-xs">--</div>
+                  </div>
+                  <div>
+                    <div className="flex items-center space-x-1">
+                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.00</span>
+                      <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         );
