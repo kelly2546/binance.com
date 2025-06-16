@@ -132,12 +132,66 @@ export default function Dashboard() {
             </div>
           </div>
         );
-      case "Orders":
+      case "Spot Order":
         return (
           <div className="px-6 py-4">
-            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Orders</h1>
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Spot Orders</h1>
             <div className="rounded-lg p-6 border border-[#2b3139]">
-              <p className="text-[#848e9c]">Your trading orders and order history will appear here.</p>
+              <p className="text-[#848e9c]">Your spot trading orders and open positions will be displayed here.</p>
+            </div>
+          </div>
+        );
+      case "Futures Order":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Futures Orders</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your futures contracts and derivative orders will be shown here.</p>
+            </div>
+          </div>
+        );
+      case "P2P Order":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">P2P Orders</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your peer-to-peer trading orders and transactions will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Transaction History":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Transaction History</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Complete history of all your transactions and trades will be displayed here.</p>
+            </div>
+          </div>
+        );
+      case "Earn History":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Earn History</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your staking rewards and earning history will be shown here.</p>
+            </div>
+          </div>
+        );
+      case "Convert History":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Convert History</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your cryptocurrency conversion history will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Payment History":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Payment History</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your deposit and withdrawal payment history will be displayed here.</p>
             </div>
           </div>
         );
@@ -582,21 +636,99 @@ export default function Dashboard() {
                 )}
               </div>
               
-              <div 
-                onClick={() => setActiveSection("Orders")}
-                className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
-                  activeSection === "Orders" 
-                    ? "text-white bg-[#474d57]" 
-                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
-                }`}
-              >
-                <div className="flex items-center">
-                  <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                  </svg>
-                  Orders
+              <div>
+                <div 
+                  onClick={() => toggleMenu("Orders")}
+                  className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                    expandedMenus["Orders"] 
+                      ? "text-white bg-[#474d57]" 
+                      : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                    </svg>
+                    Orders
+                  </div>
+                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Orders"] ? "rotate-180" : ""}`} />
                 </div>
-                <ChevronDown className="h-3 w-3" />
+                
+                {/* Orders Submenu */}
+                {expandedMenus["Orders"] && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    <div 
+                      onClick={() => setActiveSection("Spot Order")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Spot Order" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Spot Order
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Futures Order")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Futures Order" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Futures Order
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("P2P Order")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "P2P Order" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      P2P Order
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Transaction History")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Transaction History" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Transaction History
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Earn History")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Earn History" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Earn History
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Convert History")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Convert History" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Convert History
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Payment History")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Payment History" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Payment History
+                    </div>
+                  </div>
+                )}
               </div>
               
               <div 
