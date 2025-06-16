@@ -22,35 +22,35 @@ export default function Header() {
           
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-lg font-bold">
+            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-sm font-medium">
               Buy Crypto
             </a>
-            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-lg font-bold">
+            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-sm font-medium">
               Markets
             </a>
             <div className="relative group">
-              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-lg font-bold">
-                Trade <i className="fas fa-chevron-down ml-1 text-sm"></i>
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                Trade <i className="fas fa-chevron-down ml-1 text-xs"></i>
               </a>
             </div>
             <div className="relative group">
-              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-lg font-bold">
-                Futures <i className="fas fa-chevron-down ml-1 text-sm"></i>
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                Futures <i className="fas fa-chevron-down ml-1 text-xs"></i>
               </a>
             </div>
             <div className="relative group">
-              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-lg font-bold">
-                Earn <i className="fas fa-chevron-down ml-1 text-sm"></i>
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                Earn <i className="fas fa-chevron-down ml-1 text-xs"></i>
               </a>
             </div>
             <div className="relative group">
-              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-lg font-bold">
-                Square <i className="fas fa-chevron-down ml-1 text-sm"></i>
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                Square <i className="fas fa-chevron-down ml-1 text-xs"></i>
               </a>
             </div>
             <div className="relative group">
-              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-lg font-bold">
-                More <i className="fas fa-chevron-down ml-1 text-sm"></i>
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                More <i className="fas fa-chevron-down ml-1 text-xs"></i>
               </a>
             </div>
           </nav>
@@ -68,20 +68,20 @@ export default function Header() {
             </Button>
             <Button 
               variant="outline" 
-              className="text-[#EAECEF] hover:text-[#FCD535] border-[#2b3139] hover:border-[#FCD535] bg-transparent text-lg font-bold h-10 px-6"
+              className="text-[#EAECEF] hover:text-[#FCD535] border-[#2b3139] hover:border-[#FCD535] bg-transparent text-sm font-medium h-8 px-4"
               onClick={() => setIsLoginModalOpen(true)}
             >
               Log In
             </Button>
             <Button 
-              className="bg-[#FCD535] text-black hover:bg-[#e6c230] font-bold text-lg h-10 px-6"
+              className="bg-[#FCD535] text-black hover:bg-[#e6c230] font-semibold text-sm h-8 px-4"
               onClick={() => setIsSignUpModalOpen(true)}
             >
               Sign Up
             </Button>
             <Button 
               variant="outline"
-              className="text-[#EAECEF] border-[#2b3139] hover:bg-[#FCD535] hover:text-black text-lg font-bold h-10 px-6"
+              className="text-[#EAECEF] border-[#2b3139] hover:bg-[#FCD535] hover:text-black text-sm font-medium h-8 px-4"
               onClick={() => window.location.href = "/dashboard"}
             >
               Dashboard
