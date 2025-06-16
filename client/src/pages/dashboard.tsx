@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 import CryptoBalanceCard from "@/components/CryptoBalanceCard";
 import AdminBalancePanel from "@/components/AdminBalancePanel";
+import ProfileEditModal from "@/components/ProfileEditModal";
 import { useQuery } from "@tanstack/react-query";
 import { useAssetsData } from "@/hooks/useAssetsData";
 import { useUserHoldings } from "@/hooks/useUserHoldings";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy } from "lucide-react";
+import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy, Edit3 } from "lucide-react";
 import { useLocation } from "wouter";
 import CryptoPriceCard from "@/components/CryptoPriceCard";
 import NewsSection from "@/components/NewsSection";
@@ -17,6 +18,9 @@ export default function Dashboard() {
   const [activeSection, setActiveSection] = useState("Dashboard");
   const [expandedMenus, setExpandedMenus] = useState<{[key: string]: boolean}>({});
   const [assetsViewType, setAssetsViewType] = useState("Coin View");
+  const [isProfileEditOpen, setIsProfileEditOpen] = useState(false);
+  const [userSticker, setUserSticker] = useState("🦊");
+  const [userName, setUserName] = useState("");
   const [, setLocation] = useLocation();
 
   const toggleMenu = (menuName: string) => {
@@ -35,6 +39,30 @@ export default function Dashboard() {
   };
   
   const { userProfile, loading: isLoading, isAuthenticated, logout } = useFirebaseAuth();
+
+  // Initialize user data from profile
+  useEffect(() => {
+    if (userProfile) {
+      setUserName(userProfile.displayName || '');
+      // Extract sticker from localStorage or use default
+      const storedSticker = localStorage.getItem(`userSticker_${userProfile.uid}`);
+      setUserSticker(storedSticker || '🦊');
+    }
+  }, [userProfile?.uid, userProfile?.displayName]);
+
+  // Handle profile save
+  const handleProfileSave = (newName: string, newSticker: string) => {
+    setUserName(newName);
+    setUserSticker(newSticker);
+    
+    // Store sticker in localStorage
+    if (userProfile?.uid) {
+      localStorage.setItem(`userSticker_${userProfile.uid}`, newSticker);
+    }
+    
+    // Note: In a real implementation, you would also update the backend/Firebase
+    // For now, we're just updating the local state and localStorage
+  };
 
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
@@ -773,21 +801,24 @@ export default function Dashboard() {
             <div className="px-8 py-6 bg-[#181A20]">
               <div className="flex items-center w-full font-semibold text-[16px]">
                 <div className="flex items-center space-x-3 min-w-0">
-                  <Avatar className="h-10 w-10">
-                    <AvatarImage src={userProfile?.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${userProfile?.uid}`} />
-                    <AvatarFallback className="bg-[#FCD535] text-[#0B0E11] font-bold text-sm">
-                      {userProfile?.displayName?.charAt(0) || 'U'}
-                    </AvatarFallback>
-                  </Avatar>
+                  <div className="relative">
+                    <div className="h-10 w-10 rounded-full bg-[#2b3139] flex items-center justify-center text-lg border-2 border-[#474d57]">
+                      {userSticker}
+                    </div>
+                  </div>
                   <div className="flex items-center space-x-2">
-                    <h1 className="text-[#EAECEF] text-base font-semibold">{userProfile?.displayName || 'Anonymous User'}</h1>
+                    <h1 className="text-[#EAECEF] text-base font-semibold">{userName || userProfile?.displayName || 'Anonymous User'}</h1>
                     <svg className="w-3 h-3 text-[#0ECB81]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <Button variant="ghost" size="icon" className="h-5 w-5 text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] rounded-sm">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                      </svg>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      onClick={() => setIsProfileEditOpen(true)}
+                      className="h-5 w-5 text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] rounded-sm"
+                      title="Edit Profile"
+                    >
+                      <Edit3 className="w-3 h-3" />
                     </Button>
                   </div>
                 </div>
@@ -1443,7 +1474,14 @@ export default function Dashboard() {
         </div>
       </div>
 
-
+      {/* Profile Edit Modal */}
+      <ProfileEditModal
+        isOpen={isProfileEditOpen}
+        onClose={() => setIsProfileEditOpen(false)}
+        currentName={userName || userProfile?.displayName || ''}
+        currentSticker={userSticker}
+        onSave={handleProfileSave}
+      />
     </div>
   );
 }
