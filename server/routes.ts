@@ -1,0 +1,71 @@
+import type { Express } from "express";
+import { createServer, type Server } from "http";
+import { storage } from "./storage";
+import { z } from "zod";
+
+export async function registerRoutes(app: Express): Promise<Server> {
+  // Get cryptocurrency data from CoinGecko API
+  app.get("/api/crypto", async (req, res) => {
+    try {
+      const response = await fetch(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,ripple,solana&order=market_cap_desc&per_page=5&page=1&sparkline=false"
+      );
+      
+      if (!response.ok) {
+        throw new Error(`CoinGecko API error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      // Transform the data to match our schema
+      const cryptoData = data.map((coin: any) => ({
+        id: coin.id,
+        symbol: coin.symbol.toUpperCase(),
+        name: coin.name,
+        current_price: coin.current_price.toString(),
+        price_change_percentage_24h: coin.price_change_percentage_24h?.toFixed(2) || "0.00",
+        market_cap: coin.market_cap.toString(),
+        image: coin.image,
+      }));
+      
+      res.json(cryptoData);
+    } catch (error) {
+      console.error("Error fetching crypto data:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch cryptocurrency data",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Get news data (static for now as per requirements)
+  app.get("/api/news", async (req, res) => {
+    const newsData = [
+      {
+        id: 1,
+        title: "Digital Assets Show Resilience Amid Geopolitical Concerns",
+        url: "#"
+      },
+      {
+        id: 2,
+        title: "Cryptocurrency Investment Products See Continued Inflows Amid Market Gains",
+        url: "#"
+      },
+      {
+        id: 3,
+        title: "Swedish Medical Firm Secures Convertible Loan for Bitcoin Investment",
+        url: "#"
+      },
+      {
+        id: 4,
+        title: "Japan's Tax Reforms Influence Bitcoin Holdings Strategy",
+        url: "#"
+      }
+    ];
+    
+    res.json(newsData);
+  });
+
+  const httpServer = createServer(app);
+  return httpServer;
+}
