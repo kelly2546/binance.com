@@ -73,10 +73,15 @@ export function useFirebaseAuth() {
           }
         });
         
-        // Navigate to dashboard if user just authenticated and isn't already there
+        // Only navigate to dashboard if email is verified
         if (wasUnauthenticated && window.location.pathname !== '/dashboard') {
-          console.log('User authenticated, navigating to dashboard');
-          setLocation('/dashboard');
+          if (firebaseUser.emailVerified) {
+            console.log('User authenticated with verified email, navigating to dashboard');
+            setLocation('/dashboard');
+          } else {
+            console.log('User authenticated but email not verified, staying on home page');
+            setLocation('/');
+          }
         }
       } else {
         setUserProfile(null);

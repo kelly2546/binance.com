@@ -225,6 +225,21 @@ export const sendVerificationEmail = async (user: User) => {
   }
 };
 
+export const resendVerificationEmail = async () => {
+  try {
+    const user = auth.currentUser;
+    if (user && !user.emailVerified) {
+      await sendEmailVerification(user);
+      console.log('Verification email resent to:', user.email);
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error("Error resending verification email:", error);
+    throw error;
+  }
+};
+
 // Generate consistent 9-digit numeric UID
 export const generateNumericUID = () => {
   return Math.floor(100000000 + Math.random() * 900000000).toString();
