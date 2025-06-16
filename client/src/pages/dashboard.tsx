@@ -9,6 +9,7 @@ import { useUserHoldings } from "@/hooks/useUserHoldings";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy, Edit3 } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useLocation } from "wouter";
 import CryptoPriceCard from "@/components/CryptoPriceCard";
 import NewsSection from "@/components/NewsSection";
@@ -97,6 +98,50 @@ export default function Dashboard() {
   };
 
   const { totalBalance, todayPnL, pnlPercentage } = calculatePortfolioBalance();
+
+  // Generate portfolio performance data for the chart
+  const generatePortfolioData = () => {
+    if (!userProfile?.cryptoBalances || !cryptoData) return [];
+    
+    const currentTime = Date.now();
+    const data = [];
+    
+    // Generate 24 data points for the last 24 hours
+    for (let i = 23; i >= 0; i--) {
+      const timeStamp = currentTime - (i * 60 * 60 * 1000); // Each hour
+      let portfolioValue = 0;
+      
+      userProfile.cryptoBalances.forEach((holding: any) => {
+        const crypto = cryptoData.find((c: any) => c.symbol.toLowerCase() === holding.symbol.toLowerCase());
+        if (crypto) {
+          // Simulate price variation over time based on current 24h change
+          const priceChange = parseFloat(crypto.price_change_percentage_24h || '0');
+          const currentPrice = parseFloat(crypto.current_price);
+          
+          // Create realistic price fluctuation over 24 hours
+          const hourlyVariation = (priceChange / 24) * (i / 23); // Gradual change
+          const randomVariation = (Math.random() - 0.5) * (Math.abs(priceChange) * 0.1); // Small random variations
+          const historicalPrice = currentPrice * (1 - (hourlyVariation + randomVariation) / 100);
+          
+          portfolioValue += holding.balance * historicalPrice;
+        }
+      });
+      
+      data.push({
+        time: new Date(timeStamp).toLocaleTimeString('en-US', { 
+          hour: '2-digit', 
+          minute: '2-digit',
+          hour12: false 
+        }),
+        value: portfolioValue,
+        timestamp: timeStamp
+      });
+    }
+    
+    return data.sort((a, b) => a.timestamp - b.timestamp);
+  };
+
+  const chartData = generatePortfolioData();
 
   // Helper function to get filtered crypto data based on active tab
   const getFilteredCryptoData = () => {
@@ -900,9 +945,29 @@ export default function Dashboard() {
                 
                 {/* Chart */}
                 <div className="h-12 rounded-lg relative overflow-hidden bg-[transparent]">
-                  <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
-                    <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="#FCD535" strokeWidth="2" fill="none"/>
-                  </svg>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={chartData}>
+                      <Line 
+                        type="monotone" 
+                        dataKey="value" 
+                        stroke="#FCD535" 
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={{ r: 4, fill: "#FCD535" }}
+                      />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: '#2B3139',
+                          border: '1px solid #4B5563',
+                          borderRadius: '6px',
+                          color: '#EAECEF'
+                        }}
+                        labelStyle={{ color: '#848E9C' }}
+                        formatter={(value: any) => [`$${parseFloat(value).toFixed(2)}`, 'Portfolio Value']}
+                        labelFormatter={(label) => `Time: ${label}`}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
                 </div>
               </div>
 
