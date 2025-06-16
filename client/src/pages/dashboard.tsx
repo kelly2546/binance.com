@@ -727,7 +727,7 @@ export default function Dashboard() {
           <>
             {/* User Profile Header */}
             <div className="px-8 py-6 bg-[#181A20]">
-              <div className="flex items-center w-full">
+              <div className="flex items-center w-full font-semibold text-[16px]">
                 <div className="flex items-center space-x-3 min-w-0">
                   <Avatar className="h-10 w-10">
                     <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
