@@ -11,7 +11,8 @@ import {
   handleRedirectResult,
   DEFAULT_CRYPTO_BALANCES,
   createEmailPasswordAccount,
-  signInWithEmailPassword
+  signInWithEmailPassword,
+  generateNumericUID
 } from '@/lib/firebase';
 import { useLocation } from 'wouter';
 
@@ -55,10 +56,6 @@ export function useFirebaseAuth() {
             setUserProfile(profile);
           } else {
             // Fallback profile if no Firestore data exists
-            const generateNumericUID = () => {
-              return Math.floor(100000000 + Math.random() * 900000000).toString();
-            };
-            
             const fallbackProfile: UserProfile = {
               uid: generateNumericUID(),
               email: firebaseUser.email || '',

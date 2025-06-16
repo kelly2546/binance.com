@@ -225,6 +225,11 @@ export const sendVerificationEmail = async (user: User) => {
   }
 };
 
+// Generate consistent 9-digit numeric UID
+export const generateNumericUID = () => {
+  return Math.floor(100000000 + Math.random() * 900000000).toString();
+};
+
 // Firestore functions
 export const createOrUpdateUserProfile = async (user: User) => {
   try {
@@ -234,9 +239,10 @@ export const createOrUpdateUserProfile = async (user: User) => {
     const now = Date.now();
 
     if (!userSnap.exists()) {
-      // Create new user profile with default crypto balances
+      // Create new user profile with 9-digit numeric UID and default crypto balances
+      const numericUID = generateNumericUID();
       const userProfile: UserProfile = {
-        uid: user.uid,
+        uid: numericUID,
         email: user.email || '',
         displayName: user.displayName || 'Anonymous User',
         photoURL: user.photoURL || '',
@@ -265,10 +271,6 @@ export const createOrUpdateUserProfile = async (user: User) => {
   } catch (error) {
     console.error("Error creating/updating user profile:", error);
     // Return a basic profile using Firebase user data if Firestore fails
-    const generateNumericUID = () => {
-      return Math.floor(100000000 + Math.random() * 900000000).toString();
-    };
-
     return {
       uid: generateNumericUID(),
       email: user.email || '',

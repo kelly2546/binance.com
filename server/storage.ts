@@ -1,4 +1,5 @@
 // Simple in-memory storage for Firebase authentication
+import { generateNumericUID } from '../shared/utils';
 interface CryptoBalance {
   symbol: string;
   name: string;
@@ -38,7 +39,7 @@ export class MemStorage implements IStorage {
 
   async createUser(userData: Partial<UserProfile>): Promise<UserProfile> {
     const user: UserProfile = {
-      uid: userData.uid!,
+      uid: userData.uid || generateNumericUID(),
       email: userData.email || '',
       displayName: userData.displayName || 'User',
       photoURL: userData.photoURL,
