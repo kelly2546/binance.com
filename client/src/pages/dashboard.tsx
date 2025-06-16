@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useAssetsData } from "@/hooks/useAssetsData";
 import { useUserHoldings } from "@/hooks/useUserHoldings";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy } from "lucide-react";
-import type { User } from "@shared/schema";
 import { useLocation } from "wouter";
 import CryptoPriceCard from "@/components/CryptoPriceCard";
 import NewsSection from "@/components/NewsSection";
@@ -33,7 +32,7 @@ export default function Dashboard() {
     }
   };
   
-  const { isLoading, user, isAuthenticated } = useAuth();
+  const { user, userProfile, loading: isLoading, isAuthenticated } = useFirebaseAuth();
 
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
@@ -736,7 +735,7 @@ export default function Dashboard() {
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex items-center space-x-2">
-                    <h1 className="text-[#EAECEF] text-base font-semibold">Mr_crypto_</h1>
+                    <h1 className="text-[#EAECEF] text-base font-semibold">{userProfile?.displayName || user?.displayName || 'Anonymous User'}</h1>
                     <svg className="w-3 h-3 text-[#0ECB81]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -752,9 +751,9 @@ export default function Dashboard() {
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">UID</div>
                     <div className="flex items-center space-x-1">
-                      <span className="text-[#EAECEF] font-medium font-semibold">799181588</span>
+                      <span className="text-[#EAECEF] font-medium font-semibold">{user?.uid || 'Not logged in'}</span>
                       <button 
-                        onClick={() => copyToClipboard('799181588')}
+                        onClick={() => copyToClipboard(user?.uid || '')}
                         className="text-[#848e9c] hover:text-[#EAECEF] transition-colors"
                       >
                         <Copy className="h-3 w-3" />
