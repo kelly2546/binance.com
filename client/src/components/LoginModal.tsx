@@ -106,6 +106,8 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
+              onClick={handleLogin}
+              disabled={!email}
             >
               <img 
                 src="https://www.svgrepo.com/show/303125/apple-logo.svg" 
@@ -118,6 +120,8 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
+              onClick={handleLogin}
+              disabled={!email}
             >
               <svg className="w-5 h-5 mr-3 text-blue-400" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L2 7v10c0 5.55 3.84 9.95 9 11 5.16-1.05 9-5.45 9-11V7l-10-5z"/>
