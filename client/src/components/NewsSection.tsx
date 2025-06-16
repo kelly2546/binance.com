@@ -10,8 +10,8 @@ export default function NewsSection() {
     <div className="border border-[#2b3139] rounded-2xl p-6 text-[#1E2026] bg-[#1e2329]">
       {/* News Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-medium text-[#EAECEF]">News</h3>
-        <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm p-0">
+        <h3 className="text-base font-semibold text-[#EAECEF]">News</h3>
+        <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm font-medium p-0">
           View All News <ChevronRight className="ml-1 h-3 w-3" />
         </Button>
       </div>
@@ -31,7 +31,7 @@ export default function NewsSection() {
             </div>
           ))
         ) : (
-          <div className="text-[#848e9c] text-sm">
+          <div className="text-[#848e9c] text-lg font-semibold">
             Failed to load news data
           </div>
         )}
