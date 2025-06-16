@@ -11,6 +11,7 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("Holding");
   const [activeSection, setActiveSection] = useState("Dashboard");
   const [expandedMenus, setExpandedMenus] = useState<{[key: string]: boolean}>({});
+  const [assetsViewType, setAssetsViewType] = useState("Coin View");
 
   const toggleMenu = (menuName: string) => {
     setExpandedMenus(prev => ({
@@ -191,97 +192,374 @@ export default function Dashboard() {
               
               {/* Assets Tabs */}
               <div className="flex space-x-8 mb-6 border-b border-[#1e2329]">
-                <button className="pb-3 text-sm font-medium text-white border-b-2 border-[#f0b90b]">
+                <button 
+                  onClick={() => setAssetsViewType("Coin View")}
+                  className={`pb-3 text-sm font-medium ${
+                    assetsViewType === "Coin View" 
+                      ? "text-white border-b-2 border-[#f0b90b]" 
+                      : "text-[#848e9c] hover:text-white"
+                  }`}
+                >
                   Coin View
                 </button>
-                <button className="pb-3 text-sm font-medium text-[#848e9c] hover:text-white">
+                <button 
+                  onClick={() => setAssetsViewType("Account View")}
+                  className={`pb-3 text-sm font-medium ${
+                    assetsViewType === "Account View" 
+                      ? "text-white border-b-2 border-[#f0b90b]" 
+                      : "text-[#848e9c] hover:text-white"
+                  }`}
+                >
                   Account View
                 </button>
               </div>
               
-              {/* Assets Table Header */}
-              <div className="grid grid-cols-4 gap-4 text-xs text-[#848e9c] mb-4 px-0">
-                <div className="flex items-center">
-                  <span>Coin</span>
-                  <ChevronDown className="h-3 w-3 ml-1" />
-                </div>
-                <div className="flex items-center">
-                  <span>Amount</span>
-                  <ChevronDown className="h-3 w-3 ml-1" />
-                </div>
-                <div className="flex items-center">
-                  <span>Coin Price / Cost Price</span>
-                  <svg className="w-3 h-3 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div className="flex items-center">
-                  <span>Today's PnL</span>
-                  <ChevronDown className="h-3 w-3 ml-1" />
-                </div>
-              </div>
-              
-              {/* Assets Rows */}
-              <div className="space-y-2">
-                {assetsLoading ? (
-                  <div className="text-center py-8">
-                    <div className="text-[#848e9c]">Loading assets...</div>
+              {/* Conditional rendering based on view type */}
+              {assetsViewType === "Coin View" ? (
+                <>
+                  {/* Coin View Table Header */}
+                  <div className="grid grid-cols-4 gap-4 text-xs text-[#848e9c] mb-4 px-0">
+                    <div className="flex items-center">
+                      <span>Coin</span>
+                      <ChevronDown className="h-3 w-3 ml-1" />
+                    </div>
+                    <div className="flex items-center">
+                      <span>Amount</span>
+                      <ChevronDown className="h-3 w-3 ml-1" />
+                    </div>
+                    <div className="flex items-center">
+                      <span>Coin Price / Cost Price</span>
+                      <svg className="w-3 h-3 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div className="flex items-center">
+                      <span>Today's PnL</span>
+                      <ChevronDown className="h-3 w-3 ml-1" />
+                    </div>
                   </div>
-                ) : assetsData && assetsData.length > 0 ? (
-                  assetsData.slice(0, 6).map((asset, index) => {
-                    // Simulate different holding amounts for each asset
-                    const holdings = [2.22, 0.00781662, 5.56, 0.00002101, 1.45, 0.125];
-                    const holdingAmount = holdings[index] || 0;
-                    const holdingValue = holdingAmount * asset.current_price;
-                    
-                    return (
-                      <div key={asset.id} className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-6 h-6 rounded-full overflow-hidden">
-                            <img 
-                              src={asset.image} 
-                              alt={asset.name}
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                e.currentTarget.style.display = 'none';
-                              }}
-                            />
+                  
+                  {/* Coin View Assets Rows */}
+                  <div className="space-y-2">
+                    {assetsLoading ? (
+                      <div className="text-center py-8">
+                        <div className="text-[#848e9c]">Loading assets...</div>
+                      </div>
+                    ) : assetsData && assetsData.length > 0 ? (
+                      assetsData.slice(0, 6).map((asset, index) => {
+                        // Simulate different holding amounts for each asset
+                        const holdings = [2.22, 0.00781662, 5.56, 0.00002101, 1.45, 0.125];
+                        const holdingAmount = holdings[index] || 0;
+                        const holdingValue = holdingAmount * asset.current_price;
+                        
+                        return (
+                          <div key={asset.id} className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-6 h-6 rounded-full overflow-hidden">
+                                <img 
+                                  src={asset.image} 
+                                  alt={asset.name}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                  }}
+                                />
+                              </div>
+                              <div>
+                                <div className="text-[#EAECEF] text-sm font-semibold">{asset.symbol.toUpperCase()}</div>
+                                <div className="text-[#848e9c] text-xs">{asset.name.length > 15 ? asset.name.substring(0, 12) + "..." : asset.name}</div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-[#EAECEF] text-sm font-medium">{holdingAmount.toFixed(8)}</div>
+                              <div className="text-[#848e9c] text-xs">${holdingValue.toFixed(2)}</div>
+                            </div>
+                            <div>
+                              <div className="text-[#EAECEF] text-sm font-medium">${asset.current_price.toFixed(2)}</div>
+                              <div className="text-[#848e9c] text-xs">--</div>
+                            </div>
+                            <div>
+                              <div className="flex items-center space-x-1">
+                                <span className={`text-sm font-medium ${
+                                  asset.price_change_percentage_24h >= 0 
+                                    ? 'text-[#0ecb81]' 
+                                    : 'text-[#f6465d]'
+                                }`}>
+                                  {asset.price_change_percentage_24h >= 0 ? '+' : ''}
+                                  ${(holdingAmount * asset.current_price * (asset.price_change_percentage_24h / 100)).toFixed(3)}
+                                </span>
+                                <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <div className="text-[#EAECEF] text-sm font-semibold">{asset.symbol.toUpperCase()}</div>
-                            <div className="text-[#848e9c] text-xs">{asset.name.length > 15 ? asset.name.substring(0, 12) + "..." : asset.name}</div>
-                          </div>
+                        );
+                      })
+                    ) : (
+                      <div className="text-center py-8">
+                        <div className="text-[#848e9c]">No assets data available</div>
+                      </div>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Account View Table Header */}
+                  <div className="grid grid-cols-4 gap-4 text-xs text-[#848e9c] mb-4 px-0">
+                    <div className="flex items-center">
+                      <span>Account</span>
+                      <ChevronDown className="h-3 w-3 ml-1" />
+                    </div>
+                    <div className="flex items-center">
+                      <span>Amount</span>
+                      <ChevronDown className="h-3 w-3 ml-1" />
+                    </div>
+                    <div className="flex items-center">
+                      <span>Ratio</span>
+                      <ChevronDown className="h-3 w-3 ml-1" />
+                    </div>
+                    <div className="flex items-center">
+                      <span>Action</span>
+                    </div>
+                  </div>
+                  
+                  {/* Account View Rows */}
+                  <div className="space-y-2">
+                    {/* Funding */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#f0b90b] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
+                          </svg>
                         </div>
                         <div>
-                          <div className="text-[#EAECEF] text-sm font-medium">{holdingAmount.toFixed(8)}</div>
-                          <div className="text-[#848e9c] text-xs">${holdingValue.toFixed(2)}</div>
-                        </div>
-                        <div>
-                          <div className="text-[#EAECEF] text-sm font-medium">${asset.current_price.toFixed(2)}</div>
-                          <div className="text-[#848e9c] text-xs">--</div>
-                        </div>
-                        <div>
-                          <div className="flex items-center space-x-1">
-                            <span className={`text-sm font-medium ${
-                              asset.price_change_percentage_24h >= 0 
-                                ? 'text-[#0ecb81]' 
-                                : 'text-[#f6465d]'
-                            }`}>
-                              {asset.price_change_percentage_24h >= 0 ? '+' : ''}
-                              ${(holdingAmount * asset.current_price * (asset.price_change_percentage_24h / 100)).toFixed(3)}
-                            </span>
-                            <ChevronDown className="h-3 w-3 text-[#848e9c]" />
-                          </div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">Funding</div>
                         </div>
                       </div>
-                    );
-                  })
-                ) : (
-                  <div className="text-center py-8">
-                    <div className="text-[#848e9c]">No assets data available</div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.02692244</div>
+                        <div className="text-[#848e9c] text-xs">$0.03</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">99.71%</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Spot */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#2196F3] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">Spot</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00007735</div>
+                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.29%</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Cross Margin */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#FF9800] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">Cross Margin</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
+                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Isolated Margin */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#9C27B0] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">Isolated Margin</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
+                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Earn */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#4CAF50] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">Earn</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
+                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* USD©️-M Futures */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#607D8B] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">USD©️-M Futures</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
+                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* COIN-M Futures */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#795548] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.736 6.979C9.208 6.193 9.696 6 10 6c.304 0 .792.193 1.264.979a1 1 0 001.715-1.029C12.279 4.784 11.232 4 10 4s-2.279.784-2.979 1.95c-.285.475-.507 1-.67 1.55H6a1 1 0 000 2h.013a9.358 9.358 0 000 1H6a1 1 0 100 2h.351c.163.55.385 1.075.67 1.55C7.721 15.216 8.768 16 10 16s2.279-.784 2.979-1.95a1 1 0 10-1.715-1.029C10.792 13.807 10.304 14 10 14c-.304 0-.792-.193-1.264-.979A4.265 4.265 0 018.017 11H10a1 1 0 100-2H8.017c.16-.348.327-.668.719-1.021z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">COIN-M Futures</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
+                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Options */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#E91E63] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">Options</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
+                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* NFT */}
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 rounded-full bg-[#3F51B5] flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">NFT</div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">1 NFTs</div>
+                        <div className="text-[#848e9c] text-xs">$0.00</div>
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-medium">--</div>
+                      </div>
+                      <div>
+                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                )}
-              </div>
+                </>
+              )}
             </div>
           </div>
         );
