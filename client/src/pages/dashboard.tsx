@@ -168,27 +168,44 @@ export default function Dashboard() {
         {/* Main Content */}
         <div className="flex-1 bg-[#181a20]">
           {/* User Profile Header */}
-          <div className="px-6 py-4 flex items-center justify-between border-b border-[#2b3139]">
-            <div className="flex items-center space-x-4">
-              <Avatar className="h-12 w-12 border-2 border-[#f0b90b]">
-                <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
-                <AvatarFallback className="bg-[#f0b90b] text-black font-bold">
-                  M
-                </AvatarFallback>
-              </Avatar>
-              <div>
-                <h1 className="text-white text-lg font-medium">Mr_crypto_</h1>
-                <div className="flex items-center space-x-6 text-sm text-[#848e9c]">
-                  <span>UID</span>
-                  <span>VIP Level</span>
-                  <span>Following</span>
-                  <span>Followers</span>
+          <div className="px-6 py-4 border-b border-[#2b3139]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <Avatar className="h-12 w-12">
+                  <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
+                  <AvatarFallback className="bg-[#f0b90b] text-black font-bold">
+                    M
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex items-center space-x-2">
+                  <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
+                  </svg>
                 </div>
-                <div className="flex items-center space-x-6 text-sm">
-                  <span className="text-[#848e9c]">799181588</span>
-                  <span className="text-[#848e9c]">Regular User</span>
-                  <span className="text-white">14</span>
-                  <span className="text-white">3</span>
+                <div>
+                  <h1 className="text-white text-lg font-medium">Mr_crypto_</h1>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-12 text-sm">
+                <div className="text-center">
+                  <div className="text-[#848e9c]">UID</div>
+                  <div className="text-[#848e9c]">799181588</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-[#848e9c]">VIP Level</div>
+                  <div className="text-[#848e9c]">Regular User</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-[#848e9c]">Following</div>
+                  <div className="text-white">14</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-[#848e9c]">Followers</div>
+                  <div className="text-white">3</div>
                 </div>
               </div>
             </div>
