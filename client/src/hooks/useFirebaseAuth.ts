@@ -6,7 +6,8 @@ import {
   signOutUser, 
   onAuthStateChange, 
   getUserProfile,
-  UserProfile 
+  UserProfile,
+  handleRedirectResult
 } from '@/lib/firebase';
 
 export function useFirebaseAuth() {
@@ -16,6 +17,18 @@ export function useFirebaseAuth() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const initializeAuth = async () => {
+      // Check for redirect result first
+      try {
+        const redirectUser = await handleRedirectResult();
+        if (redirectUser) {
+          console.log('Redirect authentication successful');
+        }
+      } catch (error) {
+        console.error('Error handling redirect result:', error);
+      }
+    };
+
     const unsubscribe = onAuthStateChange(async (firebaseUser) => {
       setUser(firebaseUser);
       
@@ -65,6 +78,7 @@ export function useFirebaseAuth() {
       setLoading(false);
     });
 
+    initializeAuth();
     return () => unsubscribe();
   }, []);
 
@@ -73,56 +87,14 @@ export function useFirebaseAuth() {
     try {
       setError(null);
       setLoading(true);
-      console.log('useFirebaseAuth: Starting signInWithGoogle...');
-      const user = await signInWithGoogle();
-      console.log('useFirebaseAuth: signInWithGoogle completed, user:', user);
-      
-      // Try to get profile, but don't fail if Firestore is not accessible
-      try {
-        const profile = await getUserProfile(user.uid);
-        if (profile) {
-          setUserProfile(profile);
-          console.log('useFirebaseAuth: Profile loaded from Firestore');
-        } else {
-          // Use Firebase Auth data directly
-          const authProfile: UserProfile = {
-            uid: user.uid,
-            email: user.email || '',
-            displayName: user.displayName || 'Anonymous User',
-            photoURL: user.photoURL || '',
-            createdAt: Date.now(),
-            lastLoginAt: Date.now(),
-            vipLevel: 'Regular User',
-            following: 0,
-            followers: 0,
-            portfolioBalance: 0
-          };
-          setUserProfile(authProfile);
-          console.log('useFirebaseAuth: Using fallback profile from Firebase Auth');
-        }
-      } catch (profileErr) {
-        // Fallback to Firebase Auth data if Firestore fails
-        const authProfile: UserProfile = {
-          uid: user.uid,
-          email: user.email || '',
-          displayName: user.displayName || 'Anonymous User',
-          photoURL: user.photoURL || '',
-          createdAt: Date.now(),
-          lastLoginAt: Date.now(),
-          vipLevel: 'Regular User',
-          following: 0,
-          followers: 0,
-          portfolioBalance: 0
-        };
-        setUserProfile(authProfile);
-        console.log('useFirebaseAuth: Error with Firestore, using fallback profile');
-      }
+      console.log('useFirebaseAuth: Starting signInWithGoogle redirect...');
+      await signInWithGoogle();
+      // The page will redirect, so we don't need to handle the result here
+      console.log('useFirebaseAuth: Redirect initiated');
     } catch (err: any) {
       console.error('useFirebaseAuth: Login failed with error:', err);
       setError(err.message || 'Login failed');
-    } finally {
       setLoading(false);
-      console.log('useFirebaseAuth: Login process completed');
     }
   };
 

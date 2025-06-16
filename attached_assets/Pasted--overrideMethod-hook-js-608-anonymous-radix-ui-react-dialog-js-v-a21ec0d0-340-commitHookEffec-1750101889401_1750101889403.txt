@@ -1,0 +1,143 @@
+
+overrideMethod @ hook.js:608
+(anonymous) @ @radix-ui_react-dialog.js?v=a21ec0d0:340
+commitHookEffectListMount @ chunk-WERSD76P.js?v=a21ec0d0:16915
+commitPassiveMountOnFiber @ chunk-WERSD76P.js?v=a21ec0d0:18156
+commitPassiveMountEffects_complete @ chunk-WERSD76P.js?v=a21ec0d0:18129
+commitPassiveMountEffects_begin @ chunk-WERSD76P.js?v=a21ec0d0:18119
+commitPassiveMountEffects @ chunk-WERSD76P.js?v=a21ec0d0:18109
+flushPassiveEffectsImpl @ chunk-WERSD76P.js?v=a21ec0d0:19490
+flushPassiveEffects @ chunk-WERSD76P.js?v=a21ec0d0:19447
+commitRootImpl @ chunk-WERSD76P.js?v=a21ec0d0:19416
+commitRoot @ chunk-WERSD76P.js?v=a21ec0d0:19277
+performSyncWorkOnRoot @ chunk-WERSD76P.js?v=a21ec0d0:18895
+flushSyncCallbacks @ chunk-WERSD76P.js?v=a21ec0d0:9119
+(anonymous) @ chunk-WERSD76P.js?v=a21ec0d0:18627Understand this warning
+SignUpModal.tsx:20 Google Sign Up clicked
+SignUpModal.tsx:22 Attempting to login...
+useFirebaseAuth.ts:72 useFirebaseAuth: login() called
+useFirebaseAuth.ts:76 useFirebaseAuth: Starting signInWithGoogle...
+firebase.ts:41 Starting Google Sign-In process...
+firebase.ts:43 Firebase auth instance: AuthImpl {app: FirebaseAppImpl, heartbeatServiceProvider: Provider, appCheckServiceProvider: Provider, config: {…}, currentUser: _UserImpl, …}
+firebase.ts:44 Google provider: _GoogleAuthProvider {providerId: 'google.com', defaultLanguageCode: null, customParameters: {…}, scopes: Array(1)}
+firebase.ts:45 Current domain: 81c09d3f-8d9c-483a-b153-e5fd20e21d1e-00-30z4ga5mbiseb.kirk.replit.dev
+firebase.ts:51 Popup test successful - no popup blocker detected
+firebase.ts:56 Attempting signInWithPopup...
+firebase.ts:70 Error signing in with Google: FirebaseError: Firebase: Error (auth/popup-blocked).
+    at createErrorInternal (firebase_auth.js?v=a21ec0d0:697:37)
+    at _assert (firebase_auth.js?v=a21ec0d0:703:11)
+    at _open (firebase_auth.js?v=a21ec0d0:7570:3)
+    at BrowserPopupRedirectResolver._openPopup (firebase_auth.js?v=a21ec0d0:7665:12)
+    at async _PopupOperation.onExecution (firebase_auth.js?v=a21ec0d0:7027:23)
+    at async firebase_auth.js?v=a21ec0d0:6899:9
+overrideMethod @ hook.js:608
+signInWithGoogle @ firebase.ts:70
+await in signInWithGoogle
+login @ useFirebaseAuth.ts:77
+handleGoogleSignUp @ SignUpModal.tsx:23
+callCallback2 @ chunk-WERSD76P.js?v=a21ec0d0:3674
+invokeGuardedCallbackDev @ chunk-WERSD76P.js?v=a21ec0d0:3699
+invokeGuardedCallback @ chunk-WERSD76P.js?v=a21ec0d0:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-WERSD76P.js?v=a21ec0d0:3736
+executeDispatch @ chunk-WERSD76P.js?v=a21ec0d0:7014
+processDispatchQueueItemsInOrder @ chunk-WERSD76P.js?v=a21ec0d0:7034
+processDispatchQueue @ chunk-WERSD76P.js?v=a21ec0d0:7043
+dispatchEventsForPlugins @ chunk-WERSD76P.js?v=a21ec0d0:7051
+(anonymous) @ chunk-WERSD76P.js?v=a21ec0d0:7174
+batchedUpdates$1 @ chunk-WERSD76P.js?v=a21ec0d0:18913
+batchedUpdates @ chunk-WERSD76P.js?v=a21ec0d0:3579
+dispatchEventForPluginEventSystem @ chunk-WERSD76P.js?v=a21ec0d0:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-WERSD76P.js?v=a21ec0d0:5478
+dispatchEvent @ chunk-WERSD76P.js?v=a21ec0d0:5472
+dispatchDiscreteEvent @ chunk-WERSD76P.js?v=a21ec0d0:5449Understand this error
+firebase.ts:71 Error code: auth/popup-blocked
+overrideMethod @ hook.js:608
+signInWithGoogle @ firebase.ts:71
+await in signInWithGoogle
+login @ useFirebaseAuth.ts:77
+handleGoogleSignUp @ SignUpModal.tsx:23
+callCallback2 @ chunk-WERSD76P.js?v=a21ec0d0:3674
+invokeGuardedCallbackDev @ chunk-WERSD76P.js?v=a21ec0d0:3699
+invokeGuardedCallback @ chunk-WERSD76P.js?v=a21ec0d0:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-WERSD76P.js?v=a21ec0d0:3736
+executeDispatch @ chunk-WERSD76P.js?v=a21ec0d0:7014
+processDispatchQueueItemsInOrder @ chunk-WERSD76P.js?v=a21ec0d0:7034
+processDispatchQueue @ chunk-WERSD76P.js?v=a21ec0d0:7043
+dispatchEventsForPlugins @ chunk-WERSD76P.js?v=a21ec0d0:7051
+(anonymous) @ chunk-WERSD76P.js?v=a21ec0d0:7174
+batchedUpdates$1 @ chunk-WERSD76P.js?v=a21ec0d0:18913
+batchedUpdates @ chunk-WERSD76P.js?v=a21ec0d0:3579
+dispatchEventForPluginEventSystem @ chunk-WERSD76P.js?v=a21ec0d0:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-WERSD76P.js?v=a21ec0d0:5478
+dispatchEvent @ chunk-WERSD76P.js?v=a21ec0d0:5472
+dispatchDiscreteEvent @ chunk-WERSD76P.js?v=a21ec0d0:5449Understand this error
+firebase.ts:72 Error message: Firebase: Error (auth/popup-blocked).
+overrideMethod @ hook.js:608
+signInWithGoogle @ firebase.ts:72
+await in signInWithGoogle
+login @ useFirebaseAuth.ts:77
+handleGoogleSignUp @ SignUpModal.tsx:23
+callCallback2 @ chunk-WERSD76P.js?v=a21ec0d0:3674
+invokeGuardedCallbackDev @ chunk-WERSD76P.js?v=a21ec0d0:3699
+invokeGuardedCallback @ chunk-WERSD76P.js?v=a21ec0d0:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-WERSD76P.js?v=a21ec0d0:3736
+executeDispatch @ chunk-WERSD76P.js?v=a21ec0d0:7014
+processDispatchQueueItemsInOrder @ chunk-WERSD76P.js?v=a21ec0d0:7034
+processDispatchQueue @ chunk-WERSD76P.js?v=a21ec0d0:7043
+dispatchEventsForPlugins @ chunk-WERSD76P.js?v=a21ec0d0:7051
+(anonymous) @ chunk-WERSD76P.js?v=a21ec0d0:7174
+batchedUpdates$1 @ chunk-WERSD76P.js?v=a21ec0d0:18913
+batchedUpdates @ chunk-WERSD76P.js?v=a21ec0d0:3579
+dispatchEventForPluginEventSystem @ chunk-WERSD76P.js?v=a21ec0d0:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-WERSD76P.js?v=a21ec0d0:5478
+dispatchEvent @ chunk-WERSD76P.js?v=a21ec0d0:5472
+dispatchDiscreteEvent @ chunk-WERSD76P.js?v=a21ec0d0:5449Understand this error
+firebase.ts:76 Popup was blocked by browser
+overrideMethod @ hook.js:608
+signInWithGoogle @ firebase.ts:76
+await in signInWithGoogle
+login @ useFirebaseAuth.ts:77
+handleGoogleSignUp @ SignUpModal.tsx:23
+callCallback2 @ chunk-WERSD76P.js?v=a21ec0d0:3674
+invokeGuardedCallbackDev @ chunk-WERSD76P.js?v=a21ec0d0:3699
+invokeGuardedCallback @ chunk-WERSD76P.js?v=a21ec0d0:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-WERSD76P.js?v=a21ec0d0:3736
+executeDispatch @ chunk-WERSD76P.js?v=a21ec0d0:7014
+processDispatchQueueItemsInOrder @ chunk-WERSD76P.js?v=a21ec0d0:7034
+processDispatchQueue @ chunk-WERSD76P.js?v=a21ec0d0:7043
+dispatchEventsForPlugins @ chunk-WERSD76P.js?v=a21ec0d0:7051
+(anonymous) @ chunk-WERSD76P.js?v=a21ec0d0:7174
+batchedUpdates$1 @ chunk-WERSD76P.js?v=a21ec0d0:18913
+batchedUpdates @ chunk-WERSD76P.js?v=a21ec0d0:3579
+dispatchEventForPluginEventSystem @ chunk-WERSD76P.js?v=a21ec0d0:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-WERSD76P.js?v=a21ec0d0:5478
+dispatchEvent @ chunk-WERSD76P.js?v=a21ec0d0:5472
+dispatchDiscreteEvent @ chunk-WERSD76P.js?v=a21ec0d0:5449Understand this error
+useFirebaseAuth.ts:121 useFirebaseAuth: Login failed with error: FirebaseError: Firebase: Error (auth/popup-blocked).
+    at createErrorInternal (firebase_auth.js?v=a21ec0d0:697:37)
+    at _assert (firebase_auth.js?v=a21ec0d0:703:11)
+    at _open (firebase_auth.js?v=a21ec0d0:7570:3)
+    at BrowserPopupRedirectResolver._openPopup (firebase_auth.js?v=a21ec0d0:7665:12)
+    at async _PopupOperation.onExecution (firebase_auth.js?v=a21ec0d0:7027:23)
+    at async firebase_auth.js?v=a21ec0d0:6899:9
+overrideMethod @ hook.js:608
+login @ useFirebaseAuth.ts:121
+await in login
+handleGoogleSignUp @ SignUpModal.tsx:23
+callCallback2 @ chunk-WERSD76P.js?v=a21ec0d0:3674
+invokeGuardedCallbackDev @ chunk-WERSD76P.js?v=a21ec0d0:3699
+invokeGuardedCallback @ chunk-WERSD76P.js?v=a21ec0d0:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-WERSD76P.js?v=a21ec0d0:3736
+executeDispatch @ chunk-WERSD76P.js?v=a21ec0d0:7014
+processDispatchQueueItemsInOrder @ chunk-WERSD76P.js?v=a21ec0d0:7034
+processDispatchQueue @ chunk-WERSD76P.js?v=a21ec0d0:7043
+dispatchEventsForPlugins @ chunk-WERSD76P.js?v=a21ec0d0:7051
+(anonymous) @ chunk-WERSD76P.js?v=a21ec0d0:7174
+batchedUpdates$1 @ chunk-WERSD76P.js?v=a21ec0d0:18913
+batchedUpdates @ chunk-WERSD76P.js?v=a21ec0d0:3579
+dispatchEventForPluginEventSystem @ chunk-WERSD76P.js?v=a21ec0d0:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-WERSD76P.js?v=a21ec0d0:5478
+dispatchEvent @ chunk-WERSD76P.js?v=a21ec0d0:5472
+dispatchDiscreteEvent @ chunk-WERSD76P.js?v=a21ec0d0:5449Understand this error
+useFirebaseAuth.ts:125 useFirebaseAuth: Login process completed
+SignUpModal.tsx:24 Login successful, closing modal

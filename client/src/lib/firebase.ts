@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, User } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, User } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -38,48 +38,40 @@ export interface UserProfile {
 
 // Auth functions
 export const signInWithGoogle = async () => {
-  console.log('Starting Google Sign-In process...');
+  console.log('Starting Google Sign-In with redirect...');
   try {
-    console.log('Firebase auth instance:', auth);
-    console.log('Google provider:', googleProvider);
-    console.log('Current domain:', window.location.hostname);
-    
-    // Check if popup blockers might be interfering
-    const popup = window.open('', '_blank', 'width=1,height=1');
-    if (popup) {
-      popup.close();
-      console.log('Popup test successful - no popup blocker detected');
-    } else {
-      console.warn('Popup test failed - popup blocker may be active');
-    }
-    
-    console.log('Attempting signInWithPopup...');
-    const result = await signInWithPopup(auth, googleProvider);
-    console.log('Sign-in successful:', result);
-    const user = result.user;
-    
-    // Try to create or update user profile in Firestore
-    try {
-      await createOrUpdateUserProfile(user);
-    } catch (firestoreError) {
-      console.log("Firestore access limited, using Firebase Auth data only");
-    }
-    
-    return user;
+    await signInWithRedirect(auth, googleProvider);
+    // The page will redirect, so we don't return anything here
   } catch (error: any) {
-    console.error("Error signing in with Google:", error);
+    console.error("Error starting Google Sign-In redirect:", error);
     if (error?.code) console.error("Error code:", error.code);
     if (error?.message) console.error("Error message:", error.message);
-    
-    // Specific error handling for common issues
-    if (error?.code === 'auth/popup-blocked') {
-      console.error('Popup was blocked by browser');
-    } else if (error?.code === 'auth/popup-closed-by-user') {
-      console.error('Popup was closed by user');
-    } else if (error?.code === 'auth/unauthorized-domain') {
-      console.error('Domain not authorized in Firebase console');
+    throw error;
+  }
+};
+
+export const handleRedirectResult = async () => {
+  console.log('Checking for redirect result...');
+  try {
+    const result = await getRedirectResult(auth);
+    if (result) {
+      console.log('Redirect sign-in successful:', result);
+      const user = result.user;
+      
+      // Try to create or update user profile in Firestore
+      try {
+        await createOrUpdateUserProfile(user);
+      } catch (firestoreError) {
+        console.log("Firestore access limited, using Firebase Auth data only");
+      }
+      
+      return user;
     }
-    
+    return null;
+  } catch (error: any) {
+    console.error("Error handling redirect result:", error);
+    if (error?.code) console.error("Error code:", error.code);
+    if (error?.message) console.error("Error message:", error.message);
     throw error;
   }
 };
