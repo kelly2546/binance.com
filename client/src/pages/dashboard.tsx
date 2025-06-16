@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useMockAuth } from "@/hooks/useMockAuth";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import CryptoBalanceCard from "@/components/CryptoBalanceCard";
+import AdminBalancePanel from "@/components/AdminBalancePanel";
 import { useQuery } from "@tanstack/react-query";
 import { useAssetsData } from "@/hooks/useAssetsData";
 import { useUserHoldings } from "@/hooks/useUserHoldings";
@@ -32,7 +34,7 @@ export default function Dashboard() {
     }
   };
   
-  const { user, loading: isLoading, isAuthenticated, logout } = useMockAuth();
+  const { userProfile, loading: isLoading, isAuthenticated, logout } = useFirebaseAuth();
 
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
@@ -238,9 +240,45 @@ export default function Dashboard() {
                   
                   {/* Coin View Assets Rows */}
                   <div className="space-y-2">
-                    <div className="text-center py-8">
-                      <div className="text-[#848e9c] text-sm">No holdings to display. Please authenticate to view your assets.</div>
-                    </div>
+                    {isAuthenticated && userProfile?.cryptoBalances ? (
+                      userProfile.cryptoBalances.map((crypto) => (
+                        <div key={crypto.symbol} className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                          <div className="flex items-center space-x-3">
+                            <img 
+                              src={crypto.icon} 
+                              alt={crypto.name}
+                              className="w-6 h-6 rounded-full"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = `https://via.placeholder.com/24/FCD535/000000?text=${crypto.symbol}`;
+                              }}
+                            />
+                            <div>
+                              <div className="text-[#EAECEF] text-sm font-semibold">{crypto.symbol}</div>
+                              <div className="text-[#848e9c] text-xs">{crypto.name}</div>
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-[#EAECEF] text-sm">{crypto.balance.toFixed(8)}</div>
+                            <div className="text-[#848e9c] text-xs">{crypto.symbol}</div>
+                          </div>
+                          <div>
+                            <div className="text-[#EAECEF] text-sm">$0.00 / $0.00</div>
+                            <div className="text-[#848e9c] text-xs">0.00%</div>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <span className="text-[#0ecb81] text-sm">+$0.00</span>
+                            <span className="text-[#0ecb81] text-xs">(0.00%)</span>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-8">
+                        <div className="text-[#848e9c] text-sm">
+                          {isAuthenticated ? 'Loading balances...' : 'Please sign in to view your crypto balances'}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </>
               ) : (
@@ -729,13 +767,13 @@ export default function Dashboard() {
               <div className="flex items-center w-full font-semibold text-[16px]">
                 <div className="flex items-center space-x-3 min-w-0">
                   <Avatar className="h-10 w-10">
-                    <AvatarImage src={user?.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.uid}`} />
+                    <AvatarImage src={userProfile?.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${userProfile?.uid}`} />
                     <AvatarFallback className="bg-[#FCD535] text-[#0B0E11] font-bold text-sm">
-                      {user?.displayName?.charAt(0) || 'U'}
+                      {userProfile?.displayName?.charAt(0) || 'U'}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex items-center space-x-2">
-                    <h1 className="text-[#EAECEF] text-base font-semibold">{user?.displayName || 'Anonymous User'}</h1>
+                    <h1 className="text-[#EAECEF] text-base font-semibold">{userProfile?.displayName || 'Anonymous User'}</h1>
                     <svg className="w-3 h-3 text-[#0ECB81]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -751,9 +789,9 @@ export default function Dashboard() {
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">UID</div>
                     <div className="flex items-center space-x-1">
-                      <span className="text-[#EAECEF] font-medium font-semibold">{user?.uid || 'Not logged in'}</span>
+                      <span className="text-[#EAECEF] font-medium font-semibold">{userProfile?.uid || 'Not logged in'}</span>
                       <button 
-                        onClick={() => copyToClipboard(user?.uid || '')}
+                        onClick={() => copyToClipboard(userProfile?.uid || '')}
                         className="text-[#848e9c] hover:text-[#EAECEF] transition-colors"
                       >
                         <Copy className="h-3 w-3" />
