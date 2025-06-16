@@ -170,10 +170,10 @@ export default function Withdraw() {
                   <div className="w-2 h-2 bg-[#FCD535] rounded-full"></div>
                   <Label className="text-white text-sm font-medium">Withdraw to</Label>
                 </div>
-                <div className="flex space-x-1 bg-[#1e2329] rounded p-1">
+                <div className="flex space-x-1 bg-[#1e2329] rounded-2xl p-1">
                   <button
                     onClick={() => setWithdrawTo("Address")}
-                    className={`px-4 py-2 text-sm rounded transition-colors ${
+                    className={`px-4 py-2 text-sm rounded-xl transition-colors ${
                       withdrawTo === "Address"
                         ? "bg-[#FCD535] text-black font-medium"
                         : "text-[#848e9c] hover:text-white"
@@ -183,7 +183,7 @@ export default function Withdraw() {
                   </button>
                   <button
                     onClick={() => setWithdrawTo("Binance user")}
-                    className={`px-4 py-2 text-sm rounded transition-colors ${
+                    className={`px-4 py-2 text-sm rounded-xl transition-colors ${
                       withdrawTo === "Binance user"
                         ? "bg-[#FCD535] text-black font-medium"
                         : "text-[#848e9c] hover:text-white"
@@ -200,7 +200,7 @@ export default function Withdraw() {
                         placeholder="Enter Address"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
-                        className="bg-[#1e2329] border-[#2b3139] text-white placeholder:text-[#848e9c]"
+                        className="bg-[#1e2329] border-[#2b3139] text-white placeholder:text-[#848e9c] rounded-2xl"
                       />
                       <div className="flex items-center justify-end space-x-2 mt-2">
                         <button
@@ -219,7 +219,7 @@ export default function Withdraw() {
 
                     <div>
                       <Select value={network} onValueChange={setNetwork}>
-                        <SelectTrigger className="w-full bg-[#1e2329] border-[#2b3139] text-white">
+                        <SelectTrigger className="w-full bg-[#1e2329] border-[#2b3139] text-white rounded-2xl">
                           <SelectValue placeholder="Select network" />
                         </SelectTrigger>
                         <SelectContent className="bg-[#1e2329] border-[#2b3139]">
@@ -242,7 +242,7 @@ export default function Withdraw() {
                   placeholder="0.00000000"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="bg-[#1e2329] border-[#2b3139] text-white placeholder:text-[#848e9c] text-right"
+                  className="bg-[#1e2329] border-[#2b3139] text-white placeholder:text-[#848e9c] text-right rounded-2xl"
                 />
                 <div className="flex items-center justify-between mt-2 text-xs text-[#848e9c]">
                   <span>Available: 0.00125834 BTC</span>
@@ -251,7 +251,7 @@ export default function Withdraw() {
               </div>
 
               {/* Submit Button */}
-              <Button className="w-full bg-[#FCD535] text-black hover:bg-[#e6c230] font-semibold py-3 mt-8">
+              <Button className="w-full bg-[#FCD535] text-black hover:bg-[#e6c230] font-semibold py-3 mt-8 rounded-2xl">
                 Withdraw
               </Button>
             </div>
