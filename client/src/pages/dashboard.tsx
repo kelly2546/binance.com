@@ -209,7 +209,7 @@ export default function Dashboard() {
         {/* Main Content */}
         <div className="flex-1 bg-[#181A20]">
           {/* User Profile Header */}
-          <div className="px-6 py-4 border-b border-[#2b3139]">
+          <div className="px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <Avatar className="h-12 w-12">
