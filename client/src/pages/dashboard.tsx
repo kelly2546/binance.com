@@ -726,9 +726,9 @@ export default function Dashboard() {
         return (
           <>
             {/* User Profile Header */}
-            <div className="px-6 py-6 bg-[#181A20]">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
+            <div className="px-4 py-6 bg-[#181A20]">
+              <div className="flex items-center justify-start">
+                <div className="flex items-center space-x-3 mr-12">
                   <Avatar className="h-10 w-10">
                     <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
                     <AvatarFallback className="bg-[#FCD535] text-[#0B0E11] font-bold text-sm">
@@ -748,7 +748,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-6 text-xs">
+                <div className="flex items-center space-x-8 text-xs">
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">UID</div>
                     <div className="flex items-center space-x-1">
