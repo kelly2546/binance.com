@@ -26,7 +26,7 @@ export default function HeroSection() {
             <div className="md:text-7xl font-bold text-[#FCD535] mb-4 text-[80px]">
               {userCount.toLocaleString()}
             </div>
-            <h1 className="md:text-5xl font-bold mb-8 text-[#EAECEF] text-[96px]">
+            <h1 className="md:text-5xl font-bold mb-8 text-[#EAECEF] text-[90px]">
               USERS<br />TRUST US
             </h1>
             
