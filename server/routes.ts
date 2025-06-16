@@ -57,7 +57,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/crypto", async (req, res) => {
     try {
       const response = await fetch(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,ripple,solana&order=market_cap_desc&per_page=5&page=1&sparkline=false"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false"
       );
       
       if (!response.ok) {
@@ -74,6 +74,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         current_price: coin.current_price.toString(),
         price_change_percentage_24h: coin.price_change_percentage_24h?.toFixed(2) || "0.00",
         market_cap: coin.market_cap.toString(),
+        total_volume: coin.total_volume?.toString() || "0",
         image: coin.image,
       }));
       

@@ -17,35 +17,35 @@ export default function Dashboard() {
 
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
-  });
+  }) as { data: any[] | undefined };
 
   // Helper function to get filtered crypto data based on active tab
   const getFilteredCryptoData = () => {
-    if (!cryptoData) return [];
+    if (!cryptoData || !Array.isArray(cryptoData)) return [];
     
     switch (activeTab) {
       case "Holding":
         return cryptoData.slice(0, 5); // Show first 5 as holdings
       case "Hot":
-        return cryptoData.filter(crypto => 
+        return cryptoData.filter((crypto: any) => 
           parseFloat(crypto.price_change_percentage_24h || '0') > 5
         ).slice(0, 5);
       case "New Listing":
         return cryptoData.slice(10, 15); // Show different range for new listings
       case "Favorite":
-        return cryptoData.filter(crypto => 
+        return cryptoData.filter((crypto: any) => 
           ["bitcoin", "ethereum", "binancecoin"].includes(crypto.id)
         );
       case "Top Gainers":
         return cryptoData
-          .sort((a, b) => 
+          .sort((a: any, b: any) => 
             parseFloat(b.price_change_percentage_24h || '0') - 
             parseFloat(a.price_change_percentage_24h || '0')
           )
           .slice(0, 5);
       case "24h Volume":
         return cryptoData
-          .sort((a, b) => 
+          .sort((a: any, b: any) => 
             parseFloat(b.total_volume || '0') - 
             parseFloat(a.total_volume || '0')
           )
@@ -315,12 +315,19 @@ export default function Dashboard() {
               
               {/* Tabs */}
               <div className="flex space-x-6 mb-6 border-b border-[#1e2329]">
-                <button className="text-white pb-3 border-b-2 border-[#f0b90b] text-sm font-medium">Holding</button>
-                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">Hot</button>
-                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">New Listing</button>
-                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">Favorite</button>
-                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">Top Gainers</button>
-                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">24h Volume</button>
+                {["Holding", "Hot", "New Listing", "Favorite", "Top Gainers", "24h Volume"].map((tab) => (
+                  <button 
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`pb-3 text-sm font-medium transition-colors ${
+                      activeTab === tab 
+                        ? "text-white border-b-2 border-[#f0b90b]" 
+                        : "text-[#848e9c] hover:text-white"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
               </div>
               
               {/* Table Header */}
@@ -346,33 +353,57 @@ export default function Dashboard() {
                 <div>Trade</div>
               </div>
               
-              {/* BANANAS31 Row */}
-              <div className="grid grid-cols-5 gap-4 items-center py-2 px-0 hover:bg-[#1e2329] rounded">
-                <div className="flex items-center space-x-3">
-                  <div className="w-6 h-6 bg-[#f0b90b] rounded-full flex items-center justify-center">
-                    <span className="text-black font-bold text-xs">🍌</span>
+              {/* Cryptocurrency Rows */}
+              <div className="space-y-2">
+                {filteredCryptoData.map((crypto: any, index: number) => (
+                  <div key={crypto.id} className="grid grid-cols-5 gap-4 items-center py-2 px-0 hover:bg-[#1e2329] rounded">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-6 h-6 rounded-full flex items-center justify-center overflow-hidden">
+                        <img 
+                          src={crypto.image} 
+                          alt={crypto.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <div className="text-[#EAECEF] text-sm font-semibold">{crypto.symbol?.toUpperCase()}</div>
+                        <div className="text-[#848e9c] text-xs">{crypto.name}</div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-[#EAECEF] text-sm font-medium">
+                        {activeTab === "Holding" ? (Math.random() * 10).toFixed(2) : "--"}
+                      </div>
+                      <div className="text-[#848e9c] text-xs">
+                        ${crypto.current_price ? parseFloat(crypto.current_price).toFixed(2) : "0.00"}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-[#EAECEF] text-sm font-medium">
+                        ${crypto.current_price ? parseFloat(crypto.current_price).toFixed(2) : "0.00"}
+                      </div>
+                      <div className="text-[#848e9c] text-xs">--</div>
+                    </div>
+                    <div>
+                      <span className={`text-sm font-medium ${
+                        parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
+                          ? 'text-[#0ecb81]' 
+                          : 'text-[#f6465d]'
+                      }`}>
+                        {parseFloat(crypto.price_change_percentage_24h || '0') >= 0 ? '+' : ''}
+                        {parseFloat(crypto.price_change_percentage_24h || '0').toFixed(2)}%
+                      </span>
+                    </div>
+                    <div>
+                      <Button variant="outline" size="sm" className="border-[#FCD535] text-[#FCD535] hover:bg-[#FCD535] hover:text-black text-xs h-6 px-3 font-semibold">
+                        Trade
+                      </Button>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-[#EAECEF] text-sm font-semibold">BANANAS31</div>
-                    <div className="text-[#848e9c] text-xs">Banana For S...</div>
-                  </div>
-                </div>
-                <div>
-                  <div className="text-[#EAECEF] text-sm font-medium">2.22</div>
-                  <div className="text-[#848e9c] text-xs">$0.01</div>
-                </div>
-                <div>
-                  <div className="text-[#EAECEF] text-sm font-medium">$0.01</div>
-                  <div className="text-[#848e9c] text-xs">--</div>
-                </div>
-                <div>
-                  <span className="text-[#0ecb81] text-sm font-medium">+0.40%</span>
-                </div>
-                <div>
-                  <Button variant="outline" size="sm" className="border-[#FCD535] text-[#FCD535] hover:bg-[#FCD535] hover:text-black text-xs h-6 px-3 font-semibold">
-                    Trade
-                  </Button>
-                </div>
+                ))}
               </div>
             </div>
           </div>
