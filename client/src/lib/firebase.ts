@@ -42,8 +42,12 @@ export const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
     
-    // Create or update user profile in Firestore
-    await createOrUpdateUserProfile(user);
+    // Try to create or update user profile in Firestore
+    try {
+      await createOrUpdateUserProfile(user);
+    } catch (firestoreError) {
+      console.log("Firestore access limited, using Firebase Auth data only");
+    }
     
     return user;
   } catch (error) {
