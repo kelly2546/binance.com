@@ -805,7 +805,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-12 text-xs">
+                <div className="flex items-center space-x-6 text-xs">
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">UID</div>
                     <div className="text-[#EAECEF] font-medium">799181588</div>
