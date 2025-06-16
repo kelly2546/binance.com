@@ -1,29 +1,16 @@
-import { useEffect } from "react";
 import { useTestAuth } from "@/hooks/useTestAuth";
-import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { TrendingUp, TrendingDown, Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown } from "lucide-react";
+import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp } from "lucide-react";
 import type { User } from "@shared/schema";
 
 export default function Dashboard() {
-  const { toast } = useToast();
-  const { isAuthenticated, isLoading, user } = useTestAuth() as { 
+  const { isLoading, user } = useTestAuth() as { 
     isAuthenticated: boolean; 
     isLoading: boolean; 
     user: User | undefined; 
   };
-
-  // For demo purposes, we'll show the dashboard without auth restrictions
-
-  const { data: holdings } = useQuery({
-    queryKey: ["/api/user/holdings"],
-    enabled: isAuthenticated,
-  });
 
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
@@ -31,337 +18,290 @@ export default function Dashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[var(--binance-dark)] flex items-center justify-center">
+      <div className="min-h-screen bg-[#181a20] flex items-center justify-center">
         <div className="text-white">Loading...</div>
       </div>
     );
   }
 
-  if (!isAuthenticated) {
-    return null;
-  }
-
-  const mockHoldings = [
-    {
-      symbol: "BANANAS31",
-      name: "Banana For Scale",
-      amount: "2.22",
-      cost: "$0.01",
-      change: "+0.67%",
-      changeType: "positive" as const
-    },
-    {
-      symbol: "USDT",
-      name: "Tether USD",
-      amount: "0.00781662",
-      cost: "$1.00",
-      change: "-0.04%",
-      changeType: "negative" as const
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-[var(--binance-dark)]">
+    <div className="min-h-screen bg-[#181a20]">
       {/* Header */}
-      <header className="bg-[var(--binance-dark)] border-b border-[var(--binance-border)] sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex items-center">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" 
-                alt="Binance" 
-                className="h-8 w-auto"
-              />
+      <header className="bg-[#181a20] border-b border-[#2b3139] h-16">
+        <div className="h-full px-6 flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center">
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" 
+              alt="Binance" 
+              className="h-6 w-auto"
+            />
+          </div>
+          
+          {/* Navigation */}
+          <nav className="flex items-center space-x-8">
+            <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Buy Crypto</a>
+            <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Markets</a>
+            <div className="flex items-center space-x-1">
+              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Trade</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
             </div>
-            
-            {/* Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-white hover:text-[var(--binance-yellow)] transition-colors">
-                Buy Crypto
-              </a>
-              <a href="#" className="text-white hover:text-[var(--binance-yellow)] transition-colors">
-                Markets
-              </a>
-              <div className="relative group">
-                <a href="#" className="text-white hover:text-[var(--binance-yellow)] transition-colors flex items-center">
-                  Trade <ChevronDown className="ml-1 h-3 w-3" />
-                </a>
-              </div>
-              <div className="relative group">
-                <a href="#" className="text-white hover:text-[var(--binance-yellow)] transition-colors flex items-center">
-                  Futures <ChevronDown className="ml-1 h-3 w-3" />
-                </a>
-              </div>
-              <div className="relative group">
-                <a href="#" className="text-white hover:text-[var(--binance-yellow)] transition-colors flex items-center">
-                  Earn <ChevronDown className="ml-1 h-3 w-3" />
-                </a>
-              </div>
-              <div className="relative group">
-                <a href="#" className="text-white hover:text-[var(--binance-yellow)] transition-colors flex items-center">
-                  Square <ChevronDown className="ml-1 h-3 w-3" />
-                </a>
-              </div>
-              <div className="relative group">
-                <a href="#" className="text-white hover:text-[var(--binance-yellow)] transition-colors flex items-center">
-                  More <ChevronDown className="ml-1 h-3 w-3" />
-                </a>
-              </div>
-            </nav>
-            
-            {/* Right side */}
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="icon" className="text-[var(--binance-gray)] hover:text-white">
-                <Search className="h-4 w-4" />
-              </Button>
-              <Button className="bg-[var(--binance-yellow)] text-black hover:bg-yellow-400 font-medium">
-                Deposit
-              </Button>
-              <Button variant="ghost" size="icon" className="text-[var(--binance-gray)] hover:text-white">
-                <Bell className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-[var(--binance-gray)] hover:text-white">
-                <Globe className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-[var(--binance-gray)] hover:text-white">
-                <Settings className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-[var(--binance-gray)] hover:text-white">
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
+            <div className="flex items-center space-x-1">
+              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Futures</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
             </div>
+            <div className="flex items-center space-x-1">
+              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Earn</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+            </div>
+            <div className="flex items-center space-x-1">
+              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">Square</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+            </div>
+            <div className="flex items-center space-x-1">
+              <a href="#" className="text-white hover:text-[#f0b90b] text-sm">More</a>
+              <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+            </div>
+          </nav>
+          
+          {/* Right side */}
+          <div className="flex items-center space-x-3">
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+              <Search className="h-4 w-4" />
+            </Button>
+            <Button className="bg-[#f0b90b] text-black hover:bg-[#d9a709] h-8 px-4 text-sm font-medium">
+              Deposit
+            </Button>
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+              <Bell className="h-4 w-4" />
+            </Button>
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+              <Globe className="h-4 w-4" />
+            </Button>
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+              <Settings className="h-4 w-4" />
+            </Button>
+            <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       </header>
 
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-64 bg-[#1e2329] min-h-screen border-r border-[var(--binance-border)]">
-          <div className="p-6">
-            <div className="flex items-center space-x-2 mb-6">
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start text-white bg-[#474d57] hover:bg-[#5e6673]"
-              >
-                <i className="fas fa-home mr-2"></i>
+        <div className="w-48 bg-[#181a20] min-h-[calc(100vh-64px)] border-r border-[#2b3139]">
+          <div className="p-4">
+            {/* Dashboard */}
+            <div className="mb-6">
+              <div className="flex items-center px-3 py-2 text-white bg-[#474d57] rounded text-sm">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
                 Dashboard
-              </Button>
+              </div>
             </div>
             
-            <nav className="space-y-2">
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start text-[var(--binance-gray)] hover:text-white hover:bg-[#474d57]"
-              >
-                <i className="fas fa-coins mr-2"></i>
-                Assets
-                <ChevronDown className="ml-auto h-3 w-3" />
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start text-[var(--binance-gray)] hover:text-white hover:bg-[#474d57]"
-              >
-                <i className="fas fa-list mr-2"></i>
-                Orders
-                <ChevronDown className="ml-auto h-3 w-3" />
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start text-[var(--binance-gray)] hover:text-white hover:bg-[#474d57]"
-              >
-                <i className="fas fa-gift mr-2"></i>
+            {/* Navigation */}
+            <nav className="space-y-1">
+              <div className="flex items-center justify-between px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+                <div className="flex items-center">
+                  <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
+                  </svg>
+                  Assets
+                </div>
+                <ChevronDown className="h-3 w-3" />
+              </div>
+              
+              <div className="flex items-center justify-between px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+                <div className="flex items-center">
+                  <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                  </svg>
+                  Orders
+                </div>
+                <ChevronDown className="h-3 w-3" />
+              </div>
+              
+              <div className="flex items-center px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                </svg>
                 Rewards Hub
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start text-[var(--binance-gray)] hover:text-white hover:bg-[#474d57]"
-              >
-                <i className="fas fa-user-friends mr-2"></i>
+              </div>
+              
+              <div className="flex items-center px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
+                </svg>
                 Referral
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start text-[var(--binance-gray)] hover:text-white hover:bg-[#474d57]"
-              >
-                <i className="fas fa-user mr-2"></i>
-                Account
-                <ChevronDown className="ml-auto h-3 w-3" />
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start text-[var(--binance-gray)] hover:text-white hover:bg-[#474d57]"
-              >
-                <i className="fas fa-users mr-2"></i>
+              </div>
+              
+              <div className="flex items-center justify-between px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+                <div className="flex items-center">
+                  <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                  </svg>
+                  Account
+                </div>
+                <ChevronDown className="h-3 w-3" />
+              </div>
+              
+              <div className="flex items-center px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
+                </svg>
                 Sub Accounts
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full justify-start text-[var(--binance-gray)] hover:text-white hover:bg-[#474d57]"
-              >
-                <i className="fas fa-cog mr-2"></i>
+              </div>
+              
+              <div className="flex items-center px-3 py-2 text-[#848e9c] hover:text-white hover:bg-[#2b3139] rounded text-sm cursor-pointer">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                </svg>
                 Settings
-              </Button>
+              </div>
             </nav>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-6">
+        <div className="flex-1 bg-[#181a20]">
           {/* User Profile Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="px-6 py-4 flex items-center justify-between border-b border-[#2b3139]">
             <div className="flex items-center space-x-4">
-              <Avatar className="h-16 w-16">
-                <AvatarImage src={user?.profileImageUrl || undefined} />
-                <AvatarFallback className="bg-[var(--binance-yellow)] text-black text-xl font-bold">
-                  {user?.firstName?.[0] || user?.email?.[0]?.toUpperCase() || 'U'}
+              <Avatar className="h-12 w-12 border-2 border-[#f0b90b]">
+                <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
+                <AvatarFallback className="bg-[#f0b90b] text-black font-bold">
+                  M
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-2xl font-bold text-white">
-                  {user?.firstName ? `${user.firstName} ${user.lastName || ''}` : 'Mr_crypto_'}
-                </h1>
-                <div className="flex items-center space-x-4 text-sm text-[var(--binance-gray)]">
-                  <span>UID: 799181588</span>
-                  <Badge variant="secondary" className="bg-[#474d57] text-white">
-                    VIP Level: {user?.vipLevel || 'Regular User'}
-                  </Badge>
+                <h1 className="text-white text-lg font-medium">Mr_crypto_</h1>
+                <div className="flex items-center space-x-6 text-sm text-[#848e9c]">
+                  <span>UID</span>
+                  <span>VIP Level</span>
+                  <span>Following</span>
+                  <span>Followers</span>
                 </div>
-              </div>
-            </div>
-            <div className="flex items-center space-x-8 text-sm">
-              <div className="text-center">
-                <div className="text-white font-medium">Following</div>
-                <div className="text-[var(--binance-gray)]">{user?.following || 14}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-white font-medium">Followers</div>
-                <div className="text-[var(--binance-gray)]">{user?.followers || 3}</div>
+                <div className="flex items-center space-x-6 text-sm">
+                  <span className="text-[#848e9c]">799181588</span>
+                  <span className="text-[#848e9c]">Regular User</span>
+                  <span className="text-white">14</span>
+                  <span className="text-white">3</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Balance Card */}
-          <Card className="bg-[#1e2329] border-[var(--binance-border)] mb-8">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-white flex items-center">
-                Estimated Balance
-                <i className="fas fa-info-circle ml-2 text-[var(--binance-gray)]"></i>
-              </CardTitle>
-              <div className="flex space-x-2">
-                <Button variant="outline" size="sm" className="border-[var(--binance-border)] text-white">
-                  Deposit
-                </Button>
-                <Button variant="outline" size="sm" className="border-[var(--binance-border)] text-white">
-                  Withdraw
-                </Button>
-                <Button variant="outline" size="sm" className="border-[var(--binance-border)] text-white">
-                  Cash In
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-baseline space-x-2 mb-2">
-                <span className="text-3xl font-bold text-white">0.02631079</span>
-                <span className="text-[var(--binance-gray)]">USDT</span>
-                <ChevronDown className="h-4 w-4 text-[var(--binance-gray)]" />
-              </div>
-              <div className="text-sm text-[var(--binance-gray)] mb-4">
-                ≈ $0.03
-              </div>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-[var(--binance-gray)]">Today's PnL</span>
-                <span className="text-sm text-green-400">+ $0.000 (71%)</span>
-              </div>
-              <div className="mt-4 h-16 bg-[#474d57] rounded flex items-end justify-end p-2">
-                <div className="h-8 w-32 bg-[var(--binance-yellow)] rounded-sm"></div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Markets Section */}
-          <Card className="bg-[#1e2329] border-[var(--binance-border)]">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-white">Markets</CardTitle>
-              <Button variant="ghost" size="sm" className="text-[var(--binance-yellow)]">
-                More
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="flex space-x-8 mb-4 border-b border-[var(--binance-border)]">
-                <button className="text-white pb-2 border-b-2 border-[var(--binance-yellow)]">
-                  Holding
-                </button>
-                <button className="text-[var(--binance-gray)] pb-2">
-                  Hot
-                </button>
-                <button className="text-[var(--binance-gray)] pb-2">
-                  New Listing
-                </button>
-                <button className="text-[var(--binance-gray)] pb-2">
-                  Favorite
-                </button>
-                <button className="text-[var(--binance-gray)] pb-2">
-                  Top Gainers
-                </button>
-                <button className="text-[var(--binance-gray)] pb-2">
-                  24h Volume
-                </button>
-              </div>
-
-              <div className="space-y-4">
-                <div className="grid grid-cols-5 gap-4 text-sm text-[var(--binance-gray)] pb-2">
-                  <div>Coin</div>
-                  <div>Amount</div>
-                  <div>Coin Price / Cost Price</div>
-                  <div>24H Change</div>
-                  <div>Trade</div>
+          {/* Balance Section */}
+          <div className="px-6 py-6">
+            <div className="bg-[#1e2329] rounded-lg p-6 mb-6">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-2">
+                  <h2 className="text-white text-lg font-medium">Estimated Balance</h2>
+                  <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
                 </div>
-
-                {mockHoldings.map((holding, index) => (
-                  <div key={index} className="grid grid-cols-5 gap-4 items-center py-3 border-t border-[var(--binance-border)]">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-[var(--binance-yellow)] rounded-full flex items-center justify-center">
-                        <span className="text-black font-bold text-xs">
-                          {holding.symbol.slice(0, 2)}
-                        </span>
-                      </div>
-                      <div>
-                        <div className="text-white font-medium">{holding.symbol}</div>
-                        <div className="text-xs text-[var(--binance-gray)]">{holding.name}</div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-white font-medium">{holding.amount}</div>
-                      <div className="text-xs text-[var(--binance-gray)]">{holding.cost}</div>
-                    </div>
-                    <div className="text-white">
-                      {holding.cost}
-                      <div className="text-xs text-[var(--binance-gray)]">--</div>
-                    </div>
-                    <div className={`flex items-center ${
-                      holding.changeType === 'positive' ? 'text-green-400' : 'text-red-400'
-                    }`}>
-                      {holding.changeType === 'positive' ? 
-                        <TrendingUp className="h-3 w-3 mr-1" /> : 
-                        <TrendingDown className="h-3 w-3 mr-1" />
-                      }
-                      {holding.change}
-                    </div>
-                    <div>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="border-[var(--binance-yellow)] text-[var(--binance-yellow)] hover:bg-[var(--binance-yellow)] hover:text-black"
-                      >
-                        Trade
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                <div className="flex space-x-2">
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3">
+                    Deposit
+                  </Button>
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3">
+                    Withdraw
+                  </Button>
+                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3">
+                    Cash In
+                  </Button>
+                </div>
               </div>
-            </CardContent>
-          </Card>
+              
+              <div className="flex items-center space-x-2 mb-2">
+                <span className="text-white text-2xl font-bold">0.02631079</span>
+                <span className="text-[#848e9c] text-sm">USDT</span>
+                <ChevronDown className="h-4 w-4 text-[#848e9c]" />
+              </div>
+              
+              <div className="text-[#848e9c] text-sm mb-4">≈ $0.03</div>
+              
+              <div className="flex items-center space-x-4 mb-4">
+                <span className="text-[#848e9c] text-sm">Today's PnL</span>
+                <div className="flex items-center space-x-1">
+                  <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-[#0ecb81] text-sm">$0.000 (71%)</span>
+                </div>
+              </div>
+              
+              {/* Chart */}
+              <div className="h-20 bg-[#2b3139] rounded relative">
+                <svg className="absolute bottom-0 right-0 w-32 h-16" viewBox="0 0 128 64">
+                  <path d="M0,60 L20,50 L40,45 L60,35 L80,30 L100,25 L128,20" stroke="#f0b90b" strokeWidth="2" fill="none"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Markets Section */}
+            <div className="bg-[#1e2329] rounded-lg p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-white text-lg font-medium">Markets</h2>
+                <Button variant="ghost" className="text-[#f0b90b] hover:text-[#d9a709] text-sm h-auto p-0">
+                  More
+                </Button>
+              </div>
+              
+              {/* Tabs */}
+              <div className="flex space-x-8 mb-6 border-b border-[#2b3139]">
+                <button className="text-white pb-3 border-b-2 border-[#f0b90b] text-sm">Holding</button>
+                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">Hot</button>
+                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">New Listing</button>
+                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">Favorite</button>
+                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">Top Gainers</button>
+                <button className="text-[#848e9c] pb-3 text-sm hover:text-white">24h Volume</button>
+              </div>
+              
+              {/* Table Header */}
+              <div className="grid grid-cols-5 gap-4 text-xs text-[#848e9c] mb-4 px-2">
+                <div>Coin</div>
+                <div>Amount</div>
+                <div>Coin Price / Cost Price</div>
+                <div>24H Change</div>
+                <div>Trade</div>
+              </div>
+              
+              {/* BANANAS31 Row */}
+              <div className="grid grid-cols-5 gap-4 items-center py-3 px-2 hover:bg-[#2b3139] rounded">
+                <div className="flex items-center space-x-3">
+                  <div className="w-6 h-6 bg-[#f0b90b] rounded-full flex items-center justify-center">
+                    <span className="text-black font-bold text-xs">🍌</span>
+                  </div>
+                  <div>
+                    <div className="text-white text-sm font-medium">BANANAS31</div>
+                    <div className="text-[#848e9c] text-xs">Banana For S...</div>
+                  </div>
+                </div>
+                <div>
+                  <div className="text-white text-sm">2.22</div>
+                  <div className="text-[#848e9c] text-xs">$0.01</div>
+                </div>
+                <div>
+                  <div className="text-white text-sm">$0.01</div>
+                  <div className="text-[#848e9c] text-xs">--</div>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <TrendingUp className="h-3 w-3 text-[#0ecb81]" />
+                  <span className="text-[#0ecb81] text-sm">+0.64%</span>
+                </div>
+                <div>
+                  <Button variant="outline" size="sm" className="border-[#f0b90b] text-[#f0b90b] hover:bg-[#f0b90b] hover:text-black text-xs h-6 px-3">
+                    Trade
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
