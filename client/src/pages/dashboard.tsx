@@ -135,13 +135,13 @@ export default function Dashboard() {
                   </svg>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-base h-9 px-6 rounded font-bold">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-base h-9 px-6 rounded font-bold">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-base h-9 px-6 rounded font-bold">
                     Transfer
                   </Button>
                 </div>
@@ -198,7 +198,7 @@ export default function Dashboard() {
                           <svg className={`w-3 h-3 ${totalPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`} fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d={totalPnL >= 0 ? "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" : "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"} clipRule="evenodd" />
                           </svg>
-                          <span className={`text-sm font-medium ${totalPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
+                          <span className={`text-lg font-bold ${totalPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
                             {totalPnL >= 0 ? '+' : ''} ${Math.abs(totalPnL).toFixed(3)} ({pnlPercentage.toFixed(1)}%)
                           </span>
                         </>
@@ -209,7 +209,7 @@ export default function Dashboard() {
                       <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.000 (65%)</span>
+                      <span className="text-[#0ecb81] text-lg font-bold">+ $0.000 (65%)</span>
                     </>
                   )}
                 </div>
@@ -226,13 +226,13 @@ export default function Dashboard() {
             {/* My Assets Section */}
             <div className="rounded-lg p-6 border border-[#2b3139]">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-[#EAECEF] text-lg font-semibold">My Assets</h2>
+                <h2 className="text-[#EAECEF] text-2xl font-bold">My Assets</h2>
                 <div className="flex items-center space-x-4">
                   <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
                     <Search className="h-4 w-4" />
                   </Button>
-                  <div className="flex items-center space-x-2 text-sm text-[#848e9c]">
-                    <input type="checkbox" className="w-4 h-4 rounded border-[#2b3139]" />
+                  <div className="flex items-center space-x-2 text-lg font-semibold text-[#848e9c]">
+                    <input type="checkbox" className="w-5 h-5 rounded border-[#2b3139]" />
                     <span>Hide assets &lt;1 USD</span>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function Dashboard() {
               <div className="flex space-x-8 mb-6 border-b border-[#1e2329]">
                 <button 
                   onClick={() => setAssetsViewType("Coin View")}
-                  className={`pb-3 text-sm font-medium ${
+                  className={`pb-3 text-lg font-bold ${
                     assetsViewType === "Coin View" 
                       ? "text-white border-b-2 border-[#f0b90b]" 
                       : "text-[#848e9c] hover:text-white"
@@ -252,7 +252,7 @@ export default function Dashboard() {
                 </button>
                 <button 
                   onClick={() => setAssetsViewType("Account View")}
-                  className={`pb-3 text-sm font-medium ${
+                  className={`pb-3 text-lg font-bold ${
                     assetsViewType === "Account View" 
                       ? "text-white border-b-2 border-[#f0b90b]" 
                       : "text-[#848e9c] hover:text-white"
@@ -291,7 +291,7 @@ export default function Dashboard() {
                   <div className="space-y-2">
                     {assetsLoading ? (
                       <div className="text-center py-8">
-                        <div className="text-[#848e9c]">Loading assets...</div>
+                        <div className="text-[#848e9c] text-lg font-semibold">Loading assets...</div>
                       </div>
                     ) : assetsData && assetsData.length > 0 ? (
                       assetsData.slice(0, 6).map((asset, index) => {
