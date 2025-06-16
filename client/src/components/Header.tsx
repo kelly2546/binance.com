@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Search, Globe, Moon, Menu } from "lucide-react";
 import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
-import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useMockAuth } from "@/hooks/useMockAuth";
 import { useLocation } from "wouter";
 
 export default function Header() {
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { isAuthenticated, userProfile, logout } = useFirebaseAuth();
+  const { isAuthenticated, user, logout } = useMockAuth();
   const [, setLocation] = useLocation();
   return (
     <header className="bg-[#181A20] border-b border-[#2b3139] sticky top-0 z-50">
@@ -73,7 +73,7 @@ export default function Header() {
             
             {isAuthenticated ? (
               <>
-                <span className="text-[#EAECEF] text-sm">Welcome, {userProfile?.displayName || 'User'}</span>
+                <span className="text-[#EAECEF] text-sm">Welcome, {user?.displayName || 'User'}</span>
                 <Button 
                   variant="outline"
                   className="text-[#EAECEF] border-[#2b3139] hover:bg-[#FCD535] hover:text-black text-sm font-medium h-8 px-4"

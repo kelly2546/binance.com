@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X } from "lucide-react";
-import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useMockAuth } from "@/hooks/useMockAuth";
 
 interface SignUpModalProps {
   isOpen: boolean;
@@ -14,11 +14,13 @@ interface SignUpModalProps {
 export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const { login } = useFirebaseAuth();
+  const { login } = useMockAuth();
 
   const handleSignUp = async () => {
-    await login();
-    onClose();
+    if (email && agreedToTerms) {
+      await login(email);
+      onClose();
+    }
   };
 
   return (

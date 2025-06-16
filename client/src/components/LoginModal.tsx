@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X, QrCode } from "lucide-react";
-import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useMockAuth } from "@/hooks/useMockAuth";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -12,11 +12,13 @@ interface LoginModalProps {
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [email, setEmail] = useState("");
-  const { login } = useFirebaseAuth();
+  const { login } = useMockAuth();
 
   const handleLogin = async () => {
-    await login();
-    onClose();
+    if (email) {
+      await login(email);
+      onClose();
+    }
   };
 
   return (
