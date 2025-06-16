@@ -25,9 +25,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#181a20]">
+    <div className="min-h-screen bg-[#181A20]">
       {/* Header */}
-      <header className="bg-[#181a20] border-b border-[#2b3139] h-16">
+      <header className="bg-[#181A20] border-b border-[#2b3139] h-16">
         <div className="h-full px-6 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
@@ -69,7 +69,7 @@ export default function Dashboard() {
             <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
               <Search className="h-4 w-4" />
             </Button>
-            <Button className="bg-[#f0b90b] text-black hover:bg-[#d9a709] h-8 px-4 text-sm font-medium">
+            <Button className="bg-[#FCD535] text-black hover:bg-[#e6c230] h-8 px-6 text-sm font-semibold">
               Deposit
             </Button>
             <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
@@ -166,7 +166,7 @@ export default function Dashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 bg-[#181a20]">
+        <div className="flex-1 bg-[#181A20]">
           {/* User Profile Header */}
           <div className="px-6 py-4 border-b border-[#2b3139]">
             <div className="flex items-center justify-between">
@@ -216,7 +216,7 @@ export default function Dashboard() {
 
           {/* Balance Section */}
           <div className="px-6 py-4">
-            <div className="bg-[#2b3139] rounded-lg p-6 mb-6">
+            <div className="bg-[#2b3139] rounded-lg p-6 mb-6 shadow-lg border border-[#1e2329]">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
                   <h2 className="text-white text-base font-medium">Estimated Balance</h2>
@@ -225,13 +225,13 @@ export default function Dashboard() {
                   </svg>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3 rounded">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3 rounded">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#474d57] border-[#474d57] text-white hover:bg-[#5a616b] text-xs h-7 px-3 rounded">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
                     Cash In
                   </Button>
                 </div>
@@ -258,7 +258,7 @@ export default function Dashboard() {
               {/* Chart */}
               <div className="h-12 bg-[#1e2329] rounded-lg relative overflow-hidden">
                 <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
-                  <path d="M0,42 L40,40 L80,38 L120,20 L160,18" stroke="#f0b90b" strokeWidth="2" fill="none"/>
+                  <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="#FCD535" strokeWidth="2" fill="none"/>
                 </svg>
               </div>
             </div>
@@ -267,7 +267,7 @@ export default function Dashboard() {
             <div className="bg-[#2b3139] rounded-lg p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-white text-base font-medium">Markets</h2>
-                <Button variant="ghost" className="text-[#f0b90b] hover:text-[#d9a709] text-sm h-auto p-0 font-medium">
+                <Button variant="ghost" className="text-[#FCD535] hover:text-[#e6c230] text-sm h-auto p-0 font-semibold">
                   More {'>'}
                 </Button>
               </div>
@@ -328,7 +328,7 @@ export default function Dashboard() {
                   <span className="text-[#0ecb81] text-sm font-medium">+0.40%</span>
                 </div>
                 <div>
-                  <Button variant="outline" size="sm" className="border-[#f0b90b] text-[#f0b90b] hover:bg-[#f0b90b] hover:text-black text-xs h-6 px-3 font-medium">
+                  <Button variant="outline" size="sm" className="border-[#FCD535] text-[#FCD535] hover:bg-[#FCD535] hover:text-black text-xs h-6 px-3 font-semibold">
                     Trade
                   </Button>
                 </div>
