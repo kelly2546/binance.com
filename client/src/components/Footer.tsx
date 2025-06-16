@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <>
       {/* Call to Action */}
-      <section className="bg-transparent border border-[#2b3139] rounded-lg mx-4 sm:mx-6 lg:mx-8 my-20 py-20">
+      <section className="bg-transparent border border-[#2b3139] rounded-lg mx-4 sm:mx-6 lg:mx-8 my-20 py-20 text-[#1E2026]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-8 text-[#EAECEF]">Start earning today</h2>
           <Button className="bg-[#FCD535] text-black px-8 py-4 text-lg font-semibold hover:bg-[#e6c230]">
@@ -13,7 +13,6 @@ export default function Footer() {
           </Button>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-[#181A20] border-t border-[#2b3139] pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
