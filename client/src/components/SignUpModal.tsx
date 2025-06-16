@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X } from "lucide-react";
-import { useMockAuth } from "@/hooks/useMockAuth";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 
 interface SignUpModalProps {
   isOpen: boolean;

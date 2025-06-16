@@ -6,8 +6,10 @@ import {
   signOutUser, 
   onAuthStateChange, 
   getUserProfile,
+  onUserProfileChange,
   UserProfile,
-  handleRedirectResult
+  handleRedirectResult,
+  DEFAULT_CRYPTO_BALANCES
 } from '@/lib/firebase';
 import { useLocation } from 'wouter';
 
@@ -32,18 +34,25 @@ export function useFirebaseAuth() {
       }
     };
 
+    let profileUnsubscribe: (() => void) | null = null;
+
     const unsubscribe = onAuthStateChange(async (firebaseUser) => {
       const wasUnauthenticated = !user;
       setUser(firebaseUser);
       
+      // Clean up previous profile listener
+      if (profileUnsubscribe) {
+        profileUnsubscribe();
+        profileUnsubscribe = null;
+      }
+      
       if (firebaseUser) {
-        // Try to fetch user profile from Firestore, fallback to Firebase Auth data
-        try {
-          const profile = await getUserProfile(firebaseUser.uid);
+        // Set up real-time profile listener
+        profileUnsubscribe = onUserProfileChange(firebaseUser.uid, (profile) => {
           if (profile) {
             setUserProfile(profile);
           } else {
-            // Fallback to creating profile from Firebase Auth data
+            // Fallback profile if no Firestore data exists
             const fallbackProfile: UserProfile = {
               uid: firebaseUser.uid,
               email: firebaseUser.email || '',
@@ -55,28 +64,11 @@ export function useFirebaseAuth() {
               following: 0,
               followers: 0,
               portfolioBalance: 0,
-              cryptoBalances: []
+              cryptoBalances: [...DEFAULT_CRYPTO_BALANCES]
             };
             setUserProfile(fallbackProfile);
           }
-        } catch (err) {
-          console.error('Error fetching user profile:', err);
-          // Use Firebase Auth data as fallback
-          const fallbackProfile: UserProfile = {
-            uid: firebaseUser.uid,
-            email: firebaseUser.email || '',
-            displayName: firebaseUser.displayName || 'Anonymous User',
-            photoURL: firebaseUser.photoURL || '',
-            createdAt: Date.now(),
-            lastLoginAt: Date.now(),
-            vipLevel: 'Regular User',
-            following: 0,
-            followers: 0,
-            portfolioBalance: 0,
-            cryptoBalances: []
-          };
-          setUserProfile(fallbackProfile);
-        }
+        });
         
         // Navigate to dashboard if user just authenticated and isn't already there
         if (wasUnauthenticated && window.location.pathname !== '/dashboard') {
@@ -91,7 +83,12 @@ export function useFirebaseAuth() {
     });
 
     initializeAuth();
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      if (profileUnsubscribe) {
+        profileUnsubscribe();
+      }
+    };
   }, [setLocation]);
 
   const login = async () => {
