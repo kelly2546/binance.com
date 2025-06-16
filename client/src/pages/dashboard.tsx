@@ -32,7 +32,7 @@ export default function Dashboard() {
     }
   };
   
-  const { user, userProfile, loading: isLoading, isAuthenticated } = useFirebaseAuth();
+  const { user, userProfile, loading: isLoading, isAuthenticated, logout } = useFirebaseAuth();
 
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
@@ -1028,6 +1028,13 @@ export default function Dashboard() {
             </Button>
             <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] h-8 w-8 rounded-sm">
               <MoreHorizontal className="h-4 w-4" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              onClick={logout}
+              className="text-[#848e9c] hover:text-[#EAECEF] hover:bg-[#2B3139] h-8 px-3 text-sm rounded-sm"
+            >
+              Logout
             </Button>
           </div>
         </div>
