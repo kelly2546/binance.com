@@ -29,13 +29,13 @@ export default function HeroSection() {
             
             {/* Sign Up Form */}
             <div className="mb-8">
-              <div className="flex max-w-md">
+              <div className="flex max-w-md gap-0">
                 <Input 
                   type="text" 
                   placeholder="Email/Phone number" 
-                  className="flex-1 bg-[#2b3139] border-[#474d57] rounded-l-lg rounded-r-none text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-12 px-4"
+                  className="flex-1 bg-[#2b3139] border-[#474d57] border-r-0 rounded-l-lg rounded-r-none text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-12 px-4"
                 />
-                <Button className="bg-[var(--binance-yellow)] text-black rounded-l-none rounded-r-lg font-medium hover:bg-yellow-400 h-12 px-6">
+                <Button className="bg-[var(--binance-yellow)] text-black rounded-l-none rounded-r-lg font-medium hover:bg-yellow-400 h-12 px-8 border-0">
                   Sign Up
                 </Button>
               </div>
