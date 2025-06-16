@@ -9,6 +9,14 @@ import type { User } from "@shared/schema";
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("Holding");
   const [activeSection, setActiveSection] = useState("Dashboard");
+  const [expandedMenus, setExpandedMenus] = useState<{[key: string]: boolean}>({});
+
+  const toggleMenu = (menuName: string) => {
+    setExpandedMenus(prev => ({
+      ...prev,
+      [menuName]: !prev[menuName]
+    }));
+  };
   
   const { isLoading, user } = useTestAuth() as { 
     isAuthenticated: boolean; 
@@ -61,12 +69,66 @@ export default function Dashboard() {
   // Function to render content based on active section
   const renderMainContent = () => {
     switch (activeSection) {
-      case "Assets":
+      case "Overview":
         return (
           <div className="px-6 py-4">
-            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Assets</h1>
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Assets Overview</h1>
             <div className="rounded-lg p-6 border border-[#2b3139]">
-              <p className="text-[#848e9c]">Your cryptocurrency assets and portfolio overview will appear here.</p>
+              <p className="text-[#848e9c]">Complete overview of all your cryptocurrency assets and portfolio performance.</p>
+            </div>
+          </div>
+        );
+      case "Spot":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Spot Trading</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your spot trading assets and balances will be displayed here.</p>
+            </div>
+          </div>
+        );
+      case "Margin":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Margin Trading</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your margin trading positions and available margin will be shown here.</p>
+            </div>
+          </div>
+        );
+      case "Futures":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Futures Trading</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your futures positions and contract details will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Options":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Options Trading</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your options contracts and trading strategies will be displayed here.</p>
+            </div>
+          </div>
+        );
+      case "Earn":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Earn Products</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your staking rewards, savings products, and earning opportunities will appear here.</p>
+            </div>
+          </div>
+        );
+      case "Funding":
+        return (
+          <div className="px-6 py-4">
+            <h1 className="text-[#EAECEF] text-2xl font-bold mb-6">Funding Wallet</h1>
+            <div className="rounded-lg p-6 border border-[#2b3139]">
+              <p className="text-[#848e9c]">Your funding wallet balances and transfer history will be shown here.</p>
             </div>
           </div>
         );
@@ -425,21 +487,99 @@ export default function Dashboard() {
             
             {/* Navigation */}
             <nav className="space-y-1">
-              <div 
-                onClick={() => setActiveSection("Assets")}
-                className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
-                  activeSection === "Assets" 
-                    ? "text-white bg-[#474d57]" 
-                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
-                }`}
-              >
-                <div className="flex items-center">
-                  <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
-                  </svg>
-                  Assets
+              <div>
+                <div 
+                  onClick={() => toggleMenu("Assets")}
+                  className={`flex items-center justify-between px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                    expandedMenus["Assets"] 
+                      ? "text-white bg-[#474d57]" 
+                      : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
+                    </svg>
+                    Assets
+                  </div>
+                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Assets"] ? "rotate-180" : ""}`} />
                 </div>
-                <ChevronDown className="h-3 w-3" />
+                
+                {/* Assets Submenu */}
+                {expandedMenus["Assets"] && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    <div 
+                      onClick={() => setActiveSection("Overview")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Overview" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Overview
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Spot")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Spot" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Spot
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Margin")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Margin" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Margin
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Futures")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Futures" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Futures
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Options")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Options" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Options
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Earn")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Earn" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Earn
+                    </div>
+                    <div 
+                      onClick={() => setActiveSection("Funding")}
+                      className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
+                        activeSection === "Funding" 
+                          ? "text-white bg-[#474d57]" 
+                          : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
+                      }`}
+                    >
+                      Funding
+                    </div>
+                  </div>
+                )}
               </div>
               
               <div 
