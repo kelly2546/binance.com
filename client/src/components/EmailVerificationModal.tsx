@@ -51,12 +51,14 @@ export default function EmailVerificationModal({
       return;
     }
 
-    // Simulate verification (replace with actual verification logic)
-    if (verificationCode === "123456") {
+    try {
+      // For Firebase email verification, we'll check if the user has verified their email
+      // In a real implementation, you would verify the code here
+      // For now, we'll accept any 6-digit code to proceed to password setup
       onVerificationSuccess();
       onClose();
-    } else {
-      setError("Invalid verification code. Please try again.");
+    } catch (error: any) {
+      setError("Verification failed. Please try again.");
     }
   };
 
@@ -64,11 +66,16 @@ export default function EmailVerificationModal({
     setIsResending(true);
     setError("");
     
-    // Simulate sending code (replace with actual send code logic)
-    setTimeout(() => {
+    try {
+      // In a real implementation, you would call your backend to resend the verification email
+      // For now, we'll simulate a successful resend
+      await new Promise(resolve => setTimeout(resolve, 2000));
       setIsResending(false);
       setTimeLeft(30 * 60); // Reset timer
-    }, 2000);
+    } catch (error) {
+      setIsResending(false);
+      setError("Failed to resend verification code. Please try again.");
+    }
   };
 
   return (

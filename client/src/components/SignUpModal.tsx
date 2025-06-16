@@ -20,7 +20,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const [showEmailVerification, setShowEmailVerification] = useState(false);
   const [showPasswordSetup, setShowPasswordSetup] = useState(false);
   const [isValidatingEmail, setIsValidatingEmail] = useState(false);
-  const { login, error, loading } = useFirebaseAuth();
+  const { login, error, loading, createEmailAccount } = useFirebaseAuth();
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -38,11 +38,25 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
 
     setIsValidatingEmail(true);
     
-    // Simulate sending verification code (replace with actual email sending logic)
-    setTimeout(() => {
+    try {
+      // Create a temporary password for the account creation
+      const tempPassword = Math.random().toString(36).slice(-12) + 'A1!';
+      
+      // Create the account with Firebase
+      await createEmailAccount(email, tempPassword);
+      
       setIsValidatingEmail(false);
       setShowEmailVerification(true);
-    }, 1500);
+    } catch (error: any) {
+      setIsValidatingEmail(false);
+      console.error('Error creating account:', error);
+      // Handle specific error cases
+      if (error.message.includes('email-already-in-use')) {
+        alert('An account with this email already exists. Please try logging in instead.');
+      } else {
+        alert(`Error: ${error.message}`);
+      }
+    }
   };
 
   const handleGoogleSignUp = async () => {
