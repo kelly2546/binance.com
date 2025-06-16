@@ -39,14 +39,14 @@ export default function Dashboard() {
     queryKey: ["/api/crypto"],
   }) as { data: any[] | undefined };
 
-  const { data: userHoldings } = useUserHoldings(user?.id?.toString());
+  const { data: userHoldings } = useUserHoldings(user?.id?.toString()) as { data: any[] | undefined };
 
   // Fetch assets data for Overview section
   const { data: assetsData, isLoading: assetsLoading } = useAssetsData();
 
   // Calculate real-time portfolio balance
   const calculatePortfolioBalance = () => {
-    if (!userHoldings || !cryptoData) return { totalBalance: 0, todayPnL: 0 };
+    if (!userHoldings || !Array.isArray(userHoldings) || !cryptoData) return { totalBalance: 0, todayPnL: 0, pnlPercentage: 0 };
     
     let totalBalance = 0;
     let totalPreviousValue = 0;
@@ -77,7 +77,13 @@ export default function Dashboard() {
     
     switch (activeTab) {
       case "Holding":
-        return cryptoData.slice(0, 5); // Show first 5 as holdings
+        // Show only cryptocurrencies that the user actually holds
+        if (!userHoldings || !Array.isArray(userHoldings)) return [];
+        return cryptoData.filter((crypto: any) => 
+          userHoldings.some((holding: any) => 
+            holding.symbol.toLowerCase() === crypto.symbol.toLowerCase()
+          )
+        );
       case "Hot":
         return cryptoData.filter((crypto: any) => 
           parseFloat(crypto.price_change_percentage_24h || '0') > 5
@@ -899,20 +905,22 @@ export default function Dashboard() {
                 </div>
                 
                 <div className="flex items-baseline space-x-2 mb-2">
-                  <span className="text-[#EAECEF] text-3xl font-bold">0.02631079</span>
+                  <span className="text-[#EAECEF] text-3xl font-bold">{totalBalance.toFixed(8)}</span>
                   <span className="text-[#848e9c] text-base font-medium">USDT</span>
                   <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
                 </div>
                 
-                <div className="text-[#848e9c] text-sm mb-3">≈ $0.03</div>
+                <div className="text-[#848e9c] text-sm mb-3">≈ ${totalBalance.toFixed(2)}</div>
                 
                 <div className="flex items-center space-x-2 mb-4">
                   <span className="text-[#848e9c] text-sm">Today's PnL</span>
                   <div className="flex items-center space-x-1">
-                    <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                    <svg className={`w-3 h-3 ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`} fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d={todayPnL >= 0 ? "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" : "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"} clipRule="evenodd" />
                     </svg>
-                    <span className="text-[#0ecb81] text-sm font-medium">+ $0.00(0.71%)</span>
+                    <span className={`text-sm font-medium ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
+                      {todayPnL >= 0 ? '+' : ''} ${todayPnL.toFixed(2)}({pnlPercentage.toFixed(2)}%)
+                    </span>
                   </div>
                 </div>
                 

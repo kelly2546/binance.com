@@ -38,6 +38,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
+  // Test user holdings endpoint for demo purposes
+  app.get('/api/user/test-holdings', async (req, res) => {
+    const testHoldings = [
+      {
+        id: 1,
+        userId: 1,
+        symbol: "BTC",
+        amount: 0.00125834,
+        averageBuyPrice: 45000
+      },
+      {
+        id: 2,
+        userId: 1,
+        symbol: "ETH", 
+        amount: 0.01234567,
+        averageBuyPrice: 2800
+      },
+      {
+        id: 3,
+        userId: 1,
+        symbol: "BNB",
+        amount: 0.089123,
+        averageBuyPrice: 320
+      }
+    ];
+    res.json(testHoldings);
+  });
+
   // User holdings route
   app.get('/api/user/holdings', isAuthenticated, async (req: any, res) => {
     try {
