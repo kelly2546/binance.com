@@ -23,10 +23,10 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            <div className="md:text-6xl font-bold text-[#FCD535] mb-4 text-[70px]">
+            <div className="hero-number mb-4">
               {userCount.toLocaleString()}
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-8 text-[#EAECEF]">
+            <h1 className="hero-text mb-8">
               USERS<br />TRUST US
             </h1>
             

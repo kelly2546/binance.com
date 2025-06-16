@@ -32,6 +32,9 @@
   --binance-red: hsl(351, 95%, 64%);
   --binance-gray: hsl(218, 11%, 65%);
   --binance-border: hsl(217, 16%, 25%);
+  
+  /* Custom Golden Yellow */
+  --golden-yellow: #FFC72C;
 }
 
 .dark {
@@ -136,5 +139,45 @@
   
   .binance-border {
     border-color: var(--binance-border);
+  }
+
+  /* Custom Typography Classes */
+  .hero-number {
+    font-size: 2.5rem; /* 2.5x larger than base text */
+    font-weight: bold;
+    color: var(--golden-yellow);
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    line-height: 1.1;
+  }
+
+  .hero-text {
+    font-size: 1.8rem; /* 1.8x larger than base text */
+    font-weight: bold;
+    color: #FFFFFF;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    text-transform: uppercase;
+    line-height: 0.8; /* Tight spacing between lines */
+    letter-spacing: normal;
+  }
+
+  /* Responsive sizing */
+  @media (min-width: 768px) {
+    .hero-number {
+      font-size: 4rem;
+    }
+    
+    .hero-text {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-number {
+      font-size: 5rem;
+    }
+    
+    .hero-text {
+      font-size: 3rem;
+    }
   }
 }
