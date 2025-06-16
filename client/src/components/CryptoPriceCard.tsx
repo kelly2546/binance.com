@@ -38,17 +38,17 @@ export default function CryptoPriceCard() {
   };
 
   return (
-    <div className="bg-[var(--binance-card)] rounded-lg p-6">
+    <div className="bg-transparent border border-[#2b3139] rounded-lg p-6">
       {/* Tabs */}
-      <div className="flex mb-6 border-b border-[var(--binance-border)]">
-        <button className="pb-4 px-1 border-b-2 border-[var(--binance-yellow)] text-white font-medium">
+      <div className="flex mb-6 border-b border-[#2b3139]">
+        <button className="pb-4 px-1 border-b-2 border-[#FCD535] text-[#EAECEF] font-medium">
           Popular
         </button>
-        <button className="pb-4 px-4 text-[var(--binance-gray)] hover:text-white">
+        <button className="pb-4 px-4 text-[#848e9c] hover:text-[#EAECEF]">
           New Listing
         </button>
         <div className="ml-auto">
-          <Button variant="ghost" className="text-[var(--binance-gray)] hover:text-white text-sm p-0">
+          <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm p-0">
             View All 350+ Coins <ChevronRight className="ml-1 h-3 w-3" />
           </Button>
         </div>
@@ -90,19 +90,19 @@ export default function CryptoPriceCard() {
                   <span className="text-xl hidden">{getCryptoIcon(crypto.symbol)}</span>
                 </div>
                 <div>
-                  <div className="font-medium">{crypto.symbol}</div>
-                  <div className="text-[var(--binance-gray)] text-sm">{crypto.name}</div>
+                  <div className="font-medium text-[#EAECEF]">{crypto.symbol}</div>
+                  <div className="text-[#848e9c] text-sm">{crypto.name}</div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-medium">
+                <div className="font-medium text-[#EAECEF]">
                   {crypto.current_price ? formatPrice(crypto.current_price) : 'N/A'}
                 </div>
                 <div 
                   className={`text-sm ${
                     parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
-                      ? 'text-[var(--binance-green)]' 
-                      : 'text-[var(--binance-red)]'
+                      ? 'text-[#0ECB81]' 
+                      : 'text-[#F6465D]'
                   }`}
                 >
                   {crypto.price_change_percentage_24h ? formatChange(crypto.price_change_percentage_24h) : 'N/A'}
@@ -111,17 +111,17 @@ export default function CryptoPriceCard() {
             </div>
           ))
         ) : (
-          <div className="text-center py-8 text-[var(--binance-gray)]">
+          <div className="text-center py-8 text-[#848e9c]">
             Failed to load cryptocurrency data
           </div>
         )}
       </div>
       
       {/* News Section */}
-      <div className="mt-8 pt-6 border-t border-[var(--binance-border)]">
+      <div className="mt-8 pt-6 border-t border-[#2b3139]">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-medium">News</h3>
-          <Button variant="ghost" className="text-[var(--binance-gray)] hover:text-white text-sm p-0">
+          <h3 className="text-lg font-medium text-[#EAECEF]">News</h3>
+          <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm p-0">
             View All News <ChevronRight className="ml-1 h-3 w-3" />
           </Button>
         </div>
@@ -134,13 +134,13 @@ export default function CryptoPriceCard() {
             newsData.map((news) => (
               <div 
                 key={news.id}
-                className="text-sm hover:text-[var(--binance-yellow)] cursor-pointer transition-colors"
+                className="text-sm text-[#EAECEF] hover:text-[#FCD535] cursor-pointer transition-colors"
               >
                 {news.title}
               </div>
             ))
           ) : (
-            <div className="text-[var(--binance-gray)] text-sm">
+            <div className="text-[#848e9c] text-sm">
               Failed to load news data
             </div>
           )}
