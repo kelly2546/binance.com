@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X } from "lucide-react";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 
 interface SignUpModalProps {
   isOpen: boolean;
@@ -13,6 +14,16 @@ interface SignUpModalProps {
 export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const { login, loading, error } = useFirebaseAuth();
+
+  const handleGoogleSignUp = async () => {
+    try {
+      await login();
+      onClose();
+    } catch (err) {
+      console.error('Sign up failed:', err);
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -81,14 +92,22 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
+              onClick={handleGoogleSignUp}
+              disabled={loading}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
                 alt="Google" 
                 className="w-5 h-5 mr-3" 
               />
-              Continue with Google
+              {loading ? 'Signing up...' : 'Continue with Google'}
             </Button>
+            
+            {error && (
+              <div className="text-red-400 text-sm text-center mt-2">
+                {error}
+              </div>
+            )}
             
             <Button
               variant="outline"

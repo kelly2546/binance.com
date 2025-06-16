@@ -3,10 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Search, Globe, Moon, Menu } from "lucide-react";
 import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useLocation } from "wouter";
 
 export default function Header() {
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const { isAuthenticated, user, logout } = useFirebaseAuth();
+  const [, setLocation] = useLocation();
   return (
     <header className="bg-[#181A20] border-b border-[#2b3139] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,26 +70,43 @@ export default function Header() {
             <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-[#EAECEF] h-8 w-8">
               <Moon className="h-4 w-4" />
             </Button>
-            <Button 
-              variant="outline" 
-              className="text-[#EAECEF] hover:text-[#FCD535] border-[#2b3139] hover:border-[#FCD535] bg-transparent text-sm font-medium h-8 px-4"
-              onClick={() => setIsLoginModalOpen(true)}
-            >
-              Log In
-            </Button>
-            <Button 
-              className="bg-[#FCD535] text-black hover:bg-[#e6c230] font-semibold text-sm h-8 px-4"
-              onClick={() => setIsSignUpModalOpen(true)}
-            >
-              Sign Up
-            </Button>
-            <Button 
-              variant="outline"
-              className="text-[#EAECEF] border-[#2b3139] hover:bg-[#FCD535] hover:text-black text-sm font-medium h-8 px-4"
-              onClick={() => window.location.href = "/dashboard"}
-            >
-              Dashboard
-            </Button>
+            
+            {isAuthenticated ? (
+              <>
+                <span className="text-[#EAECEF] text-sm">Welcome, {user?.displayName || 'User'}</span>
+                <Button 
+                  variant="outline"
+                  className="text-[#EAECEF] border-[#2b3139] hover:bg-[#FCD535] hover:text-black text-sm font-medium h-8 px-4"
+                  onClick={() => setLocation("/dashboard")}
+                >
+                  Dashboard
+                </Button>
+                <Button 
+                  variant="ghost"
+                  className="text-[#848e9c] hover:text-[#EAECEF] text-sm font-medium h-8 px-4"
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button 
+                  variant="outline" 
+                  className="text-[#EAECEF] hover:text-[#FCD535] border-[#2b3139] hover:border-[#FCD535] bg-transparent text-sm font-medium h-8 px-4"
+                  onClick={() => setIsLoginModalOpen(true)}
+                >
+                  Log In
+                </Button>
+                <Button 
+                  className="bg-[#FCD535] text-black hover:bg-[#e6c230] font-semibold text-sm h-8 px-4"
+                  onClick={() => setIsSignUpModalOpen(true)}
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
+            
             <Button variant="ghost" size="icon" className="md:hidden text-[#EAECEF] h-8 w-8">
               <Menu className="h-4 w-4" />
             </Button>
