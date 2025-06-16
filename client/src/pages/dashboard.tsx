@@ -887,7 +887,7 @@ export default function Dashboard() {
 
             {/* Balance Section */}
             <div className="px-6 py-4">
-              <div className="rounded-lg p-6 mb-6 border border-[#2b3139]">
+              <div className="rounded-2xl p-6 mb-6 border border-[#2b3139]">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-2">
                     <h2 className="text-[#EAECEF] text-base font-semibold">Estimated Balance</h2>
@@ -896,18 +896,18 @@ export default function Dashboard() {
                     </svg>
                   </div>
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                    <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded-xl font-semibold">
                       Deposit
                     </Button>
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold"
+                      className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded-xl font-semibold"
                       onClick={() => setLocation("/withdraw")}
                     >
                       Withdraw
                     </Button>
-                    <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
+                    <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded-xl font-semibold">
                       Cash In
                     </Button>
                   </div>

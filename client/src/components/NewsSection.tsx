@@ -7,7 +7,7 @@ export default function NewsSection() {
   const { data: newsData, isLoading: newsLoading } = useNewsData();
 
   return (
-    <div className="border border-[#2b3139] rounded-lg p-6 text-[#1E2026] bg-[#181B20]">
+    <div className="border border-[#2b3139] rounded-2xl p-6 text-[#1E2026] bg-[#181B20]">
       {/* News Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-medium text-[#EAECEF]">News</h3>

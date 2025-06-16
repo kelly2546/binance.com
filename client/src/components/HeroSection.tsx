@@ -36,10 +36,10 @@ export default function HeroSection() {
                 <Input 
                   type="text" 
                   placeholder="Email/Phone number" 
-                  className="flex-1 bg-[#181a20] border-[#474d57] rounded-lg text-[#000000] placeholder:text-[#848e9c] focus:border-[#FCD535] focus:ring-0 h-12 px-4"
+                  className="flex-1 bg-[#181a20] border-[#474d57] rounded-2xl text-[#000000] placeholder:text-[#848e9c] focus:border-[#FCD535] focus:ring-0 h-12 px-4"
                 />
                 <Button 
-                  className="bg-[#FCD535] text-black rounded-lg font-semibold hover:bg-[#e6c230] h-12 px-8 border-0"
+                  className="bg-[#FCD535] text-black rounded-2xl font-semibold hover:bg-[#e6c230] h-12 px-8 border-0"
                   onClick={() => setIsSignUpModalOpen(true)}
                 >
                   Sign Up
