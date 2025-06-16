@@ -541,6 +541,13 @@ export default function Dashboard() {
                 </>
               )}
             </div>
+            
+            {/* Admin Panel for Testing Real-time Balance Updates */}
+            {isAuthenticated && (
+              <div className="mt-6">
+                <AdminBalancePanel />
+              </div>
+            )}
           </div>
         );
       case "Spot":
