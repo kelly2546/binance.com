@@ -40,14 +40,14 @@ export default function CryptoPriceCard() {
     <div className="border border-[#2b3139] rounded-2xl p-6 text-[#1E2026] bg-[#1e2329]">
       {/* Tabs */}
       <div className="flex mb-6 border-b border-[#2b3139]">
-        <button className="pb-4 px-1 border-b-2 border-[#FCD535] text-[#EAECEF] font-medium text-sm">
+        <button className="pb-4 px-1 border-b-2 border-[#FCD535] text-[#EAECEF] font-medium">
           Popular
         </button>
-        <button className="pb-4 px-4 text-[#848e9c] hover:text-[#EAECEF] font-medium text-sm">
+        <button className="pb-4 px-4 text-[#848e9c] hover:text-[#EAECEF]">
           New Listing
         </button>
         <div className="ml-auto">
-          <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm font-medium p-0">
+          <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm p-0">
             View All 350+ Coins <ChevronRight className="ml-1 h-3 w-3" />
           </Button>
         </div>
@@ -88,16 +88,16 @@ export default function CryptoPriceCard() {
                   <span className="text-xl hidden">{getCryptoIcon(crypto.symbol)}</span>
                 </div>
                 <div>
-                  <div className="font-semibold text-[#EAECEF] text-sm">{crypto.symbol}</div>
-                  <div className="text-[#848e9c] text-xs">{crypto.name}</div>
+                  <div className="font-medium text-[#EAECEF]">{crypto.symbol}</div>
+                  <div className="text-[#848e9c] text-sm">{crypto.name}</div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-medium text-[#EAECEF] text-sm">
+                <div className="font-medium text-[#EAECEF]">
                   {crypto.current_price ? formatPrice(crypto.current_price) : 'N/A'}
                 </div>
                 <div 
-                  className={`text-xs ${
+                  className={`text-sm ${
                     parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
                       ? 'text-[#0ECB81]' 
                       : 'text-[#F6465D]'
@@ -109,7 +109,7 @@ export default function CryptoPriceCard() {
             </div>
           ))
         ) : (
-          <div className="text-center py-8 text-[#848e9c] text-lg font-semibold">
+          <div className="text-center py-8 text-[#848e9c]">
             Failed to load cryptocurrency data
           </div>
         )}

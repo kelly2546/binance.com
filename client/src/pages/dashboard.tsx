@@ -135,20 +135,20 @@ export default function Dashboard() {
                   </svg>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold">
                     Transfer
                   </Button>
                 </div>
               </div>
               
               <div className="flex items-baseline space-x-2 mb-2">
-                <span className="text-[#EAECEF] text-xl font-semibold">
+                <span className="text-[#EAECEF] text-3xl font-bold">
                   {assetsData && assetsData.length > 0 ? (
                     (() => {
                       const holdings = [2.22, 0.00781662, 5.56, 0.00002101, 1.45, 0.125];
@@ -160,11 +160,11 @@ export default function Dashboard() {
                     })()
                   ) : '0.02629081'}
                 </span>
-                <span className="text-[#848e9c] text-sm">USDT</span>
+                <span className="text-[#848e9c] text-base font-medium">USDT</span>
                 <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
               </div>
               
-              <div className="text-[#848e9c] text-xs mb-3">
+              <div className="text-[#848e9c] text-sm mb-3">
                 ≈ ${assetsData && assetsData.length > 0 ? (
                   (() => {
                     const holdings = [2.22, 0.00781662, 5.56, 0.00002101, 1.45, 0.125];
@@ -178,7 +178,7 @@ export default function Dashboard() {
               </div>
               
               <div className="flex items-center space-x-2 mb-4">
-                <span className="text-[#848e9c] text-xs">Today's PnL</span>
+                <span className="text-[#848e9c] text-sm">Today's PnL</span>
                 <div className="flex items-center space-x-1">
                   {assetsData && assetsData.length > 0 ? (
                     (() => {
@@ -198,7 +198,7 @@ export default function Dashboard() {
                           <svg className={`w-3 h-3 ${totalPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`} fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d={totalPnL >= 0 ? "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" : "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"} clipRule="evenodd" />
                           </svg>
-                          <span className={`text-xs ${totalPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
+                          <span className={`text-sm font-medium ${totalPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
                             {totalPnL >= 0 ? '+' : ''} ${Math.abs(totalPnL).toFixed(3)} ({pnlPercentage.toFixed(1)}%)
                           </span>
                         </>
@@ -209,7 +209,7 @@ export default function Dashboard() {
                       <svg className="w-3 h-3 text-[#0ecb81]" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span className="text-[#0ecb81] text-xs">+ $0.000 (65%)</span>
+                      <span className="text-[#0ecb81] text-sm font-medium">+ $0.000 (65%)</span>
                     </>
                   )}
                 </div>
@@ -226,7 +226,7 @@ export default function Dashboard() {
             {/* My Assets Section */}
             <div className="rounded-lg p-6 border border-[#2b3139]">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-[#EAECEF] text-base font-semibold">My Assets</h2>
+                <h2 className="text-[#EAECEF] text-lg font-semibold">My Assets</h2>
                 <div className="flex items-center space-x-4">
                   <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
                     <Search className="h-4 w-4" />
@@ -266,7 +266,7 @@ export default function Dashboard() {
               {assetsViewType === "Coin View" ? (
                 <>
                   {/* Coin View Table Header */}
-                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-[#848e9c] mb-4 px-0">
+                  <div className="grid grid-cols-4 gap-4 text-xs text-[#848e9c] mb-4 px-0">
                     <div className="flex items-center">
                       <span>Coin</span>
                       <ChevronDown className="h-3 w-3 ml-1" />
@@ -291,7 +291,7 @@ export default function Dashboard() {
                   <div className="space-y-2">
                     {assetsLoading ? (
                       <div className="text-center py-8">
-                        <div className="text-[#848e9c] text-sm">Loading assets...</div>
+                        <div className="text-[#848e9c]">Loading assets...</div>
                       </div>
                     ) : assetsData && assetsData.length > 0 ? (
                       assetsData.slice(0, 6).map((asset, index) => {
@@ -319,16 +319,16 @@ export default function Dashboard() {
                               </div>
                             </div>
                             <div>
-                              <div className="text-[#EAECEF] text-xs">{holdingAmount.toFixed(8)}</div>
+                              <div className="text-[#EAECEF] text-sm font-medium">{holdingAmount.toFixed(8)}</div>
                               <div className="text-[#848e9c] text-xs">${holdingValue.toFixed(2)}</div>
                             </div>
                             <div>
-                              <div className="text-[#EAECEF] text-xs">${asset.current_price.toFixed(2)}</div>
+                              <div className="text-[#EAECEF] text-sm font-medium">${asset.current_price.toFixed(2)}</div>
                               <div className="text-[#848e9c] text-xs">--</div>
                             </div>
                             <div>
                               <div className="flex items-center space-x-1">
-                                <span className={`text-xs ${
+                                <span className={`text-sm font-medium ${
                                   asset.price_change_percentage_24h >= 0 
                                     ? 'text-[#0ecb81]' 
                                     : 'text-[#f6465d]'
@@ -344,7 +344,7 @@ export default function Dashboard() {
                       })
                     ) : (
                       <div className="text-center py-8">
-                        <div className="text-[#848e9c] text-sm">No assets data available</div>
+                        <div className="text-[#848e9c]">No assets data available</div>
                       </div>
                     )}
                   </div>
@@ -352,7 +352,7 @@ export default function Dashboard() {
               ) : (
                 <>
                   {/* Account View Table Header */}
-                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-[#848e9c] mb-4 px-0">
+                  <div className="grid grid-cols-4 gap-4 text-xs text-[#848e9c] mb-4 px-0">
                     <div className="flex items-center">
                       <span>Account</span>
                       <ChevronDown className="h-3 w-3 ml-1" />
@@ -385,11 +385,11 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-xs">0.02692244</div>
+                        <div className="text-[#EAECEF] text-sm font-medium">0.02692244</div>
                         <div className="text-[#848e9c] text-xs">$0.03</div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-xs">99.71%</div>
+                        <div className="text-[#EAECEF] text-sm font-medium">99.71%</div>
                       </div>
                       <div>
                         <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
@@ -1034,9 +1034,9 @@ export default function Dashboard() {
                         </span>
                       </div>
                       <div>
-                        <button className="text-[#FCD535] hover:text-[#e6c230] text-sm font-bold cursor-pointer">
+                        <Button variant="outline" size="sm" className="border-[#FCD535] text-[#FCD535] hover:bg-[#FCD535] hover:text-black text-xs h-6 px-3 font-semibold rounded-none">
                           Trade
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   ))}
