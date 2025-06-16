@@ -57,9 +57,7 @@ export default function MobileAppSection() {
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer p-4">
-                  <svg className="w-full h-full text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.504 0C5.623 0-.026 5.649-.026 12.5c0 6.851 5.649 12.5 12.53 12.5 6.851 0 12.5-5.649 12.5-12.5C24.504 5.649 18.855 0 12.504 0zm-.633 1.62c1.951 0 3.735.64 5.178 1.716l-2.99 2.99c-.873-.456-1.868-.716-2.925-.716-3.654 0-6.618 2.964-6.618 6.618 0 1.057.26 2.052.716 2.925l-2.99 2.99C1.516 16.103.87 14.319.87 12.368c0-5.649 4.603-10.252 10.252-10.252l.75.504zm6.618 3.712c1.076 1.443 1.716 3.227 1.716 5.178 0 5.649-5.103 10.252-10.752 10.252-1.951 0-3.735-.64-5.178-1.716l2.99-2.99c.873.456 1.868.716 2.925.716 3.654 0 6.618-2.964 6.618-6.618 0-1.057-.26-2.052-.716-2.925l2.99-2.99-.593-.897z"/>
-                  </svg>
+                  <img src="https://www.svgrepo.com/show/372898/linux.svg" alt="Linux" className="w-full h-full" />
                 </div>
                 <p className="text-sm text-[var(--binance-gray)]">Linux</p>
               </div>
