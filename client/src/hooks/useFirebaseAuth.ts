@@ -33,6 +33,7 @@ export function useFirebaseAuth() {
     };
 
     const unsubscribe = onAuthStateChange(async (firebaseUser) => {
+      const wasUnauthenticated = !user;
       setUser(firebaseUser);
       
       if (firebaseUser) {
@@ -74,6 +75,12 @@ export function useFirebaseAuth() {
           };
           setUserProfile(fallbackProfile);
         }
+        
+        // Navigate to dashboard if user just authenticated and isn't already there
+        if (wasUnauthenticated && window.location.pathname !== '/dashboard') {
+          console.log('User authenticated, navigating to dashboard');
+          setLocation('/dashboard');
+        }
       } else {
         setUserProfile(null);
       }
@@ -83,7 +90,7 @@ export function useFirebaseAuth() {
 
     initializeAuth();
     return () => unsubscribe();
-  }, []);
+  }, [setLocation]);
 
   const login = async () => {
     console.log('useFirebaseAuth: login() called');
