@@ -69,16 +69,20 @@ export function useFirebaseAuth() {
   }, []);
 
   const login = async () => {
+    console.log('useFirebaseAuth: login() called');
     try {
       setError(null);
       setLoading(true);
+      console.log('useFirebaseAuth: Starting signInWithGoogle...');
       const user = await signInWithGoogle();
+      console.log('useFirebaseAuth: signInWithGoogle completed, user:', user);
       
       // Try to get profile, but don't fail if Firestore is not accessible
       try {
         const profile = await getUserProfile(user.uid);
         if (profile) {
           setUserProfile(profile);
+          console.log('useFirebaseAuth: Profile loaded from Firestore');
         } else {
           // Use Firebase Auth data directly
           const authProfile: UserProfile = {
@@ -94,6 +98,7 @@ export function useFirebaseAuth() {
             portfolioBalance: 0
           };
           setUserProfile(authProfile);
+          console.log('useFirebaseAuth: Using fallback profile from Firebase Auth');
         }
       } catch (profileErr) {
         // Fallback to Firebase Auth data if Firestore fails
@@ -110,11 +115,14 @@ export function useFirebaseAuth() {
           portfolioBalance: 0
         };
         setUserProfile(authProfile);
+        console.log('useFirebaseAuth: Error with Firestore, using fallback profile');
       }
     } catch (err: any) {
+      console.error('useFirebaseAuth: Login failed with error:', err);
       setError(err.message || 'Login failed');
     } finally {
       setLoading(false);
+      console.log('useFirebaseAuth: Login process completed');
     }
   };
 

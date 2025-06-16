@@ -17,8 +17,11 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const { login, loading, error } = useFirebaseAuth();
 
   const handleGoogleSignUp = async () => {
+    console.log('Google Sign Up clicked');
     try {
+      console.log('Attempting to login...');
       await login();
+      console.log('Login successful, closing modal');
       onClose();
     } catch (err) {
       console.error('Sign up failed:', err);

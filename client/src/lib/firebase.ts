@@ -38,8 +38,24 @@ export interface UserProfile {
 
 // Auth functions
 export const signInWithGoogle = async () => {
+  console.log('Starting Google Sign-In process...');
   try {
+    console.log('Firebase auth instance:', auth);
+    console.log('Google provider:', googleProvider);
+    console.log('Current domain:', window.location.hostname);
+    
+    // Check if popup blockers might be interfering
+    const popup = window.open('', '_blank', 'width=1,height=1');
+    if (popup) {
+      popup.close();
+      console.log('Popup test successful - no popup blocker detected');
+    } else {
+      console.warn('Popup test failed - popup blocker may be active');
+    }
+    
+    console.log('Attempting signInWithPopup...');
     const result = await signInWithPopup(auth, googleProvider);
+    console.log('Sign-in successful:', result);
     const user = result.user;
     
     // Try to create or update user profile in Firestore
@@ -50,8 +66,20 @@ export const signInWithGoogle = async () => {
     }
     
     return user;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error signing in with Google:", error);
+    if (error?.code) console.error("Error code:", error.code);
+    if (error?.message) console.error("Error message:", error.message);
+    
+    // Specific error handling for common issues
+    if (error?.code === 'auth/popup-blocked') {
+      console.error('Popup was blocked by browser');
+    } else if (error?.code === 'auth/popup-closed-by-user') {
+      console.error('Popup was closed by user');
+    } else if (error?.code === 'auth/unauthorized-domain') {
+      console.error('Domain not authorized in Firebase console');
+    }
+    
     throw error;
   }
 };
