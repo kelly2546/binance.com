@@ -14,10 +14,10 @@ interface SignUpModalProps {
 export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const { login } = useMockAuth();
+  const { login } = useFirebaseAuth();
 
   const handleSignUp = async () => {
-    await login(email);
+    await login();
     onClose();
   };
 
@@ -89,7 +89,6 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
               onClick={handleSignUp}
-              disabled={!email || !agreedToTerms}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
