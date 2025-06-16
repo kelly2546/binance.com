@@ -1034,9 +1034,9 @@ export default function Dashboard() {
                         </span>
                       </div>
                       <div>
-                        <Button variant="outline" size="sm" className="border-[#FCD535] text-[#FCD535] hover:bg-[#FCD535] hover:text-black text-xs h-6 px-3 font-semibold rounded-none">
+                        <button className="text-[#FCD535] hover:text-[#e6c230] text-xs font-semibold cursor-pointer">
                           Trade
-                        </Button>
+                        </button>
                       </div>
                     </div>
                   ))}
