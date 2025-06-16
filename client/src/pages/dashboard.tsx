@@ -787,11 +787,7 @@ export default function Dashboard() {
             <div className="mb-6">
               <div 
                 onClick={() => setActiveSection("Dashboard")}
-                className={`flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors ${
-                  activeSection === "Dashboard" 
-                    ? "text-white bg-[#474d57]" 
-                    : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
-                }`}
+                className="flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors text-white bg-[#1E2026]"
               >
                 <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
