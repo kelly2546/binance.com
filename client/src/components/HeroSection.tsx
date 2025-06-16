@@ -20,15 +20,18 @@ export default function HeroSection() {
   return (
     <section className="bg-[#181A20] pt-20 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Content */}
-          <div>
-            <div className="hero-number mb-4">
-              {userCount.toLocaleString()}
+          <div className="flex flex-col">
+            {/* Hero Stats - Aligned with Popular section */}
+            <div className="py-6 mb-8">
+              <div className="hero-number mb-4">
+                {userCount.toLocaleString()}
+              </div>
+              <h1 className="hero-text">
+                USERS<br />TRUST US
+              </h1>
             </div>
-            <h1 className="hero-text mb-8">
-              USERS<br />TRUST US
-            </h1>
             
             {/* Sign Up Form */}
             <div className="mb-8">
