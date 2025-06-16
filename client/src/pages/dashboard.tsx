@@ -197,7 +197,10 @@ export default function Dashboard() {
                 </div>
                 <div className="text-center">
                   <div className="text-[#848e9c]">VIP Level</div>
-                  <div className="text-[#848e9c]">Regular User</div>
+                  <div className="flex items-center space-x-1">
+                    <span className="text-[#848e9c]">Regular User</span>
+                    <ChevronDown className="h-3 w-3 text-[#848e9c]" />
+                  </div>
                 </div>
                 <div className="text-center">
                   <div className="text-[#848e9c]">Following</div>
