@@ -10,9 +10,9 @@ export default function NewsSection() {
     <div className="border border-[#2b3139] rounded-2xl p-6 text-[#1E2026] bg-[#1e2329]">
       {/* News Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-2xl font-bold text-[#EAECEF]">News</h3>
-        <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-lg font-semibold p-0">
-          View All News <ChevronRight className="ml-1 h-4 w-4" />
+        <h3 className="text-base font-semibold text-[#EAECEF]">News</h3>
+        <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm font-medium p-0">
+          View All News <ChevronRight className="ml-1 h-3 w-3" />
         </Button>
       </div>
       {/* News List */}
@@ -25,7 +25,7 @@ export default function NewsSection() {
           newsData.map((news) => (
             <div 
               key={news.id}
-              className="text-lg font-medium text-[#EAECEF] hover:text-[#FCD535] cursor-pointer transition-colors"
+              className="text-sm text-[#EAECEF] hover:text-[#FCD535] cursor-pointer transition-colors"
             >
               {news.title}
             </div>

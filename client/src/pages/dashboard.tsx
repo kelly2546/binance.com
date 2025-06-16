@@ -231,8 +231,8 @@ export default function Dashboard() {
                   <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
                     <Search className="h-4 w-4" />
                   </Button>
-                  <div className="flex items-center space-x-2 text-lg font-semibold text-[#848e9c]">
-                    <input type="checkbox" className="w-5 h-5 rounded border-[#2b3139]" />
+                  <div className="flex items-center space-x-2 text-sm text-[#848e9c]">
+                    <input type="checkbox" className="w-4 h-4 rounded border-[#2b3139]" />
                     <span>Hide assets &lt;1 USD</span>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function Dashboard() {
               <div className="flex space-x-8 mb-6 border-b border-[#1e2329]">
                 <button 
                   onClick={() => setAssetsViewType("Coin View")}
-                  className={`pb-3 text-lg font-bold ${
+                  className={`pb-3 text-sm font-medium ${
                     assetsViewType === "Coin View" 
                       ? "text-white border-b-2 border-[#f0b90b]" 
                       : "text-[#848e9c] hover:text-white"
@@ -252,7 +252,7 @@ export default function Dashboard() {
                 </button>
                 <button 
                   onClick={() => setAssetsViewType("Account View")}
-                  className={`pb-3 text-lg font-bold ${
+                  className={`pb-3 text-sm font-medium ${
                     assetsViewType === "Account View" 
                       ? "text-white border-b-2 border-[#f0b90b]" 
                       : "text-[#848e9c] hover:text-white"
@@ -269,21 +269,21 @@ export default function Dashboard() {
                   <div className="grid grid-cols-4 gap-4 text-base font-semibold text-[#848e9c] mb-4 px-0">
                     <div className="flex items-center">
                       <span>Coin</span>
-                      <ChevronDown className="h-4 w-4 ml-1" />
+                      <ChevronDown className="h-3 w-3 ml-1" />
                     </div>
                     <div className="flex items-center">
                       <span>Amount</span>
-                      <ChevronDown className="h-4 w-4 ml-1" />
+                      <ChevronDown className="h-3 w-3 ml-1" />
                     </div>
                     <div className="flex items-center">
                       <span>Coin Price / Cost Price</span>
-                      <svg className="w-4 h-4 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-3 h-3 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                       </svg>
                     </div>
                     <div className="flex items-center">
                       <span>Today's PnL</span>
-                      <ChevronDown className="h-4 w-4 ml-1" />
+                      <ChevronDown className="h-3 w-3 ml-1" />
                     </div>
                   </div>
                   
@@ -291,7 +291,7 @@ export default function Dashboard() {
                   <div className="space-y-2">
                     {assetsLoading ? (
                       <div className="text-center py-8">
-                        <div className="text-[#848e9c] text-lg font-semibold">Loading assets...</div>
+                        <div className="text-[#848e9c] text-sm">Loading assets...</div>
                       </div>
                     ) : assetsData && assetsData.length > 0 ? (
                       assetsData.slice(0, 6).map((asset, index) => {
@@ -314,21 +314,21 @@ export default function Dashboard() {
                                 />
                               </div>
                               <div>
-                                <div className="text-[#EAECEF] text-lg font-bold">{asset.symbol.toUpperCase()}</div>
-                                <div className="text-[#848e9c] text-base font-medium">{asset.name.length > 15 ? asset.name.substring(0, 12) + "..." : asset.name}</div>
+                                <div className="text-[#EAECEF] text-sm font-semibold">{asset.symbol.toUpperCase()}</div>
+                                <div className="text-[#848e9c] text-xs">{asset.name.length > 15 ? asset.name.substring(0, 12) + "..." : asset.name}</div>
                               </div>
                             </div>
                             <div>
-                              <div className="text-[#EAECEF] text-lg font-bold">{holdingAmount.toFixed(8)}</div>
-                              <div className="text-[#848e9c] text-base font-medium">${holdingValue.toFixed(2)}</div>
+                              <div className="text-[#EAECEF] text-xs">{holdingAmount.toFixed(8)}</div>
+                              <div className="text-[#848e9c] text-xs">${holdingValue.toFixed(2)}</div>
                             </div>
                             <div>
-                              <div className="text-[#EAECEF] text-lg font-bold">${asset.current_price.toFixed(2)}</div>
-                              <div className="text-[#848e9c] text-base font-medium">--</div>
+                              <div className="text-[#EAECEF] text-xs">${asset.current_price.toFixed(2)}</div>
+                              <div className="text-[#848e9c] text-xs">--</div>
                             </div>
                             <div>
                               <div className="flex items-center space-x-1">
-                                <span className={`text-lg font-bold ${
+                                <span className={`text-xs ${
                                   asset.price_change_percentage_24h >= 0 
                                     ? 'text-[#0ecb81]' 
                                     : 'text-[#f6465d]'

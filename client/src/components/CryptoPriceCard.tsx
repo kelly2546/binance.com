@@ -40,15 +40,15 @@ export default function CryptoPriceCard() {
     <div className="border border-[#2b3139] rounded-2xl p-6 text-[#1E2026] bg-[#1e2329]">
       {/* Tabs */}
       <div className="flex mb-6 border-b border-[#2b3139]">
-        <button className="pb-4 px-1 border-b-2 border-[#FCD535] text-[#EAECEF] font-bold text-lg">
+        <button className="pb-4 px-1 border-b-2 border-[#FCD535] text-[#EAECEF] font-medium text-sm">
           Popular
         </button>
-        <button className="pb-4 px-4 text-[#848e9c] hover:text-[#EAECEF] font-bold text-lg">
+        <button className="pb-4 px-4 text-[#848e9c] hover:text-[#EAECEF] font-medium text-sm">
           New Listing
         </button>
         <div className="ml-auto">
-          <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-lg font-semibold p-0">
-            View All 350+ Coins <ChevronRight className="ml-1 h-4 w-4" />
+          <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm font-medium p-0">
+            View All 350+ Coins <ChevronRight className="ml-1 h-3 w-3" />
           </Button>
         </div>
       </div>
@@ -88,16 +88,16 @@ export default function CryptoPriceCard() {
                   <span className="text-xl hidden">{getCryptoIcon(crypto.symbol)}</span>
                 </div>
                 <div>
-                  <div className="font-bold text-[#EAECEF] text-lg">{crypto.symbol}</div>
-                  <div className="text-[#848e9c] text-base font-medium">{crypto.name}</div>
+                  <div className="font-semibold text-[#EAECEF] text-sm">{crypto.symbol}</div>
+                  <div className="text-[#848e9c] text-xs">{crypto.name}</div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-bold text-[#EAECEF] text-lg">
+                <div className="font-medium text-[#EAECEF] text-sm">
                   {crypto.current_price ? formatPrice(crypto.current_price) : 'N/A'}
                 </div>
                 <div 
-                  className={`text-base font-semibold ${
+                  className={`text-xs ${
                     parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
                       ? 'text-[#0ECB81]' 
                       : 'text-[#F6465D]'
