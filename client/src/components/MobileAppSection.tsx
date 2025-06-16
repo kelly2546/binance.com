@@ -50,8 +50,7 @@ export default function MobileAppSection() {
               <div className="text-center">
                 <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer p-4">
                   <svg className="w-full h-full text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M0 12l1.608-1.608L12 20.784l10.392-10.392L24 12 12 24 0 12z"/>
-                    <path d="M0 0l1.608 1.608L12 12l10.392-10.392L24 0 12 12 0 0z"/>
+                    <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.351"/>
                   </svg>
                 </div>
                 <p className="text-sm text-[var(--binance-gray)]">Windows</p>
@@ -59,7 +58,7 @@ export default function MobileAppSection() {
               <div className="text-center">
                 <div className="w-16 h-16 bg-[var(--binance-card)] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[var(--binance-yellow)] border border-transparent transition-colors cursor-pointer p-4">
                   <svg className="w-full h-full text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    <path d="M12.504 0C5.623 0-.026 5.649-.026 12.5c0 6.851 5.649 12.5 12.53 12.5 6.851 0 12.5-5.649 12.5-12.5C24.504 5.649 18.855 0 12.504 0zm-.633 1.62c1.951 0 3.735.64 5.178 1.716l-2.99 2.99c-.873-.456-1.868-.716-2.925-.716-3.654 0-6.618 2.964-6.618 6.618 0 1.057.26 2.052.716 2.925l-2.99 2.99C1.516 16.103.87 14.319.87 12.368c0-5.649 4.603-10.252 10.252-10.252l.75.504zm6.618 3.712c1.076 1.443 1.716 3.227 1.716 5.178 0 5.649-5.103 10.252-10.752 10.252-1.951 0-3.735-.64-5.178-1.716l2.99-2.99c.873.456 1.868.716 2.925.716 3.654 0 6.618-2.964 6.618-6.618 0-1.057-.26-2.052-.716-2.925l2.99-2.99-.593-.897z"/>
                   </svg>
                 </div>
                 <p className="text-sm text-[var(--binance-gray)]">Linux</p>
