@@ -131,7 +131,7 @@ export default function Dashboard() {
 
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-48 bg-[#181a20] min-h-[calc(100vh-64px)] border-r border-[#2b3139]">
+        <div className="w-48 bg-[#181a20] min-h-[calc(100vh-64px)]">
           <div className="p-4">
             {/* Dashboard */}
             <div className="mb-6">
