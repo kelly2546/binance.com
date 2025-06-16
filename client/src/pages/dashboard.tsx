@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTestAuth } from "@/hooks/useTestAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useAssetsData } from "@/hooks/useAssetsData";
+import { useUserHoldings } from "@/hooks/useUserHoldings";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy } from "lucide-react";
@@ -38,8 +39,37 @@ export default function Dashboard() {
     queryKey: ["/api/crypto"],
   }) as { data: any[] | undefined };
 
+  const { data: userHoldings } = useUserHoldings(user?.id?.toString());
+
   // Fetch assets data for Overview section
   const { data: assetsData, isLoading: assetsLoading } = useAssetsData();
+
+  // Calculate real-time portfolio balance
+  const calculatePortfolioBalance = () => {
+    if (!userHoldings || !cryptoData) return { totalBalance: 0, todayPnL: 0 };
+    
+    let totalBalance = 0;
+    let totalPreviousValue = 0;
+    
+    userHoldings.forEach((holding: any) => {
+      const crypto = cryptoData.find((c: any) => c.symbol.toLowerCase() === holding.symbol.toLowerCase());
+      if (crypto) {
+        const currentValue = holding.amount * parseFloat(crypto.current_price);
+        const previousPrice = parseFloat(crypto.current_price) / (1 + parseFloat(crypto.price_change_percentage_24h) / 100);
+        const previousValue = holding.amount * previousPrice;
+        
+        totalBalance += currentValue;
+        totalPreviousValue += previousValue;
+      }
+    });
+    
+    const todayPnL = totalBalance - totalPreviousValue;
+    const pnlPercentage = totalPreviousValue > 0 ? (todayPnL / totalPreviousValue) * 100 : 0;
+    
+    return { totalBalance, todayPnL, pnlPercentage };
+  };
+
+  const { totalBalance, todayPnL, pnlPercentage } = calculatePortfolioBalance();
 
   // Helper function to get filtered crypto data based on active tab
   const getFilteredCryptoData = () => {
