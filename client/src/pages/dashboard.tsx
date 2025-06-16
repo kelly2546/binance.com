@@ -266,7 +266,7 @@ export default function Dashboard() {
               {assetsViewType === "Coin View" ? (
                 <>
                   {/* Coin View Table Header */}
-                  <div className="grid grid-cols-4 gap-4 text-base font-semibold text-[#848e9c] mb-4 px-0">
+                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-[#848e9c] mb-4 px-0">
                     <div className="flex items-center">
                       <span>Coin</span>
                       <ChevronDown className="h-3 w-3 ml-1" />
@@ -344,7 +344,7 @@ export default function Dashboard() {
                       })
                     ) : (
                       <div className="text-center py-8">
-                        <div className="text-[#848e9c] text-lg font-semibold">No assets data available</div>
+                        <div className="text-[#848e9c] text-sm">No assets data available</div>
                       </div>
                     )}
                   </div>
@@ -352,18 +352,18 @@ export default function Dashboard() {
               ) : (
                 <>
                   {/* Account View Table Header */}
-                  <div className="grid grid-cols-4 gap-4 text-base font-semibold text-[#848e9c] mb-4 px-0">
+                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-[#848e9c] mb-4 px-0">
                     <div className="flex items-center">
                       <span>Account</span>
-                      <ChevronDown className="h-4 w-4 ml-1" />
+                      <ChevronDown className="h-3 w-3 ml-1" />
                     </div>
                     <div className="flex items-center">
                       <span>Amount</span>
-                      <ChevronDown className="h-4 w-4 ml-1" />
+                      <ChevronDown className="h-3 w-3 ml-1" />
                     </div>
                     <div className="flex items-center">
                       <span>Ratio</span>
-                      <ChevronDown className="h-4 w-4 ml-1" />
+                      <ChevronDown className="h-3 w-3 ml-1" />
                     </div>
                     <div className="flex items-center">
                       <span>Action</span>
@@ -381,15 +381,15 @@ export default function Dashboard() {
                           </svg>
                         </div>
                         <div>
-                          <div className="text-[#EAECEF] text-lg font-bold">Funding</div>
+                          <div className="text-[#EAECEF] text-sm font-semibold">Funding</div>
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-lg font-bold">0.02692244</div>
-                        <div className="text-[#848e9c] text-base font-medium">$0.03</div>
+                        <div className="text-[#EAECEF] text-xs">0.02692244</div>
+                        <div className="text-[#848e9c] text-xs">$0.03</div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-lg font-bold">99.71%</div>
+                        <div className="text-[#EAECEF] text-xs">99.71%</div>
                       </div>
                       <div>
                         <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">

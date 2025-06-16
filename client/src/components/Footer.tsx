@@ -7,8 +7,8 @@ export default function Footer() {
       {/* Call to Action */}
       <section className="border border-[#2b3139] rounded-lg mx-4 sm:mx-6 lg:mx-8 my-20 py-20 text-[#1E2026] bg-[#1e2329]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-5xl md:text-6xl font-black mb-8 text-[#EAECEF]">Start earning today</h2>
-          <Button className="bg-[#FCD535] text-black px-8 py-4 text-xl font-bold hover:bg-[#e6c230]">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-[#EAECEF]">Start earning today</h2>
+          <Button className="bg-[#FCD535] text-black px-6 py-3 text-sm font-semibold hover:bg-[#e6c230]">
             Sign Up Now
           </Button>
         </div>
@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
             {/* Community */}
             <div>
-              <h3 className="text-xl font-bold mb-4 text-[#EAECEF]">Community</h3>
+              <h3 className="text-base font-semibold mb-4 text-[#EAECEF]">Community</h3>
               <div className="flex flex-wrap gap-2">
                 {[
                   { icon: "fab fa-discord", name: "Discord" },
@@ -46,8 +46,8 @@ export default function Footer() {
             
             {/* About Us */}
             <div>
-              <h3 className="text-xl font-bold mb-4 text-[#EAECEF]">About Us</h3>
-              <ul className="space-y-2 text-[#848e9c] text-lg font-medium">
+              <h3 className="text-base font-semibold mb-4 text-[#EAECEF]">About Us</h3>
+              <ul className="space-y-2 text-[#848e9c] text-sm">
                 {[
                   "About", "Careers", "Announcements", "News", "Press", 
                   "Legal", "Terms", "Privacy", "Building Trust"
@@ -63,8 +63,8 @@ export default function Footer() {
             
             {/* Products */}
             <div>
-              <h3 className="text-xl font-bold mb-4 text-[#EAECEF]">Products</h3>
-              <ul className="space-y-2 text-[#848e9c] text-lg font-medium">
+              <h3 className="text-base font-semibold mb-4 text-[#EAECEF]">Products</h3>
+              <ul className="space-y-2 text-[#848e9c] text-sm">
                 {[
                   "Exchange", "Buy Crypto", "Pay", "Academy", "Live",
                   "Tax", "Gift Card", "Launchpool", "Auto-Invest"
@@ -80,8 +80,8 @@ export default function Footer() {
             
             {/* Business */}
             <div>
-              <h3 className="text-xl font-bold mb-4 text-[#EAECEF]">Business</h3>
-              <ul className="space-y-2 text-[#848e9c] text-lg font-medium">
+              <h3 className="text-base font-semibold mb-4 text-[#EAECEF]">Business</h3>
+              <ul className="space-y-2 text-[#848e9c] text-sm">
                 {[
                   "P2P Merchant Application",
                   "P2Pro Merchant Application",
@@ -101,8 +101,8 @@ export default function Footer() {
             
             {/* Learn & Service */}
             <div>
-              <h3 className="text-xl font-bold mb-4 text-[#EAECEF]">Learn</h3>
-              <ul className="space-y-2 text-[#848e9c] text-lg font-medium mb-6">
+              <h3 className="text-base font-semibold mb-4 text-[#EAECEF]">Learn</h3>
+              <ul className="space-y-2 text-[#848e9c] text-sm mb-6">
                 <li>
                   <a href="#" className="hover:text-[#EAECEF] transition-colors">
                     Learn & Earn
@@ -110,8 +110,8 @@ export default function Footer() {
                 </li>
               </ul>
               
-              <h3 className="text-xl font-bold mb-4 text-[#EAECEF]">Service</h3>
-              <ul className="space-y-2 text-[#848e9c] text-lg font-medium">
+              <h3 className="text-base font-semibold mb-4 text-[#EAECEF]">Service</h3>
+              <ul className="space-y-2 text-[#848e9c] text-sm">
                 {[
                   "Affiliate", "Referral", "BNB", "OTC Trading",
                   "Historical Market Data", "Trading Insight", "Proof of Reserves"
@@ -127,8 +127,8 @@ export default function Footer() {
             
             {/* Support */}
             <div>
-              <h3 className="text-xl font-bold mb-4 text-[#EAECEF]">Support</h3>
-              <ul className="space-y-2 text-[#848e9c] text-lg font-medium">
+              <h3 className="text-base font-semibold mb-4 text-[#EAECEF]">Support</h3>
+              <ul className="space-y-2 text-[#848e9c] text-sm">
                 <li>
                   <a href="#" className="hover:text-[#EAECEF] transition-colors">
                     24/7 Chat Support
@@ -151,7 +151,7 @@ export default function Footer() {
                 <ChevronDown className="h-3 w-3 text-[#848e9c]" />
               </div>
             </div>
-            <div className="text-[#848e9c] text-lg font-medium">
+            <div className="text-[#848e9c] text-sm">
               © 2024 BAM Trading Services Inc. d.b.a. Binance.US - All rights reserved.
             </div>
           </div>

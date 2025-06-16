@@ -23,10 +23,10 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            <div className="text-7xl md:text-8xl font-black text-[#FCD535] mb-4">
+            <div className="text-5xl md:text-6xl font-bold text-[#FCD535] mb-4">
               {userCount.toLocaleString()}
             </div>
-            <h1 className="text-5xl md:text-6xl font-black mb-8 text-[#EAECEF]">
+            <h1 className="text-3xl md:text-4xl font-bold mb-8 text-[#EAECEF]">
               USERS<br />TRUST US
             </h1>
             
@@ -39,7 +39,7 @@ export default function HeroSection() {
                   className="flex-1 bg-[#181a20] border-[#474d57] rounded-2xl text-[#000000] placeholder:text-[#848e9c] focus:border-[#FCD535] focus:ring-0 h-12 px-4"
                 />
                 <Button 
-                  className="bg-[#FCD535] text-black rounded-2xl font-bold hover:bg-[#e6c230] h-12 px-8 border-0 text-lg"
+                  className="bg-[#FCD535] text-black rounded-2xl font-semibold hover:bg-[#e6c230] h-12 px-8 border-0 text-sm"
                   onClick={() => setIsSignUpModalOpen(true)}
                 >
                   Sign Up
@@ -49,7 +49,7 @@ export default function HeroSection() {
             
             {/* Or Continue With */}
             <div className="mb-8">
-              <p className="text-[#848e9c] mb-4 text-lg font-semibold">Or Continue With</p>
+              <p className="text-[#848e9c] mb-4 text-sm">Or Continue With</p>
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
@@ -77,7 +77,7 @@ export default function HeroSection() {
             
             {/* Download App */}
             <div>
-              <p className="text-[#848e9c] mb-4 text-lg font-semibold">Download App</p>
+              <p className="text-[#848e9c] mb-4 text-sm">Download App</p>
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
