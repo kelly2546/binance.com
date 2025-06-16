@@ -39,7 +39,7 @@ export default function Dashboard() {
     queryKey: ["/api/crypto"],
   }) as { data: any[] | undefined };
 
-  const { data: userHoldings } = useUserHoldings(user?.uid) as { data: any[] | undefined };
+  const { data: userHoldings } = useUserHoldings(undefined) as { data: any[] | undefined };
 
   // Fetch assets data for Overview section
   const { data: assetsData, isLoading: assetsLoading } = useAssetsData();
