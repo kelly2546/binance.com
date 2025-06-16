@@ -1,8 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import type { UserHolding } from "@shared/schema";
+
+interface CryptoBalance {
+  symbol: string;
+  name: string;
+  balance: number;
+  icon: string;
+}
 
 export function useUserHoldings(userId?: string) {
-  return useQuery({
+  return useQuery<CryptoBalance[]>({
     queryKey: ["/api/user/holdings"],
     refetchInterval: 30000,
     enabled: !!userId,
