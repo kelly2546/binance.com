@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAssetsData } from "@/hooks/useAssetsData";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp } from "lucide-react";
+import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy } from "lucide-react";
 import type { User } from "@shared/schema";
 
 export default function Dashboard() {
@@ -18,6 +18,14 @@ export default function Dashboard() {
       ...prev,
       [menuName]: !prev[menuName]
     }));
+  };
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
   };
   
   const { isLoading, user } = useTestAuth() as { 
@@ -808,7 +816,15 @@ export default function Dashboard() {
                 <div className="flex items-center space-x-6 text-xs">
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">UID</div>
-                    <div className="text-[#EAECEF] font-medium">799181588</div>
+                    <div className="flex items-center space-x-1">
+                      <span className="text-[#EAECEF] font-medium">799181588</span>
+                      <button 
+                        onClick={() => copyToClipboard('799181588')}
+                        className="text-[#848e9c] hover:text-[#EAECEF] transition-colors"
+                      >
+                        <Copy className="h-3 w-3" />
+                      </button>
+                    </div>
                   </div>
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">VIP Level</div>
