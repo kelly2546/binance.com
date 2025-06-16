@@ -726,9 +726,9 @@ export default function Dashboard() {
         return (
           <>
             {/* User Profile Header */}
-            <div className="px-4 py-6 bg-[#181A20]">
-              <div className="flex items-center justify-start">
-                <div className="flex items-center space-x-3 mr-12">
+            <div className="px-8 py-6 bg-[#181A20]">
+              <div className="flex items-center gap-12">
+                <div className="flex items-center space-x-3">
                   <Avatar className="h-10 w-10">
                     <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=crypto" />
                     <AvatarFallback className="bg-[#FCD535] text-[#0B0E11] font-bold text-sm">
@@ -748,11 +748,11 @@ export default function Dashboard() {
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-12 text-xs">
+                <div className="flex items-center text-xs">
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">UID</div>
                     <div className="flex items-center space-x-1">
-                      <span className="text-[#EAECEF] font-medium">799181588</span>
+                      <span className="text-[#EAECEF] font-medium font-semibold">799181588</span>
                       <button 
                         onClick={() => copyToClipboard('799181588')}
                         className="text-[#848e9c] hover:text-[#EAECEF] transition-colors"
@@ -761,20 +761,29 @@ export default function Dashboard() {
                       </button>
                     </div>
                   </div>
+                </div>
+                
+                <div className="flex items-center text-xs">
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">VIP Level</div>
                     <div className="flex items-center space-x-1 cursor-pointer group">
-                      <span className="text-[#EAECEF] font-medium group-hover:text-[#FCD535] transition-colors">Regular User</span>
+                      <span className="text-[#EAECEF] font-medium font-semibold group-hover:text-[#FCD535] transition-colors">Regular User</span>
                       <ChevronDown className="h-3 w-3 text-[#848e9c] group-hover:text-[#FCD535] transition-colors" />
                     </div>
                   </div>
+                </div>
+                
+                <div className="flex items-center text-xs">
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">Following</div>
-                    <div className="text-[#EAECEF] font-medium">14</div>
+                    <div className="text-[#EAECEF] font-medium font-semibold">14</div>
                   </div>
+                </div>
+                
+                <div className="flex items-center text-xs">
                   <div className="text-left">
                     <div className="text-[#848e9c] mb-1">Followers</div>
-                    <div className="text-[#EAECEF] font-medium">3</div>
+                    <div className="text-[#EAECEF] font-medium font-semibold">3</div>
                   </div>
                 </div>
               </div>
