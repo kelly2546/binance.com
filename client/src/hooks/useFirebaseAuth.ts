@@ -9,12 +9,14 @@ import {
   UserProfile,
   handleRedirectResult
 } from '@/lib/firebase';
+import { useLocation } from 'wouter';
 
 export function useFirebaseAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     const initializeAuth = async () => {
@@ -22,7 +24,8 @@ export function useFirebaseAuth() {
       try {
         const redirectUser = await handleRedirectResult();
         if (redirectUser) {
-          console.log('Redirect authentication successful');
+          console.log('Redirect authentication successful, navigating to dashboard');
+          setLocation('/dashboard');
         }
       } catch (error) {
         console.error('Error handling redirect result:', error);

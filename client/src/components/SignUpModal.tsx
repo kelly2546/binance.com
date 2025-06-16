@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X } from "lucide-react";
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useLocation } from "wouter";
 
 interface SignUpModalProps {
   isOpen: boolean;
@@ -15,13 +16,15 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const { login, loading, error } = useFirebaseAuth();
+  const [, setLocation] = useLocation();
 
   const handleGoogleSignUp = async () => {
     console.log('Google Sign Up clicked');
     try {
       console.log('Attempting to login...');
       await login();
-      console.log('Login successful, closing modal');
+      // The redirect will handle navigation to dashboard
+      console.log('Redirect initiated');
       onClose();
     } catch (err) {
       console.error('Sign up failed:', err);
