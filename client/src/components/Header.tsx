@@ -79,6 +79,13 @@ export default function Header() {
             >
               Sign Up
             </Button>
+            <Button 
+              variant="outline"
+              className="text-white border-[var(--binance-border)] hover:bg-[var(--binance-yellow)] hover:text-black"
+              onClick={() => window.location.href = "/dashboard"}
+            >
+              Dashboard
+            </Button>
             <Button variant="ghost" size="icon" className="md:hidden text-white">
               <Menu className="h-4 w-4" />
             </Button>
