@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, User } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, User, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -148,6 +148,79 @@ export const signOutUser = async () => {
     await signOut(auth);
   } catch (error) {
     console.error("Error signing out:", error);
+    throw error;
+  }
+};
+
+// Email/Password authentication functions
+export const createEmailPasswordAccount = async (email: string, password: string) => {
+  try {
+    console.log('Creating account with email:', email);
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    
+    // Send email verification
+    await sendEmailVerification(user);
+    console.log('Verification email sent');
+    
+    // Create user profile in Firestore
+    await createOrUpdateUserProfile(user);
+    
+    return user;
+  } catch (error: any) {
+    console.error("Error creating account:", error);
+    
+    let errorMessage = 'Failed to create account';
+    if (error?.code === 'auth/email-already-in-use') {
+      errorMessage = 'An account with this email already exists';
+    } else if (error?.code === 'auth/invalid-email') {
+      errorMessage = 'Invalid email address';
+    } else if (error?.code === 'auth/weak-password') {
+      errorMessage = 'Password is too weak';
+    } else if (error?.message) {
+      errorMessage = error.message;
+    }
+    
+    throw new Error(errorMessage);
+  }
+};
+
+export const signInWithEmailPassword = async (email: string, password: string) => {
+  try {
+    console.log('Signing in with email:', email);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    
+    // Update user profile in Firestore
+    await createOrUpdateUserProfile(user);
+    
+    return user;
+  } catch (error: any) {
+    console.error("Error signing in:", error);
+    
+    let errorMessage = 'Failed to sign in';
+    if (error?.code === 'auth/user-not-found') {
+      errorMessage = 'No account found with this email';
+    } else if (error?.code === 'auth/wrong-password') {
+      errorMessage = 'Incorrect password';
+    } else if (error?.code === 'auth/invalid-email') {
+      errorMessage = 'Invalid email address';
+    } else if (error?.code === 'auth/too-many-requests') {
+      errorMessage = 'Too many failed attempts. Please try again later';
+    } else if (error?.message) {
+      errorMessage = error.message;
+    }
+    
+    throw new Error(errorMessage);
+  }
+};
+
+export const sendVerificationEmail = async (user: User) => {
+  try {
+    await sendEmailVerification(user);
+    console.log('Verification email sent to:', user.email);
+  } catch (error) {
+    console.error("Error sending verification email:", error);
     throw error;
   }
 };

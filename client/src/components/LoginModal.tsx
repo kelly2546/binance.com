@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X, QrCode } from "lucide-react";
+import { X, Eye, EyeOff, QrCode } from "lucide-react";
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 
 interface LoginModalProps {
@@ -12,10 +12,17 @@ interface LoginModalProps {
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [email, setEmail] = useState("");
-  const { login, error, loading } = useFirebaseAuth();
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isEmailLogin, setIsEmailLogin] = useState(false);
+  const { login, loginWithEmail, error, loading } = useFirebaseAuth();
 
   const handleLogin = async () => {
-    await login();
+    if (isEmailLogin) {
+      await loginWithEmail(email, password);
+    } else {
+      await login();
+    }
     onClose();
   };
 
@@ -66,39 +73,66 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             Sign in to your account to access your crypto portfolio
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="space-y-6 pt-4">
           {error && (
             <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-3">
               <p className="text-red-400 text-sm">{error}</p>
             </div>
           )}
-          
+
           <div>
             <label className="text-sm font-medium mb-2 block">
-              Email/Phone number
+              Email
             </label>
             <Input
-              type="text"
-              placeholder="Email/Phone (without country code)"
+              type="email"
+              placeholder="Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setIsEmailLogin(true);
+              }}
               className="bg-[#2b3139] border-[#474d57] text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-12"
             />
           </div>
-          
+
+          <div>
+            <label className="text-sm font-medium mb-2 block">
+              Password
+            </label>
+            <div className="relative">
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-[#2b3139] border-[#474d57] text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-12"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-1/2 right-2 -translate-y-1/2 text-white hover:bg-[#474d57]"
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </Button>
+            </div>
+          </div>
+
+
           <Button
             className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-12"
-            disabled={!email}
+            disabled={!email || !password}
             onClick={handleLogin}
           >
-            Next
+            Log In
           </Button>
-          
+
           <div className="text-center">
             <span className="text-[#848e9c]">or</span>
           </div>
-          
+
           <div className="space-y-3">
             <Button
               variant="outline"
@@ -109,7 +143,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               </svg>
               Continue with Passkey
             </Button>
-            
+
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
@@ -123,7 +157,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               />
               {loading ? 'Redirecting...' : 'Continue with Google'}
             </Button>
-            
+
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
@@ -137,7 +171,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               />
               Continue with Apple
             </Button>
-            
+
             <Button
               variant="outline"
               className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"

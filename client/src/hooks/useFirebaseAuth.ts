@@ -9,7 +9,9 @@ import {
   onUserProfileChange,
   UserProfile,
   handleRedirectResult,
-  DEFAULT_CRYPTO_BALANCES
+  DEFAULT_CRYPTO_BALANCES,
+  createEmailPasswordAccount,
+  signInWithEmailPassword
 } from '@/lib/firebase';
 import { useLocation } from 'wouter';
 
@@ -141,6 +143,32 @@ export function useFirebaseAuth() {
     }
   };
 
+  const createEmailAccount = async (email: string, password: string) => {
+    try {
+      setError(null);
+      setLoading(true);
+      await createEmailPasswordAccount(email, password);
+      // Navigation will be handled by the auth state change listener
+    } catch (err: any) {
+      setError(err.message || 'Failed to create account');
+      setLoading(false);
+      throw err;
+    }
+  };
+
+  const loginWithEmail = async (email: string, password: string) => {
+    try {
+      setError(null);
+      setLoading(true);
+      await signInWithEmailPassword(email, password);
+      // Navigation will be handled by the auth state change listener
+    } catch (err: any) {
+      setError(err.message || 'Failed to sign in');
+      setLoading(false);
+      throw err;
+    }
+  };
+
   return {
     user,
     userProfile,
@@ -148,6 +176,8 @@ export function useFirebaseAuth() {
     error,
     login,
     logout,
+    createEmailAccount,
+    loginWithEmail,
     isAuthenticated: !!user
   };
 }
