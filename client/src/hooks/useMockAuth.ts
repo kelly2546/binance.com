@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 
+interface CryptoBalance {
+  symbol: string;
+  name: string;
+  balance: number;
+  icon: string;
+}
+
 interface MockUser {
   uid: string;
   email: string;
   displayName: string;
   photoURL?: string;
+  cryptoBalances: CryptoBalance[];
 }
 
 export function useMockAuth() {
@@ -43,6 +51,32 @@ export function useMockAuth() {
       email: email,
       displayName: email.split('@')[0] || 'Demo User',
       photoURL: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+      cryptoBalances: [
+        {
+          symbol: 'BTC',
+          name: 'Bitcoin',
+          balance: 0.00012345,
+          icon: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
+        },
+        {
+          symbol: 'ETH',
+          name: 'Ethereum',
+          balance: 0.0543,
+          icon: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
+        },
+        {
+          symbol: 'USDT',
+          name: 'Tether',
+          balance: 125.50,
+          icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png'
+        },
+        {
+          symbol: 'BNB',
+          name: 'BNB',
+          balance: 0.25,
+          icon: 'https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png'
+        }
+      ]
     };
     
     localStorage.setItem('mockUser', JSON.stringify(mockUser));
