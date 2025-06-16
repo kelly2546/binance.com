@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Search, Globe, Moon, Menu } from "lucide-react";
 import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
-import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useMockAuth } from "@/hooks/useMockAuth";
 import { useLocation } from "wouter";
 
 export default function Header() {
