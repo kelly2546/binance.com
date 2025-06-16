@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTestAuth } from "@/hooks/useTestAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,8 @@ import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp 
 import type { User } from "@shared/schema";
 
 export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState("Holding");
+  
   const { isLoading, user } = useTestAuth() as { 
     isAuthenticated: boolean; 
     isLoading: boolean; 
@@ -15,6 +18,44 @@ export default function Dashboard() {
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
   });
+
+  // Helper function to get filtered crypto data based on active tab
+  const getFilteredCryptoData = () => {
+    if (!cryptoData) return [];
+    
+    switch (activeTab) {
+      case "Holding":
+        return cryptoData.slice(0, 5); // Show first 5 as holdings
+      case "Hot":
+        return cryptoData.filter(crypto => 
+          parseFloat(crypto.price_change_percentage_24h || '0') > 5
+        ).slice(0, 5);
+      case "New Listing":
+        return cryptoData.slice(10, 15); // Show different range for new listings
+      case "Favorite":
+        return cryptoData.filter(crypto => 
+          ["bitcoin", "ethereum", "binancecoin"].includes(crypto.id)
+        );
+      case "Top Gainers":
+        return cryptoData
+          .sort((a, b) => 
+            parseFloat(b.price_change_percentage_24h || '0') - 
+            parseFloat(a.price_change_percentage_24h || '0')
+          )
+          .slice(0, 5);
+      case "24h Volume":
+        return cryptoData
+          .sort((a, b) => 
+            parseFloat(b.total_volume || '0') - 
+            parseFloat(a.total_volume || '0')
+          )
+          .slice(0, 5);
+      default:
+        return cryptoData.slice(0, 5);
+    }
+  };
+
+  const filteredCryptoData = getFilteredCryptoData();
 
   if (isLoading) {
     return (
