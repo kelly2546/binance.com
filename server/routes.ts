@@ -20,6 +20,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Test user route (for demo purposes)
+  app.get('/api/auth/test-user', async (req, res) => {
+    res.json({
+      id: 1,
+      uid: "demo_user",
+      username: "mr_crypto_",
+      email: "demo@example.com",
+      firstName: "Mr",
+      lastName: "Crypto",
+      profileImageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=crypto",
+      vipLevel: "Regular User",
+      following: 14,
+      followers: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+  });
+
   // User holdings route
   app.get('/api/user/holdings', isAuthenticated, async (req: any, res) => {
     try {

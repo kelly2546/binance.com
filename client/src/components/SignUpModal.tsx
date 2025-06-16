@@ -68,6 +68,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
           <Button
             className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-12"
             disabled={!email || !agreedToTerms}
+            onClick={() => window.location.href = "/api/login"}
           >
             Next
           </Button>

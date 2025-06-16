@@ -62,6 +62,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           <Button
             className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-12"
             disabled={!email}
+            onClick={() => window.location.href = "/api/login"}
           >
             Next
           </Button>
