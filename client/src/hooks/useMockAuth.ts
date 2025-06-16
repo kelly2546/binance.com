@@ -33,8 +33,13 @@ export function useMockAuth() {
   }, []);
 
   const login = async (email: string) => {
+    // Generate a 9-digit numeric UID similar to 799181588
+    const generateNumericUID = () => {
+      return Math.floor(100000000 + Math.random() * 900000000).toString();
+    };
+
     const mockUser = {
-      uid: 'demo-user-' + Date.now(),
+      uid: generateNumericUID(),
       email: email,
       displayName: email.split('@')[0] || 'Demo User',
       photoURL: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
