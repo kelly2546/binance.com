@@ -100,6 +100,11 @@ export default function HeroSection() {
           <CryptoPriceCard />
         </div>
       </div>
+      
+      <SignUpModal 
+        isOpen={isSignUpModalOpen} 
+        onClose={() => setIsSignUpModalOpen(false)} 
+      />
     </section>
   );
 }
