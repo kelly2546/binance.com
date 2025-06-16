@@ -186,7 +186,7 @@ export default function Dashboard() {
                   </svg>
                 </div>
                 <div>
-                  <h1 className="text-white text-lg font-medium">Mr_crypto_</h1>
+                  <h1 className="text-[#EAECEF] text-lg font-semibold">Mr_crypto_</h1>
                 </div>
               </div>
               
@@ -204,11 +204,11 @@ export default function Dashboard() {
                 </div>
                 <div className="text-center">
                   <div className="text-[#848e9c]">Following</div>
-                  <div className="text-white">14</div>
+                  <div className="text-[#EAECEF] font-medium">14</div>
                 </div>
                 <div className="text-center">
                   <div className="text-[#848e9c]">Followers</div>
-                  <div className="text-white">3</div>
+                  <div className="text-[#EAECEF] font-medium">3</div>
                 </div>
               </div>
             </div>
@@ -219,7 +219,7 @@ export default function Dashboard() {
             <div className="bg-[#2b3139] rounded-lg p-6 mb-6 shadow-lg border border-[#1e2329]">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
-                  <h2 className="text-white text-base font-medium">Estimated Balance</h2>
+                  <h2 className="text-[#EAECEF] text-base font-semibold">Estimated Balance</h2>
                   <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
@@ -238,7 +238,7 @@ export default function Dashboard() {
               </div>
               
               <div className="flex items-baseline space-x-2 mb-2">
-                <span className="text-white text-3xl font-bold">0.02631079</span>
+                <span className="text-[#EAECEF] text-3xl font-bold">0.02631079</span>
                 <span className="text-[#848e9c] text-base font-medium">USDT</span>
                 <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
               </div>
@@ -264,9 +264,9 @@ export default function Dashboard() {
             </div>
 
             {/* Markets Section */}
-            <div className="bg-[#2b3139] rounded-lg p-6">
+            <div className="bg-[#2b3139] rounded-lg p-6 shadow-lg border border-[#1e2329]">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-white text-base font-medium">Markets</h2>
+                <h2 className="text-[#EAECEF] text-base font-semibold">Markets</h2>
                 <Button variant="ghost" className="text-[#FCD535] hover:text-[#e6c230] text-sm h-auto p-0 font-semibold">
                   More {'>'}
                 </Button>
@@ -312,16 +312,16 @@ export default function Dashboard() {
                     <span className="text-black font-bold text-xs">🍌</span>
                   </div>
                   <div>
-                    <div className="text-white text-sm font-medium">BANANAS31</div>
+                    <div className="text-[#EAECEF] text-sm font-semibold">BANANAS31</div>
                     <div className="text-[#848e9c] text-xs">Banana For S...</div>
                   </div>
                 </div>
                 <div>
-                  <div className="text-white text-sm">2.22</div>
+                  <div className="text-[#EAECEF] text-sm font-medium">2.22</div>
                   <div className="text-[#848e9c] text-xs">$0.01</div>
                 </div>
                 <div>
-                  <div className="text-white text-sm">$0.01</div>
+                  <div className="text-[#EAECEF] text-sm font-medium">$0.01</div>
                   <div className="text-[#848e9c] text-xs">--</div>
                 </div>
                 <div>
