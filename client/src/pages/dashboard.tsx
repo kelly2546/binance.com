@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy } from "lucide-react";
 import type { User } from "@shared/schema";
-import WithdrawModal from "@/components/WithdrawModal";
+import { useLocation } from "wouter";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("Holding");
   const [activeSection, setActiveSection] = useState("Dashboard");
   const [expandedMenus, setExpandedMenus] = useState<{[key: string]: boolean}>({});
   const [assetsViewType, setAssetsViewType] = useState("Coin View");
-  const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   const toggleMenu = (menuName: string) => {
     setExpandedMenus(prev => ({
@@ -901,7 +901,7 @@ export default function Dashboard() {
                       variant="outline" 
                       size="sm" 
                       className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-semibold"
-                      onClick={() => setIsWithdrawModalOpen(true)}
+                      onClick={() => setLocation("/withdraw")}
                     >
                       Withdraw
                     </Button>
@@ -1477,11 +1477,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Withdraw Modal */}
-      <WithdrawModal 
-        isOpen={isWithdrawModalOpen} 
-        onClose={() => setIsWithdrawModalOpen(false)} 
-      />
+
     </div>
   );
 }
