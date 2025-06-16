@@ -884,7 +884,6 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-
             {/* Balance Section */}
             <div className="px-6 py-4">
               <div className="rounded-2xl p-6 mb-6 border border-[#2b3139]">
@@ -934,7 +933,7 @@ export default function Dashboard() {
                 </div>
                 
                 {/* Chart */}
-                <div className="h-12 bg-[#1e2329] rounded-lg relative overflow-hidden">
+                <div className="h-12 rounded-lg relative overflow-hidden bg-[transparent]">
                   <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
                     <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="#FCD535" strokeWidth="2" fill="none"/>
                   </svg>
