@@ -1,38 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, Plus } from "lucide-react";
 
-const faqData = [
-  {
-    id: 1,
-    question: "What is a cryptocurrency exchange?",
-    answer: "A cryptocurrency exchange is a digital marketplace where users can buy, sell, and trade cryptocurrencies. Binance is one of the world's largest cryptocurrency exchanges, offering a secure platform for trading hundreds of digital assets."
-  },
-  {
-    id: 2,
-    question: "What products does Binance provide?",
-    answer: "Binance offers a comprehensive suite of cryptocurrency services including spot trading, futures trading, options, savings products, staking, NFT marketplace, Binance Pay, and much more. We provide tools for both beginners and advanced traders."
-  },
-  {
-    id: 3,
-    question: "How to buy Bitcoin and other cryptocurrencies on Binance",
-    answer: "You can buy Bitcoin and other cryptocurrencies on Binance through several methods: using a credit/debit card, bank transfer, P2P trading, or by depositing existing cryptocurrencies. Simply create an account, complete verification, and choose your preferred payment method."
-  },
-  {
-    id: 4,
-    question: "How to track cryptocurrency prices",
-    answer: "Binance provides real-time price tracking for all listed cryptocurrencies. You can monitor prices through our website, mobile app, or API. We offer advanced charting tools, price alerts, and market analysis to help you stay informed about market movements."
-  },
-  {
-    id: 5,
-    question: "How to trade cryptocurrencies on Binance",
-    answer: "Trading on Binance is simple: deposit funds into your account, navigate to the trading interface, select your trading pair, choose between market or limit orders, and execute your trade. We offer both basic and advanced trading interfaces to suit your experience level."
-  },
-  {
-    id: 6,
-    question: "How to earn from crypto on Binance",
-    answer: "Binance offers multiple ways to earn from crypto including staking, savings products, liquidity farming, Launchpool, and trading. You can earn passive income through our various earn products or actively trade to generate profits."
-  }
-];
+const faqData: { id: number; question: string; answer: string; }[] = [];
 
 export default function FAQSection() {
   const [openItems, setOpenItems] = useState<number[]>([]);

@@ -31,8 +31,8 @@ export default function NewsSection() {
             </div>
           ))
         ) : (
-          <div className="text-[#848e9c] text-lg font-semibold">
-            Failed to load news data
+          <div className="text-[#848e9c] text-sm">
+            News service currently unavailable. Please check back later.
           </div>
         )}
       </div>

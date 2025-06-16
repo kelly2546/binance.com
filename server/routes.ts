@@ -20,51 +20,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Test user route (for demo purposes)
-  app.get('/api/auth/test-user', async (req, res) => {
-    res.json({
-      id: 1,
-      uid: "demo_user",
-      username: "mr_crypto_",
-      email: "demo@example.com",
-      firstName: "Mr",
-      lastName: "Crypto",
-      profileImageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=crypto",
-      vipLevel: "Regular User",
-      following: 14,
-      followers: 3,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    });
-  });
 
-  // Test user holdings endpoint for demo purposes
-  app.get('/api/user/test-holdings', async (req, res) => {
-    const testHoldings = [
-      {
-        id: 1,
-        userId: 1,
-        symbol: "BTC",
-        amount: 0.00125834,
-        averageBuyPrice: 45000
-      },
-      {
-        id: 2,
-        userId: 1,
-        symbol: "ETH", 
-        amount: 0.01234567,
-        averageBuyPrice: 2800
-      },
-      {
-        id: 3,
-        userId: 1,
-        symbol: "BNB",
-        amount: 0.089123,
-        averageBuyPrice: 320
-      }
-    ];
-    res.json(testHoldings);
-  });
 
   // User holdings route
   app.get('/api/user/holdings', isAuthenticated, async (req: any, res) => {
@@ -116,32 +72,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get news data (static for now as per requirements)
+  // Get news data (placeholder - connect to real news API)
   app.get("/api/news", async (req, res) => {
-    const newsData = [
-      {
-        id: 1,
-        title: "Digital Assets Show Resilience Amid Geopolitical Concerns",
-        url: "#"
-      },
-      {
-        id: 2,
-        title: "Cryptocurrency Investment Products See Continued Inflows Amid Market Gains",
-        url: "#"
-      },
-      {
-        id: 3,
-        title: "Swedish Medical Firm Secures Convertible Loan for Bitcoin Investment",
-        url: "#"
-      },
-      {
-        id: 4,
-        title: "Japan's Tax Reforms Influence Bitcoin Holdings Strategy",
-        url: "#"
-      }
-    ];
-    
-    res.json(newsData);
+    res.status(503).json({ 
+      error: "News service unavailable",
+      message: "Please configure a news API service"
+    });
   });
 
   const httpServer = createServer(app);

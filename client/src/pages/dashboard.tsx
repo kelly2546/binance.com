@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTestAuth } from "@/hooks/useTestAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useAssetsData } from "@/hooks/useAssetsData";
 import { useUserHoldings } from "@/hooks/useUserHoldings";
@@ -33,17 +33,13 @@ export default function Dashboard() {
     }
   };
   
-  const { isLoading, user } = useTestAuth() as { 
-    isAuthenticated: boolean; 
-    isLoading: boolean; 
-    user: User | undefined; 
-  };
+  const { isLoading, user, isAuthenticated } = useAuth();
 
   const { data: cryptoData } = useQuery({
     queryKey: ["/api/crypto"],
   }) as { data: any[] | undefined };
 
-  const { data: userHoldings } = useUserHoldings(user?.id?.toString()) as { data: any[] | undefined };
+  const { data: userHoldings } = useUserHoldings(user?.uid) as { data: any[] | undefined };
 
   // Fetch assets data for Overview section
   const { data: assetsData, isLoading: assetsLoading } = useAssetsData();
