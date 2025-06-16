@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X, Eye, EyeOff } from "lucide-react";
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
+import { useToast } from "@/hooks/use-toast";
 
 interface PasswordSetupModalProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export default function PasswordSetupModal({ isOpen, onClose, email }: PasswordS
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [error, setError] = useState("");
   const { createEmailAccount, loading } = useFirebaseAuth();
+  const { toast } = useToast();
 
   const validatePassword = (pass: string) => {
     const minLength = 8;
@@ -52,8 +54,12 @@ export default function PasswordSetupModal({ isOpen, onClose, email }: PasswordS
 
     try {
       await createEmailAccount(email, password);
-      // Show success message and inform user about email verification
-      alert('Account created successfully! Please check your email and verify your account before accessing the dashboard.');
+      // Show success toast notification
+      toast({
+        title: "🔔 Account created successfully!",
+        description: "Please check your email and verify your account before accessing the dashboard.",
+        duration: 8000,
+      });
       onClose();
     } catch (err: any) {
       setError(err.message || "Failed to create account");

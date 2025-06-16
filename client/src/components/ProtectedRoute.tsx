@@ -2,6 +2,7 @@ import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 import { useLocation } from 'wouter';
 import { useEffect, useState } from 'react';
 import { resendVerificationEmail } from '@/lib/firebase';
+import { useToast } from '@/hooks/use-toast';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -12,7 +13,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const [, setLocation] = useLocation();
   const [showVerificationMessage, setShowVerificationMessage] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
-  const [resendMessage, setResendMessage] = useState('');
+  const { toast } = useToast();
 
   useEffect(() => {
     if (!loading) {
@@ -31,13 +32,21 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   const handleResendEmail = async () => {
     setResendLoading(true);
-    setResendMessage('');
     
     try {
       await resendVerificationEmail();
-      setResendMessage('Verification email sent successfully!');
+      toast({
+        title: "📧 Verification email sent!",
+        description: "Please check your email and click the verification link.",
+        duration: 5000,
+      });
     } catch (error) {
-      setResendMessage('Failed to send verification email. Please try again.');
+      toast({
+        title: "❌ Failed to send email",
+        description: "Please try again or contact support if the problem persists.",
+        variant: "destructive",
+        duration: 5000,
+      });
     } finally {
       setResendLoading(false);
     }
@@ -85,11 +94,6 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
             >
               {resendLoading ? 'Sending...' : 'Resend Verification Email'}
             </button>
-            {resendMessage && (
-              <p className={`text-sm ${resendMessage.includes('sent') ? 'text-green-400' : 'text-red-400'}`}>
-                {resendMessage}
-              </p>
-            )}
             <button
               onClick={() => setLocation('/')}
               className="text-[#848e9c] hover:text-white transition-colors"
