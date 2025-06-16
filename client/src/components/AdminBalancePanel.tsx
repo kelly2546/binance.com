@@ -39,19 +39,16 @@ export default function AdminBalancePanel() {
   if (!userProfile) {
     return (
       <Card className="bg-[#1e2329] border-[#474d57] text-white">
-        <CardContent className="p-6">
+        <div className="p-6">
           <p className="text-center text-[#848e9c]">Please sign in to access admin panel</p>
-        </CardContent>
+        </div>
       </Card>
     );
   }
 
   return (
     <Card className="bg-[#1e2329] border-[#474d57] text-white">
-      <CardHeader>
-        <CardTitle className="text-lg font-semibold">Admin: Update Crypto Balances</CardTitle>
-        <p className="text-sm text-[#848e9c]">Test real-time balance updates</p>
-      </CardHeader>
+      
       <CardContent>
         <div className="space-y-4">
           <div>

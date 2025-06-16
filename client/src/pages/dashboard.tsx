@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 import CryptoBalanceCard from "@/components/CryptoBalanceCard";
-import AdminBalancePanel from "@/components/AdminBalancePanel";
+
 import ProfileEditModal from "@/components/ProfileEditModal";
 import { useQuery } from "@tanstack/react-query";
 import { useAssetsData } from "@/hooks/useAssetsData";
@@ -68,24 +68,22 @@ export default function Dashboard() {
     queryKey: ["/api/crypto"],
   }) as { data: any[] | undefined };
 
-  const { data: userHoldings } = useUserHoldings(undefined) as { data: any[] | undefined };
-
   // Fetch assets data for Overview section
   const { data: assetsData, isLoading: assetsLoading } = useAssetsData();
 
-  // Calculate real-time portfolio balance
+  // Calculate real-time portfolio balance using user's actual crypto balances
   const calculatePortfolioBalance = () => {
-    if (!userHoldings || !Array.isArray(userHoldings) || !cryptoData) return { totalBalance: 0, todayPnL: 0, pnlPercentage: 0 };
+    if (!userProfile?.cryptoBalances || !cryptoData) return { totalBalance: 0, todayPnL: 0, pnlPercentage: 0 };
     
     let totalBalance = 0;
     let totalPreviousValue = 0;
     
-    userHoldings.forEach((holding: any) => {
+    userProfile.cryptoBalances.forEach((holding: any) => {
       const crypto = cryptoData.find((c: any) => c.symbol.toLowerCase() === holding.symbol.toLowerCase());
       if (crypto) {
-        const currentValue = holding.amount * parseFloat(crypto.current_price);
+        const currentValue = holding.balance * parseFloat(crypto.current_price);
         const previousPrice = parseFloat(crypto.current_price) / (1 + parseFloat(crypto.price_change_percentage_24h) / 100);
-        const previousValue = holding.amount * previousPrice;
+        const previousValue = holding.balance * previousPrice;
         
         totalBalance += currentValue;
         totalPreviousValue += previousValue;
@@ -107,9 +105,9 @@ export default function Dashboard() {
     switch (activeTab) {
       case "Holding":
         // Show only cryptocurrencies that the user actually holds
-        if (!userHoldings || !Array.isArray(userHoldings)) return [];
+        if (!userProfile?.cryptoBalances || !Array.isArray(userProfile.cryptoBalances)) return [];
         return cryptoData.filter((crypto: any) => 
-          userHoldings.some((holding: any) => 
+          userProfile.cryptoBalances.some((holding: any) => 
             holding.symbol.toLowerCase() === crypto.symbol.toLowerCase()
           )
         );
@@ -570,12 +568,7 @@ export default function Dashboard() {
               )}
             </div>
             
-            {/* Admin Panel for Testing Real-time Balance Updates */}
-            {isAuthenticated && (
-              <div className="mt-6">
-                <AdminBalancePanel />
-              </div>
-            )}
+            
           </div>
         );
       case "Spot":
@@ -984,7 +977,14 @@ export default function Dashboard() {
                       </div>
                       <div>
                         <div className="text-[#EAECEF] text-sm font-medium">
-                          {activeTab === "Holding" ? (Math.random() * 10).toFixed(2) : "--"}
+                          {activeTab === "Holding" ? 
+                            (() => {
+                              const userHolding = userProfile?.cryptoBalances?.find(
+                                (holding: any) => holding.symbol.toLowerCase() === crypto.symbol.toLowerCase()
+                              );
+                              return userHolding ? userHolding.balance.toFixed(8) : "0.00000000";
+                            })() 
+                            : "--"}
                         </div>
                         <div className="text-[#848e9c] text-xs">
                           ${crypto.current_price ? parseFloat(crypto.current_price).toFixed(2) : "0.00"}
