@@ -1,0 +1,41 @@
+server/vite.ts:49:9 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+49         import.meta.dirname,
+           ~~~~~~~~~~~
+
+server/vite.ts:71:33 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+71   const distPath = path.resolve(import.meta.dirname, "public");
+                                   ~~~~~~~~~~~
+
+vite.config.ts:21:25 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+21       "@": path.resolve(import.meta.dirname, "client", "src"),
+                           ~~~~~~~~~~~
+
+vite.config.ts:22:31 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+22       "@shared": path.resolve(import.meta.dirname, "shared"),
+                                 ~~~~~~~~~~~
+
+vite.config.ts:23:31 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+23       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+                                 ~~~~~~~~~~~
+
+vite.config.ts:26:22 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+26   root: path.resolve(import.meta.dirname, "client"),
+                        ~~~~~~~~~~~
+
+vite.config.ts:28:26 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+28     outDir: path.resolve(import.meta.dirname, "dist/public"),
+                            ~~~~~~~~~~~
+
+
+Found 7 errors in 2 files.
+
+Errors  Files
+     2  server/vite.ts:49
+     5  vite.config.ts:21
