@@ -17,29 +17,46 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-2xl font-bold text-white">
-              <span className="text-[#FCD535]">Crypto</span>Trade
-            </div>
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" 
+              alt="Binance" 
+              className="h-8 w-auto"
+            />
           </div>
           
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-sm font-medium">
+              Buy Crypto
+            </a>
+            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-sm font-medium">
               Markets
             </a>
-            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-sm font-medium">
-              Portfolio
-            </a>
-            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-sm font-medium">
-              Trading
-            </a>
-            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-sm font-medium">
-              News
-            </a>
-            <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors text-sm font-medium">
-              Analytics
-            </a>
-
+            <div className="relative group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                Trade <i className="fas fa-chevron-down ml-1 text-xs"></i>
+              </a>
+            </div>
+            <div className="relative group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                Futures <i className="fas fa-chevron-down ml-1 text-xs"></i>
+              </a>
+            </div>
+            <div className="relative group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                Earn <i className="fas fa-chevron-down ml-1 text-xs"></i>
+              </a>
+            </div>
+            <div className="relative group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                Square <i className="fas fa-chevron-down ml-1 text-xs"></i>
+              </a>
+            </div>
+            <div className="relative group">
+              <a href="#" className="text-[#EAECEF] hover:text-[#FCD535] transition-colors flex items-center text-sm font-medium">
+                More <i className="fas fa-chevron-down ml-1 text-xs"></i>
+              </a>
+            </div>
           </nav>
           
           {/* Right side */}
