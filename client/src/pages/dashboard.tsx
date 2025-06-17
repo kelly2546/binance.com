@@ -99,40 +99,47 @@ export default function Dashboard() {
 
   const { totalBalance, todayPnL, pnlPercentage } = calculatePortfolioBalance();
 
-  // Generate portfolio performance data for the chart with natural wavy patterns
+  // Generate portfolio performance data that correlates with PnL
   const generatePortfolioData = () => {
     if (!userProfile?.cryptoBalances || !cryptoData) return [];
     
     const currentTime = Date.now();
     const data = [];
     
-    // Calculate base portfolio value
-    let basePortfolioValue = 0;
+    // Calculate current portfolio value and 24h ago value for PnL correlation
+    let currentPortfolioValue = 0;
+    let portfolioValue24hAgo = 0;
+    
     userProfile.cryptoBalances.forEach((holding: any) => {
       const crypto = cryptoData.find((c: any) => c.symbol.toLowerCase() === holding.symbol.toLowerCase());
       if (crypto) {
-        basePortfolioValue += holding.balance * parseFloat(crypto.current_price);
+        const currentPrice = parseFloat(crypto.current_price);
+        const priceChange24h = parseFloat(crypto.price_change_percentage_24h || '0');
+        const price24hAgo = currentPrice / (1 + priceChange24h / 100);
+        
+        currentPortfolioValue += holding.balance * currentPrice;
+        portfolioValue24hAgo += holding.balance * price24hAgo;
       }
     });
     
-    // Generate 30 data points for smooth curve (every hour)
+    const totalPnLPercentage = portfolioValue24hAgo > 0 ? 
+      ((currentPortfolioValue - portfolioValue24hAgo) / portfolioValue24hAgo) * 100 : 0;
+    
+    // Generate 30 data points that follow the PnL trend
     for (let i = 29; i >= 0; i--) {
-      const timeStamp = currentTime - (i * 60 * 60 * 1000); // Every hour
-      const timeProgress = (29 - i) / 29; // 0 to 1 progression
+      const timeStamp = currentTime - (i * 60 * 60 * 1000);
+      const timeProgress = (29 - i) / 29; // 0 to 1 (past to present)
       
-      // Create realistic market fluctuation pattern
-      const overallTrend = Math.sin(timeProgress * Math.PI * 1.5) * 0.02; // Gentle overall trend
-      const midTermWave = Math.sin(timeProgress * Math.PI * 6) * 0.015; // Medium frequency waves
-      const shortTermNoise = Math.sin(timeProgress * Math.PI * 20 + Math.random() * 2) * 0.008; // High frequency variations
+      // Calculate the portfolio value at this point in time based on PnL progression
+      const pnlProgression = totalPnLPercentage * timeProgress; // Gradual change over time
+      const baseValue = portfolioValue24hAgo;
       
-      // Add some randomness for natural movement
-      const randomFactor = (Math.random() - 0.5) * 0.01;
+      // Add realistic market fluctuations while maintaining PnL correlation
+      const marketNoise = Math.sin(timeProgress * Math.PI * 8) * 0.003; // Small variations
+      const randomNoise = (Math.random() - 0.5) * 0.002; // Minimal random fluctuation
       
-      // Combine all factors for natural price movement
-      const totalVariation = overallTrend + midTermWave + shortTermNoise + randomFactor;
-      
-      // Apply variation to base value
-      const portfolioValue = basePortfolioValue * (1 + totalVariation);
+      // Calculate portfolio value that correlates with PnL
+      const pnlBasedValue = baseValue * (1 + (pnlProgression + marketNoise + randomNoise) / 100);
       
       data.push({
         time: new Date(timeStamp).toLocaleTimeString('en-US', { 
@@ -140,7 +147,7 @@ export default function Dashboard() {
           minute: '2-digit',
           hour12: false 
         }),
-        value: Math.max(portfolioValue, basePortfolioValue * 0.95), // Prevent unrealistic drops
+        value: pnlBasedValue,
         timestamp: timeStamp
       });
     }
@@ -957,13 +964,12 @@ export default function Dashboard() {
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
                         <Line 
-                          type="cardinal" 
+                          type="monotone" 
                           dataKey="value" 
                           stroke="#FCD535" 
                           strokeWidth={2}
                           dot={false}
                           activeDot={{ r: 3, fill: "#FCD535", strokeWidth: 0 }}
-                          tension={0.4}
                         />
                         <XAxis 
                           dataKey="time" 
