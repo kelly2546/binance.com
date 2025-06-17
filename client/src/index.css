@@ -24,14 +24,14 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
 
-  /* Binance Custom Colors */
-  --binance-dark: hsl(214, 24%, 6%);
-  --binance-card: hsl(220, 13%, 18%);
-  --binance-yellow: hsl(45, 93%, 50%);
-  --binance-green: hsl(157, 97%, 38%);
-  --binance-red: hsl(351, 95%, 64%);
-  --binance-gray: hsl(218, 11%, 65%);
-  --binance-border: hsl(217, 16%, 25%);
+  /* CryptoTrade Platform Colors */
+  --crypto-dark: hsl(214, 24%, 6%);
+  --crypto-card: hsl(220, 13%, 18%);
+  --crypto-yellow: hsl(45, 93%, 50%);
+  --crypto-green: hsl(157, 97%, 38%);
+  --crypto-red: hsl(351, 95%, 64%);
+  --crypto-gray: hsl(218, 11%, 65%);
+  --crypto-border: hsl(217, 16%, 25%);
   
   /* Custom Golden Yellow */
   --golden-yellow: #FFC72C;

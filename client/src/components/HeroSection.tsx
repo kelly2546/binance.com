@@ -23,14 +23,22 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Content */}
           <div className="flex flex-col">
-            {/* Hero Stats - Aligned with Popular section */}
+            {/* Hero Title */}
             <div className="py-6 mb-8">
-              <div className="hero-number mb-4">
-                {userCount.toLocaleString()}
-              </div>
-              <h1 className="hero-text">
-                USERS<br />TRUST US
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+                Trade Crypto with
+                <span className="text-[#FCD535]"> Confidence</span>
               </h1>
+              <p className="text-xl text-gray-400 mb-6">
+                Advanced cryptocurrency trading platform with real-time market data and portfolio management
+              </p>
+              <div className="flex items-center gap-4 text-sm text-gray-400">
+                <span>Active Users: {userCount.toLocaleString()}</span>
+                <span>•</span>
+                <span>24/7 Trading</span>
+                <span>•</span>
+                <span>Secure & Reliable</span>
+              </div>
             </div>
             
             {/* Sign Up Form */}
