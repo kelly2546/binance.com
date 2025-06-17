@@ -1,11 +1,19 @@
 {
   "version": 2,
-  "buildCommand": "bash build-frontend-only.sh",
-  "outputDirectory": "dist/public",
-  "installCommand": "npm install",
-  "functions": {
-    "api/index.js": {}
-  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "bash build-frontend-only.sh",
+        "outputDirectory": "dist/public"
+      }
+    },
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",

@@ -1,0 +1,42 @@
+~/workspace$ $ npx vercel --prod
+bash: $: command not found
+~/workspace$ ^[[200~npx vite build~
+npx vite build~bash: npx: command not found
+~/workspace$ npx vite build
+vite v5.4.14 building for production...
+transforming (1) index.htmlBrowserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 2548 modules transformed.
+../dist/public/index.html                                   1.03 kB │ gzip:   0.57 kB
+../dist/public/assets/image_1750071666454-BNOBz02U.png     38.21 kB
+../dist/public/assets/index-UuonTkQT.css                   67.31 kB │ gzip:  11.90 kB
+../dist/public/assets/index-BRgCLl1E.js                 1,284.54 kB │ gzip: 339.52 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 8.98s
+~/workspace$ install vercel
+install: missing destination file operand after 'vercel'
+Try 'install --help' for more information.
+~/workspace$ vercel
+Vercel CLI 43.2.0
+❗️  Your Project was either deleted, transferred to a new Team, or you don’t have access to it anymore.
+? Set up and deploy “~/workspace”? yes
+? Which scope should contain your project? kelvinkelly3189-gmailcom's projects
+? Link to existing project? no
+? What’s your project’s name? workspace
+? In which directory is your code located? ./
+Local settings detected in vercel.json:
+- Build Command: bash build-frontend-only.sh
+- Install Command: npm install
+- Output Directory: dist/public
+Auto-detected Project Settings (Vite):
+- Development Command: vite --port $PORT
+? Want to modify these settings? no
+🔗  Linked to kelvinkelly3189-gmailcoms-projects/workspace (created .vercel)
+🔍  Inspect: https://vercel.com/kelvinkelly3189-gmailcoms-projects/workspace/EAvk7ui3QHUrqYJsGjRf8iAe9HCS [2s]
+✅  Production: https://workspace-bmnjcw4ob-kelvinkelly3189-gmailcoms-projects.vercel.app [2s]
+Error: Function must contain at least one property.
