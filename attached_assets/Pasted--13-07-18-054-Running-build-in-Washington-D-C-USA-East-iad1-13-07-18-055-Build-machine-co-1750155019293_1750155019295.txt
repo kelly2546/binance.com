@@ -1,0 +1,51 @@
+[13:07:18.054] Running build in Washington, D.C., USA (East) – iad1
+[13:07:18.055] Build machine configuration: 2 cores, 8 GB
+[13:07:18.067] Retrieving list of deployment files...
+[13:07:18.447] Downloading 363 deployment files...
+[13:07:20.465] Restored build cache from previous deployment (FxHALy3j5f57s7t54wc147NMfbGk)
+[13:07:21.141] Running "vercel build"
+[13:07:21.593] Vercel CLI 42.2.0
+[13:07:21.749] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[13:07:22.318] Installing dependencies...
+[13:07:24.264] 
+[13:07:24.264] up to date in 2s
+[13:07:24.265] 
+[13:07:24.265] 78 packages are looking for funding
+[13:07:24.266]   run `npm fund` for details
+[13:07:24.333] Running "npm run vercel-build"
+[13:07:24.448] 
+[13:07:24.448] > rest-express@1.0.0 vercel-build
+[13:07:24.448] > npm run build
+[13:07:24.449] 
+[13:07:24.570] 
+[13:07:24.572] > rest-express@1.0.0 build
+[13:07:24.572] > vite build && tsc server/index.ts --outDir dist/server --target es2020 --module commonjs --esModuleInterop --allowSyntheticDefaultImports --skipLibCheck
+[13:07:24.572] 
+[13:07:25.074] [36mvite v5.4.14 [32mbuilding for production...[36m[39m
+[13:07:25.130] transforming...
+[13:07:25.554] Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+[13:07:25.554]   npx update-browserslist-db@latest
+[13:07:25.554]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[13:07:34.372] [32m✓[39m 2548 modules transformed.
+[13:07:35.182] rendering chunks...
+[13:07:35.201] computing gzip size...
+[13:07:35.236] [2m../dist/public/[22m[32mindex.html                               [39m[1m[2m    1.03 kB[22m[1m[22m[2m │ gzip:   0.57 kB[22m
+[13:07:35.236] [2m../dist/public/[22m[2massets/[22m[32mimage_1750071666454-BNOBz02U.png  [39m[1m[2m   38.21 kB[22m[1m[22m
+[13:07:35.236] [2m../dist/public/[22m[2massets/[22m[35mindex-UuonTkQT.css                [39m[1m[2m   67.31 kB[22m[1m[22m[2m │ gzip:  11.89 kB[22m
+[13:07:35.237] [2m../dist/public/[22m[2massets/[22m[36mindex-BRgCLl1E.js                 [39m[1m[33m1,284.54 kB[39m[22m[2m │ gzip: 340.84 kB[22m
+[13:07:35.237] [33m
+[13:07:35.237] (!) Some chunks are larger than 500 kB after minification. Consider:
+[13:07:35.237] - Using dynamic import() to code-split the application
+[13:07:35.237] - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+[13:07:35.238] - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[13:07:35.238] [32m✓ built in 10.13s[39m
+[13:07:37.660] server/vite.ts(49,9): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+[13:07:37.662] server/vite.ts(71,33): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+[13:07:37.666] vite.config.ts(21,25): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+[13:07:37.666] vite.config.ts(22,31): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+[13:07:37.667] vite.config.ts(23,31): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+[13:07:37.667] vite.config.ts(26,22): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+[13:07:37.667] vite.config.ts(28,26): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+[13:07:37.693] Error: Command "npm run vercel-build" exited with 2
+[13:07:38.441] 
+[13:07:41.654] Exiting build container
