@@ -23,16 +23,18 @@ export default function CryptoPriceCard() {
     }
   };
 
-  const formatPrice = (price: string) => {
-    const num = parseFloat(price);
+  const formatPrice = (price: number | string) => {
+    const num = typeof price === 'string' ? parseFloat(price) : price;
+    if (isNaN(num)) return '$0.00';
     if (num >= 1000) {
       return `$${num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
     return `$${num.toFixed(2)}`;
   };
 
-  const formatChange = (change: string) => {
-    const num = parseFloat(change);
+  const formatChange = (change: number | string) => {
+    const num = typeof change === 'string' ? parseFloat(change) : change;
+    if (isNaN(num)) return '0.00%';
     return `${num >= 0 ? '+' : ''}${num.toFixed(2)}%`;
   };
 

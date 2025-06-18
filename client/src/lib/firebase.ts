@@ -334,8 +334,9 @@ export const onUserProfileChange = (uid: string, callback: (profile: UserProfile
       callback(null);
     }
   }, (error) => {
-    console.error("Error listening to user profile changes:", error);
-    callback(null);
+    console.warn("Firestore listener error (using fallback):", error);
+    // Don't call callback(null) as it would clear the profile
+    // Let the app continue with existing profile data
   });
 };
 

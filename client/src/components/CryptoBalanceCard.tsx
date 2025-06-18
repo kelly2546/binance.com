@@ -6,7 +6,10 @@ interface CryptoBalanceCardProps {
 }
 
 export default function CryptoBalanceCard({ balances }: CryptoBalanceCardProps) {
-  const totalBalance = balances.reduce((sum, crypto) => sum + crypto.balance, 0);
+  const totalBalance = balances.reduce((sum, crypto) => {
+    const balance = typeof crypto.balance === 'number' ? crypto.balance : 0;
+    return sum + balance;
+  }, 0);
 
   return (
     <Card className="bg-[#1e2329] border-[#474d57] text-white">
@@ -34,7 +37,7 @@ export default function CryptoBalanceCard({ balances }: CryptoBalanceCardProps) 
                 </div>
               </div>
               <div className="text-right">
-                <p className="font-medium">{crypto.balance.toFixed(8)}</p>
+                <p className="font-medium">{typeof crypto.balance === 'number' ? crypto.balance.toFixed(8) : '0.00000000'}</p>
                 <p className="text-sm text-[#848e9c]">{crypto.symbol}</p>
               </div>
             </div>

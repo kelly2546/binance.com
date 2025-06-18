@@ -62,11 +62,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/crypto", async (req, res) => {
     try {
       const response = await fetch(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false",
+        {
+          headers: {
+            'Accept': 'application/json',
+            'User-Agent': 'CryptoTradingApp/1.0'
+          }
+        }
       );
       
       if (!response.ok) {
-        throw new Error(`CoinGecko API error: ${response.status}`);
+        if (response.status === 429) {
+          throw new Error('CoinGecko API rate limit exceeded. Please try again later.');
+        }
+        throw new Error(`CoinGecko API error: ${response.status} ${response.statusText}`);
       }
       
       const data = await response.json();
@@ -96,9 +105,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get cryptocurrency news from NewsAPI
   app.get("/api/news", async (req, res) => {
     try {
-      // Using NewsAPI free tier for cryptocurrency news
+      // Check if NEWS_API_KEY is available
+      const apiKey = process.env.NEWS_API_KEY;
+      if (!apiKey) {
+        throw new Error('NEWS_API_KEY not configured');
+      }
+      
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=cryptocurrency+OR+bitcoin+OR+blockchain&sortBy=publishedAt&pageSize=5&language=en&apiKey=${process.env.NEWS_API_KEY || 'demo'}`
+        `https://newsapi.org/v2/everything?q=cryptocurrency+OR+bitcoin+OR+blockchain&sortBy=publishedAt&pageSize=5&language=en&apiKey=${apiKey}`
       );
       
       if (!response.ok) {
