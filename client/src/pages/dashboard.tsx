@@ -210,7 +210,7 @@ export default function Dashboard() {
           <div className="px-6 py-4">
             {/* Estimated Balance Section */}
             <div className="rounded-lg p-6 mb-6 border border-line">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
                 <div className="flex items-center space-x-2">
                   <h2 className="text-secondary text-base font-semibold">Estimated Balance</h2>
                   <svg className="w-4 h-4 text-icon-normal" fill="currentColor" viewBox="0 0 20 20">
@@ -218,13 +218,13 @@ export default function Dashboard() {
                   </svg>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-10 sm:h-7 px-4 rounded font-medium touch-manipulation">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-10 sm:h-7 px-4 rounded font-medium touch-manipulation">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-10 sm:h-7 px-4 rounded font-medium touch-manipulation">
                     Transfer
                   </Button>
                 </div>
@@ -253,33 +253,34 @@ export default function Dashboard() {
               </div>
               
               {/* Chart */}
-              <div className="h-12 bg-binance-card rounded-lg relative overflow-hidden">
-                <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
+              <div className="h-16 sm:h-12 bg-binance-card rounded-lg relative overflow-hidden">
+                <svg className="absolute bottom-0 right-0 w-full sm:w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
                   <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="var(--color-primary)" strokeWidth="2" fill="none"/>
                 </svg>
               </div>
             </div>
 
             {/* My Assets Section */}
-            <div className="rounded-lg p-6 border border-line">
-              <div className="flex items-center justify-between mb-6">
+            <div className="rounded-lg p-4 sm:p-6 border border-line">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
                 <h2 className="text-secondary text-base font-semibold">My Assets</h2>
                 <div className="flex items-center space-x-4">
-                  <Button variant="ghost" size="icon" className="text-icon-normal hover:text-white h-8 w-8">
+                  <Button variant="ghost" size="icon" className="text-icon-normal hover:text-white h-10 w-10 sm:h-8 sm:w-8 touch-manipulation">
                     <Search className="h-4 w-4" />
                   </Button>
                   <div className="flex items-center space-x-2 text-sm text-icon-normal">
-                    <input type="checkbox" className="w-4 h-4 rounded border-line" />
-                    <span>Hide assets &lt;1 USD</span>
+                    <input type="checkbox" className="w-4 h-4 rounded border-line touch-manipulation" />
+                    <span className="hidden sm:inline">Hide assets &lt;1 USD</span>
+                    <span className="sm:hidden">Hide &lt;$1</span>
                   </div>
                 </div>
               </div>
               
               {/* Assets Tabs */}
-              <div className="flex space-x-8 mb-6 border-b border-line">
+              <div className="flex space-x-6 sm:space-x-8 mb-6 border-b border-line overflow-x-auto">
                 <button 
                   onClick={() => setAssetsViewType("Coin View")}
-                  className={`pb-3 text-sm font-medium ${
+                  className={`pb-3 text-sm font-medium whitespace-nowrap touch-manipulation ${
                     assetsViewType === "Coin View" 
                       ? "text-white border-b-2 border-primary" 
                       : "text-icon-normal hover:text-white"
@@ -289,7 +290,7 @@ export default function Dashboard() {
                 </button>
                 <button 
                   onClick={() => setAssetsViewType("Account View")}
-                  className={`pb-3 text-sm font-medium ${
+                  className={`pb-3 text-sm font-medium whitespace-nowrap touch-manipulation ${
                     assetsViewType === "Account View" 
                       ? "text-white border-b-2 border-primary" 
                       : "text-icon-normal hover:text-white"
@@ -303,7 +304,7 @@ export default function Dashboard() {
               {assetsViewType === "Coin View" ? (
                 <>
                   {/* Coin View Table Header */}
-                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-icon-normal mb-4 px-0">
+                  <div className="hidden sm:grid grid-cols-4 gap-4 text-xs font-medium text-icon-normal mb-4 px-0">
                     <div className="flex items-center">
                       <span>Coin</span>
                       <ChevronDown className="h-3 w-3 ml-1" />
@@ -328,8 +329,34 @@ export default function Dashboard() {
                   <div className="space-y-2">
                     {isAuthenticated && userProfile?.cryptoBalances ? (
                       userProfile.cryptoBalances.map((crypto) => (
-                        <div key={crypto.symbol} className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-binance-card rounded">
-                          <div className="flex items-center space-x-3">
+                        <div key={crypto.symbol} className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-4 items-center py-3 px-0 hover:bg-binance-card rounded border-b border-line sm:border-b-0">
+                          {/* Mobile Layout */}
+                          <div className="sm:hidden">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-3">
+                                <img 
+                                  src={crypto.icon} 
+                                  alt={crypto.name}
+                                  className="w-8 h-8 rounded-full"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = `https://via.placeholder.com/32/FCD535/000000?text=${crypto.symbol}`;
+                                  }}
+                                />
+                                <div>
+                                  <div className="text-secondary text-sm font-semibold">{crypto.symbol}</div>
+                                  <div className="text-icon-normal text-xs">{crypto.name}</div>
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <div className="text-secondary text-sm">{crypto.balance.toFixed(8)}</div>
+                                <div className="text-success text-xs">+$0.00 (0.00%)</div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Desktop Layout */}
+                          <div className="hidden sm:flex items-center space-x-3">
                             <img 
                               src={crypto.icon} 
                               alt={crypto.name}
@@ -344,15 +371,15 @@ export default function Dashboard() {
                               <div className="text-icon-normal text-xs">{crypto.name}</div>
                             </div>
                           </div>
-                          <div>
+                          <div className="hidden sm:block">
                             <div className="text-secondary text-sm">{crypto.balance.toFixed(8)}</div>
                             <div className="text-icon-normal text-xs">{crypto.symbol}</div>
                           </div>
-                          <div>
+                          <div className="hidden sm:block">
                             <div className="text-secondary text-sm">$0.00 / $0.00</div>
                             <div className="text-icon-normal text-xs">0.00%</div>
                           </div>
-                          <div className="flex items-center space-x-1">
+                          <div className="hidden sm:flex items-center space-x-1">
                             <span className="text-success text-sm">+$0.00</span>
                             <span className="text-success text-xs">(0.00%)</span>
                           </div>
@@ -1585,7 +1612,7 @@ export default function Dashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 bg-[#181A20]">
+        <div className="flex-1 bg-[#181A20] pb-20 lg:pb-0">
           {renderMainContent()}
         </div>
       </div>
