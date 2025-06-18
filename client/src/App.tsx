@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import MobileOptimizations from "@/components/MobileOptimizations";
+import MobileAuditTool from "@/components/MobileAuditTool";
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
 import Withdraw from "@/pages/withdraw";
@@ -35,6 +36,7 @@ function App() {
       <TooltipProvider>
         <div className="dark">
           <MobileOptimizations />
+          <MobileAuditTool />
           <Toaster />
           <Router />
         </div>
