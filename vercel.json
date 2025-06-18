@@ -2,11 +2,16 @@
   "version": 2,
   "buildCommand": "bash build-frontend-only.sh",
   "outputDirectory": "dist/public",
-  "functions": {
-    "api/*.js": {
-      "runtime": "@vercel/node@2.15.10"
+  "builds": [
+    {
+      "src": "api/crypto.js",
+      "use": "@vercel/node@2.15.10"
+    },
+    {
+      "src": "api/news.js",
+      "use": "@vercel/node@2.15.10"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/api/crypto",
