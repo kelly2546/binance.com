@@ -1,23 +1,12 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "bash build-frontend-only.sh",
-        "outputDirectory": "dist/public"
-      }
-    },
-    {
-      "src": "api/crypto.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/news.js", 
-      "use": "@vercel/node"
+  "buildCommand": "bash build-frontend-only.sh",
+  "outputDirectory": "dist/public",
+  "functions": {
+    "api/*.js": {
+      "runtime": "@vercel/node@3.0.7"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/crypto",
