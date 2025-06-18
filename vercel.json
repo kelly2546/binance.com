@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "bash build-frontend-only.sh",
+  "buildCommand": "node vercel-build.js",
   "outputDirectory": "dist/public",
   "builds": [
     {
