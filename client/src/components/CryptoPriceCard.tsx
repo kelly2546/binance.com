@@ -40,7 +40,7 @@ export default function CryptoPriceCard() {
   
 
   return (
-    <div className="border border-line rounded-2xl bg-binance-card p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+    <div className="border border-line rounded-2xl bg-binance-card p-6 m-4 shadow-sm hover:shadow-md transition-shadow duration-200">
       {/* Tabs */}
       <div className="flex mb-6 border-b border-line">
         <button className="pb-4 px-1 border-b-2 border-primary text-secondary font-medium text-sm">
@@ -76,7 +76,7 @@ export default function CryptoPriceCard() {
           )))
         ) : cryptoData ? (
           cryptoData.slice(0, 5).map((crypto) => (
-            <div key={crypto.id} className="flex items-center justify-between py-3">
+            <div key={crypto.id} className="flex items-center justify-between py-2 pt-[0px] pb-[0px]">
               <div className="flex items-center">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center mr-3 overflow-hidden">
                   <img 
@@ -91,16 +91,16 @@ export default function CryptoPriceCard() {
                   <span className="text-xl hidden">{getCryptoIcon(crypto.symbol)}</span>
                 </div>
                 <div>
-                  <div className="font-bold text-white text-base">{crypto.symbol}</div>
-                  <div className="text-icon-normal text-sm">{crypto.name}</div>
+                  <div className="font-semibold text-secondary text-sm">{crypto.symbol}</div>
+                  <div className="text-icon-normal text-xs">{crypto.name}</div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-semibold text-white text-base">
+                <div className="font-medium text-secondary text-sm">
                   {crypto.current_price ? formatPrice(crypto.current_price) : 'N/A'}
                 </div>
                 <div 
-                  className={`text-sm font-medium ${
+                  className={`text-xs ${
                     parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
                       ? 'text-success' 
                       : 'text-error'
