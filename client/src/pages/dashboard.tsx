@@ -8,12 +8,11 @@ import { useAssetsData } from "@/hooks/useAssetsData";
 import { useUserHoldings } from "@/hooks/useUserHoldings";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy, Edit3, Menu, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy, Edit3 } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useLocation } from "wouter";
 import CryptoPriceCard from "@/components/CryptoPriceCard";
 import NewsSection from "@/components/NewsSection";
-import MobileBottomNavigation from "@/components/MobileBottomNavigation";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("Holding");
@@ -23,8 +22,6 @@ export default function Dashboard() {
   const [isProfileEditOpen, setIsProfileEditOpen] = useState(false);
   const [userSticker, setUserSticker] = useState("🦊");
   const [userName, setUserName] = useState("");
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [viewMode, setViewMode] = useState<"lite" | "pro">("lite");
   const [, setLocation] = useLocation();
 
   const toggleMenu = (menuName: string) => {
@@ -209,92 +206,37 @@ export default function Dashboard() {
     switch (activeSection) {
       case "Overview":
         return (
-          <div className="px-4 lg:px-6 py-4">
-            {/* Mobile Quick Actions Bar */}
-            <div className="lg:hidden mb-4">
-              <div className="flex space-x-2 overflow-x-auto pb-2 hide-scrollbar">
-                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
-                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z" />
-                  </svg>
-                  <span className="text-xs text-secondary">Trade</span>
-                </button>
-                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
-                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z" />
-                    <path d="M3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6z" />
-                  </svg>
-                  <span className="text-xs text-secondary">Markets</span>
-                </button>
-                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
-                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
-                  </svg>
-                  <span className="text-xs text-secondary">Earn</span>
-                </button>
-                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
-                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path d="M18 8a2 2 0 11-4 0 2 2 0 014 0z" />
-                    <path d="M14 15a4 4 0 00-8 0v3h8v-3z" />
-                  </svg>
-                  <span className="text-xs text-secondary">P2P</span>
-                </button>
-                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
-                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-xs text-secondary">Convert</span>
-                </button>
-              </div>
-            </div>
-
+          <div className="px-6 py-4">
             {/* Estimated Balance Section */}
-            <div className="rounded-lg p-4 lg:p-6 mb-6 border border-line bg-gradient-to-r from-[#1e2026] to-[#181a20]">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
+            <div className="rounded-lg p-6 mb-6 border border-line">
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
-                  <h2 className="text-secondary text-lg lg:text-base font-semibold">Total Balance</h2>
-                  <button className="touch-manipulation">
-                    <svg className="w-4 h-4 text-icon-normal hover:text-white transition-colors" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clipRule="evenodd" />
-                      <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                    </svg>
-                  </button>
+                  <h2 className="text-secondary text-base font-semibold">Estimated Balance</h2>
+                  <svg className="w-4 h-4 text-icon-normal" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-primary text-black hover:bg-yellow-500 text-xs h-12 lg:h-8 px-4 rounded-lg font-medium touch-manipulation min-w-[80px]">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#474d57] text-secondary hover:bg-[#474d57] text-xs h-12 lg:h-8 px-4 rounded-lg font-medium touch-manipulation min-w-[80px]">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="lg:inline-flex hidden bg-[#2b3139] border-[#474d57] text-secondary hover:bg-[#474d57] text-xs h-8 px-4 rounded-lg font-medium touch-manipulation">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
                     Transfer
                   </Button>
                 </div>
               </div>
               
-              <div className="flex items-baseline space-x-3 mb-3">
-                <span className="text-white text-3xl lg:text-2xl font-bold">{totalBalance.toFixed(2)}</span>
-                <span className="text-icon-normal text-base lg:text-sm">USD</span>
+              <div className="flex items-baseline space-x-2 mb-2">
+                <span className="text-secondary text-xl font-semibold">{totalBalance.toFixed(8)}</span>
+                <span className="text-icon-normal text-sm">USDT</span>
+                <ChevronDown className="h-4 w-4 text-icon-normal mt-1" />
               </div>
               
-              <div className="text-icon-normal text-base lg:text-sm mb-4">
-                ≈ {totalBalance.toFixed(8)} BTC
-              </div>
-              
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-2">
-                  <span className="text-icon-normal text-sm">Today's PnL:</span>
-                  <span className="text-success text-sm font-medium">
-                    +$0.00 (0.00%)
-                  </span>
-                </div>
-                <div className="lg:hidden">
-                  <Button variant="ghost" size="sm" className="text-primary text-sm font-medium h-8 px-3">
-                    View All →
-                  </Button>
-                </div>
+              <div className="text-icon-normal text-xs mb-3">
+                ≈ ${totalBalance.toFixed(2)}
               </div>
               
               <div className="flex items-center space-x-2 mb-4">
@@ -309,47 +251,34 @@ export default function Dashboard() {
                 </div>
               </div>
               
-              {/* Chart - Enhanced for mobile */}
-              <div className="h-20 lg:h-16 bg-gradient-to-r from-[#2b3139] to-[#1e2026] rounded-lg relative overflow-hidden border border-[#474d57]">
-                <div className="absolute inset-0 flex items-end justify-end p-3">
-                  <svg className="w-full h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
-                    <defs>
-                      <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.3"/>
-                        <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0"/>
-                      </linearGradient>
-                    </defs>
-                    <path d="M0,30 L40,25 L80,20 L120,15 L160,10" stroke="var(--color-primary)" strokeWidth="2" fill="none"/>
-                    <path d="M0,30 L40,25 L80,20 L120,15 L160,10 L160,48 L0,48 Z" fill="url(#chartGradient)"/>
-                  </svg>
-                </div>
-                <div className="absolute top-3 left-3 text-success text-xs font-medium">
-                  +2.45%
-                </div>
+              {/* Chart */}
+              <div className="h-12 bg-binance-card rounded-lg relative overflow-hidden">
+                <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
+                  <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="var(--color-primary)" strokeWidth="2" fill="none"/>
+                </svg>
               </div>
             </div>
 
             {/* My Assets Section */}
-            <div className="rounded-lg p-4 sm:p-6 border border-line">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+            <div className="rounded-lg p-6 border border-line">
+              <div className="flex items-center justify-between mb-6">
                 <h2 className="text-secondary text-base font-semibold">My Assets</h2>
                 <div className="flex items-center space-x-4">
-                  <Button variant="ghost" size="icon" className="text-icon-normal hover:text-white h-10 w-10 sm:h-8 sm:w-8 touch-manipulation">
+                  <Button variant="ghost" size="icon" className="text-icon-normal hover:text-white h-8 w-8">
                     <Search className="h-4 w-4" />
                   </Button>
                   <div className="flex items-center space-x-2 text-sm text-icon-normal">
-                    <input type="checkbox" className="w-4 h-4 rounded border-line touch-manipulation" />
-                    <span className="hidden sm:inline">Hide assets &lt;1 USD</span>
-                    <span className="sm:hidden">Hide &lt;$1</span>
+                    <input type="checkbox" className="w-4 h-4 rounded border-line" />
+                    <span>Hide assets &lt;1 USD</span>
                   </div>
                 </div>
               </div>
               
               {/* Assets Tabs */}
-              <div className="flex space-x-6 sm:space-x-8 mb-6 border-b border-line overflow-x-auto hide-scrollbar">
+              <div className="flex space-x-8 mb-6 border-b border-line">
                 <button 
                   onClick={() => setAssetsViewType("Coin View")}
-                  className={`pb-3 text-sm font-medium whitespace-nowrap touch-manipulation ${
+                  className={`pb-3 text-sm font-medium ${
                     assetsViewType === "Coin View" 
                       ? "text-white border-b-2 border-primary" 
                       : "text-icon-normal hover:text-white"
@@ -359,7 +288,7 @@ export default function Dashboard() {
                 </button>
                 <button 
                   onClick={() => setAssetsViewType("Account View")}
-                  className={`pb-3 text-sm font-medium whitespace-nowrap touch-manipulation ${
+                  className={`pb-3 text-sm font-medium ${
                     assetsViewType === "Account View" 
                       ? "text-white border-b-2 border-primary" 
                       : "text-icon-normal hover:text-white"
@@ -373,7 +302,7 @@ export default function Dashboard() {
               {assetsViewType === "Coin View" ? (
                 <>
                   {/* Coin View Table Header */}
-                  <div className="hidden sm:grid grid-cols-4 gap-4 text-xs font-medium text-icon-normal mb-4 px-0">
+                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-icon-normal mb-4 px-0">
                     <div className="flex items-center">
                       <span>Coin</span>
                       <ChevronDown className="h-3 w-3 ml-1" />
@@ -398,34 +327,8 @@ export default function Dashboard() {
                   <div className="space-y-2">
                     {isAuthenticated && userProfile?.cryptoBalances ? (
                       userProfile.cryptoBalances.map((crypto) => (
-                        <div key={crypto.symbol} className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-4 items-center py-3 px-0 hover:bg-binance-card rounded border-b border-line sm:border-b-0">
-                          {/* Mobile Layout */}
-                          <div className="sm:hidden">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-3">
-                                <img 
-                                  src={crypto.icon} 
-                                  alt={crypto.name}
-                                  className="w-8 h-8 rounded-full"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.src = `https://via.placeholder.com/32/FCD535/000000?text=${crypto.symbol}`;
-                                  }}
-                                />
-                                <div>
-                                  <div className="text-secondary text-sm font-semibold">{crypto.symbol}</div>
-                                  <div className="text-icon-normal text-xs">{crypto.name}</div>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <div className="text-secondary text-sm">{crypto.balance.toFixed(8)}</div>
-                                <div className="text-success text-xs">+$0.00 (0.00%)</div>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          {/* Desktop Layout */}
-                          <div className="hidden sm:flex items-center space-x-3">
+                        <div key={crypto.symbol} className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-binance-card rounded">
+                          <div className="flex items-center space-x-3">
                             <img 
                               src={crypto.icon} 
                               alt={crypto.name}
@@ -440,15 +343,15 @@ export default function Dashboard() {
                               <div className="text-icon-normal text-xs">{crypto.name}</div>
                             </div>
                           </div>
-                          <div className="hidden sm:block">
+                          <div>
                             <div className="text-secondary text-sm">{crypto.balance.toFixed(8)}</div>
                             <div className="text-icon-normal text-xs">{crypto.symbol}</div>
                           </div>
-                          <div className="hidden sm:block">
+                          <div>
                             <div className="text-secondary text-sm">$0.00 / $0.00</div>
                             <div className="text-icon-normal text-xs">0.00%</div>
                           </div>
-                          <div className="hidden sm:flex items-center space-x-1">
+                          <div className="flex items-center space-x-1">
                             <span className="text-success text-sm">+$0.00</span>
                             <span className="text-success text-xs">(0.00%)</span>
                           </div>
@@ -1308,34 +1211,19 @@ export default function Dashboard() {
         </div>
       </header>
       <div className="flex">
-        {/* Sidebar - Hidden on mobile in Lite mode */}
-        <div className={`${
-          viewMode === "lite" ? "hidden lg:block" : "block"
-        } ${sidebarCollapsed ? 'w-16' : 'w-48'} bg-[#181a20] min-h-[calc(100vh-56px)] transition-all duration-300 relative`}>
-          {/* Sidebar Toggle Button */}
-          <div className="absolute -right-3 top-6 z-10">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="h-6 w-6 bg-[#2b3139] hover:bg-[#474d57] border border-[#474d57] rounded-full text-white"
-            >
-              {sidebarCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
-            </Button>
-          </div>
-
+        {/* Sidebar */}
+        <div className="w-48 bg-[#181a20] min-h-[calc(100vh-56px)]">
           <div className="p-4">
             {/* Dashboard */}
             <div className="mb-6">
               <div 
                 onClick={() => setActiveSection("Dashboard")}
                 className="flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors text-white bg-[#1E2026]"
-                title="Dashboard"
               >
-                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                 </svg>
-                {!sidebarCollapsed && <span>Dashboard</span>}
+                Dashboard
               </div>
             </div>
             
@@ -1349,19 +1237,18 @@ export default function Dashboard() {
                       ? "text-white bg-[#474d57]" 
                       : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                   }`}
-                  title="Assets"
                 >
                   <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
                     </svg>
-                    {!sidebarCollapsed && <span>Assets</span>}
+                    Assets
                   </div>
-                  {!sidebarCollapsed && <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Assets"] ? "rotate-180" : ""}`} />}
+                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Assets"] ? "rotate-180" : ""}`} />
                 </div>
                 
                 {/* Assets Submenu */}
-                {expandedMenus["Assets"] && !sidebarCollapsed && (
+                {expandedMenus["Assets"] && (
                   <div className="ml-4 mt-1 space-y-1">
                     <div 
                       onClick={() => setActiveSection("Overview")}
@@ -1445,19 +1332,18 @@ export default function Dashboard() {
                       ? "text-white bg-[#474d57]" 
                       : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                   }`}
-                  title="Orders"
                 >
                   <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                     </svg>
-                    {!sidebarCollapsed && <span>Orders</span>}
+                    Orders
                   </div>
-                  {!sidebarCollapsed && <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Orders"] ? "rotate-180" : ""}`} />}
+                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Orders"] ? "rotate-180" : ""}`} />
                 </div>
                 
                 {/* Orders Submenu */}
-                {expandedMenus["Orders"] && !sidebarCollapsed && (
+                {expandedMenus["Orders"] && (
                   <div className="ml-4 mt-1 space-y-1">
                     <div 
                       onClick={() => setActiveSection("Spot Order")}
@@ -1540,12 +1426,11 @@ export default function Dashboard() {
                     ? "text-white bg-[#474d57]" 
                     : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                 }`}
-                title="Rewards Hub"
               >
-                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
                 </svg>
-                {!sidebarCollapsed && <span>Rewards Hub</span>}
+                Rewards Hub
               </div>
               
               <div 
@@ -1555,12 +1440,11 @@ export default function Dashboard() {
                     ? "text-white bg-[#474d57]" 
                     : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                 }`}
-                title="Referral"
               >
-                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                 </svg>
-                {!sidebarCollapsed && <span>Referral</span>}
+                Referral
               </div>
               
               <div>
@@ -1571,19 +1455,18 @@ export default function Dashboard() {
                       ? "text-white bg-[#474d57]" 
                       : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                   }`}
-                  title="Account"
                 >
                   <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
                     </svg>
-                    {!sidebarCollapsed && <span>Account</span>}
+                    Account
                   </div>
-                  {!sidebarCollapsed && <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Account"] ? "rotate-180" : ""}`} />}
+                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Account"] ? "rotate-180" : ""}`} />
                 </div>
                 
                 {/* Account Submenu */}
-                {expandedMenus["Account"] && !sidebarCollapsed && (
+                {expandedMenus["Account"] && (
                   <div className="ml-4 mt-1 space-y-1">
                     <div 
                       onClick={() => setActiveSection("Identification")}
@@ -1656,12 +1539,11 @@ export default function Dashboard() {
                     ? "text-white bg-[#474d57]" 
                     : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                 }`}
-                title="Sub Accounts"
               >
-                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                 </svg>
-                {!sidebarCollapsed && <span>Sub Accounts</span>}
+                Sub Accounts
               </div>
               
               <div 
@@ -1671,56 +1553,21 @@ export default function Dashboard() {
                     ? "text-white bg-[#474d57]" 
                     : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                 }`}
-                title="Settings"
               >
-                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
                 </svg>
-                {!sidebarCollapsed && <span>Settings</span>}
+                Settings
               </div>
             </nav>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 bg-[#181A20] pb-20 lg:pb-4">
-          {/* Mobile Mode Toggle */}
-          <div className="lg:hidden flex items-center justify-between p-4 border-b border-line">
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setViewMode("lite")}
-                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors touch-manipulation ${
-                  viewMode === "lite"
-                    ? "bg-primary text-black"
-                    : "bg-[#2b3139] text-secondary hover:bg-[#474d57]"
-                }`}
-              >
-                Lite
-              </button>
-              <button
-                onClick={() => setViewMode("pro")}
-                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors touch-manipulation ${
-                  viewMode === "pro"
-                    ? "bg-primary text-black"
-                    : "bg-[#2b3139] text-secondary hover:bg-[#474d57]"
-                }`}
-              >
-                Pro
-              </button>
-            </div>
-            <div className="text-xs text-icon-normal">
-              {viewMode === "lite" ? "Optimized for speed" : "Full features"}
-            </div>
-          </div>
+        <div className="flex-1 bg-[#181A20]">
           {renderMainContent()}
         </div>
       </div>
-
-      {/* Mobile Bottom Navigation */}
-      <MobileBottomNavigation 
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-      />
 
       {/* Profile Edit Modal */}
       <ProfileEditModal

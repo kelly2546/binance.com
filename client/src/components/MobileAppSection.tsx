@@ -18,7 +18,7 @@ export default function MobileAppSection() {
           
           {/* Right - Content */}
           <div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 text-[#EAECEF] leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-[#EAECEF]">
               Trade on the go. Anywhere, anytime.
             </h2>
             
@@ -40,26 +40,26 @@ export default function MobileAppSection() {
             </div>
             
             {/* Platform Downloads */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-md">
+            <div className="grid grid-cols-3 gap-4 max-w-md">
               <div className="text-center">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-transparent border border-[#2b3139] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[#FCD535] transition-colors cursor-pointer p-3 sm:p-4 touch-manipulation">
+                <div className="w-16 h-16 bg-transparent border border-[#2b3139] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[#FCD535] transition-colors cursor-pointer p-4">
                   <img src="https://www.svgrepo.com/show/303125/apple-logo.svg" alt="Apple" className="w-full h-full" />
                 </div>
-                <p className="text-xs sm:text-sm text-[#848e9c]">macOS</p>
+                <p className="text-sm text-[#848e9c]">macOS</p>
               </div>
               <div className="text-center">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-transparent border border-[#2b3139] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[#FCD535] transition-colors cursor-pointer p-3 sm:p-4 touch-manipulation">
+                <div className="w-16 h-16 bg-transparent border border-[#2b3139] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[#FCD535] transition-colors cursor-pointer p-4">
                   <svg className="w-full h-full text-[#EAECEF]" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.351"/>
                   </svg>
                 </div>
-                <p className="text-xs sm:text-sm text-[#848e9c]">Windows</p>
+                <p className="text-sm text-[#848e9c]">Windows</p>
               </div>
               <div className="text-center">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-transparent border border-[#2b3139] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[#FCD535] transition-colors cursor-pointer p-3 sm:p-4 touch-manipulation">
+                <div className="w-16 h-16 bg-transparent border border-[#2b3139] rounded-lg flex items-center justify-center mx-auto mb-2 hover:border-[#FCD535] transition-colors cursor-pointer p-4">
                   <img src="https://www.svgrepo.com/show/372898/linux.svg" alt="Linux" className="w-full h-full" />
                 </div>
-                <p className="text-xs sm:text-sm text-[#848e9c]">Linux</p>
+                <p className="text-sm text-[#848e9c]">Linux</p>
               </div>
             </div>
           </div>

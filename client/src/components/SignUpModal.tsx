@@ -74,7 +74,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   return (
     <>
       <Dialog open={isOpen && !showEmailVerification && !showPasswordSetup} onOpenChange={handleMainModalClose}>
-        <DialogContent className="bg-[#1e2329] border-[#474d57] text-white max-w-md mx-4 sm:mx-auto max-h-[90vh] overflow-y-auto">
+        <DialogContent className="bg-[#1e2329] border-[#474d57] text-white max-w-md">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-center mt-4">
               Welcome to Binance
@@ -100,7 +100,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
                 placeholder="Email/Phone (without country code)"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-[#2b3139] border-[#474d57] text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-12 text-base touch-manipulation"
+                className="bg-[#2b3139] border-[#474d57] text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-10"
               />
             </div>
             
