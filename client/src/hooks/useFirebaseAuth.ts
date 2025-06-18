@@ -50,7 +50,7 @@ export function useFirebaseAuth() {
       }
       
       if (firebaseUser) {
-        // Set up real-time profile listener with error handling
+        // Set up real-time profile listener
         profileUnsubscribe = onUserProfileChange(firebaseUser.uid, (profile) => {
           if (profile) {
             setUserProfile(profile);

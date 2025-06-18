@@ -36,28 +36,6 @@ export const users = pgTable("users", {
 export type UpsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
 
-// Cryptocurrency data schema
-export const CryptocurrencySchema = z.object({
-  id: z.string(),
-  symbol: z.string(),
-  name: z.string(),
-  image: z.string(),
-  current_price: z.union([z.number(), z.string()]).transform(val => 
-    typeof val === 'string' ? parseFloat(val) : val
-  ),
-  market_cap: z.union([z.number(), z.string()]).transform(val => 
-    typeof val === 'string' ? parseFloat(val) : val
-  ),
-  price_change_percentage_24h: z.union([z.number(), z.string()]).transform(val => 
-    typeof val === 'string' ? parseFloat(val) : val
-  ),
-  total_volume: z.union([z.number(), z.string()]).transform(val => 
-    typeof val === 'string' ? parseFloat(val) : val
-  ).optional(),
-});
-
-export type Cryptocurrency = z.infer<typeof CryptocurrencySchema>;
-
 // CoinGecko API response types
 export const CoinGeckoApiResponse = z.object({
   id: z.string(),

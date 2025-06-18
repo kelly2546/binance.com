@@ -47,20 +47,11 @@ export const queryClient = new QueryClient({
       queryFn: getQueryFn({ on401: "throw" }),
       refetchInterval: false,
       refetchOnWindowFocus: false,
-      staleTime: 5 * 60 * 1000, // 5 minutes instead of Infinity
-      retry: (failureCount, error) => {
-        // Don't retry on 4xx errors except 429 (rate limit)
-        if (error instanceof Error) {
-          const status = parseInt(error.message.split(':')[0]);
-          if (status >= 400 && status < 500 && status !== 429) {
-            return false;
-          }
-        }
-        return failureCount < 3;
-      },
+      staleTime: Infinity,
+      retry: false,
     },
     mutations: {
-      retry: 1, // Allow one retry for mutations
+      retry: false,
     },
   },
 });

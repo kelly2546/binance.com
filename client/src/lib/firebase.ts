@@ -284,8 +284,8 @@ export const createOrUpdateUserProfile = async (user: User) => {
       return userSnap.data() as UserProfile;
     }
   } catch (error) {
-    console.warn("Firestore access limited, using Firebase Auth data only:", error);
-    // Don't throw error - continue with fallback profile
+    console.error("Error creating/updating user profile:", error);
+    // Return a basic profile using Firebase user data if Firestore fails
     return {
       uid: generateNumericUID(),
       email: user.email || '',
@@ -334,9 +334,8 @@ export const onUserProfileChange = (uid: string, callback: (profile: UserProfile
       callback(null);
     }
   }, (error) => {
-    console.warn("Firestore listener error (using fallback):", error);
-    // Don't call callback(null) as it would clear the profile
-    // Let the app continue with existing profile data
+    console.error("Error listening to user profile changes:", error);
+    callback(null);
   });
 };
 

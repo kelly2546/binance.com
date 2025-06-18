@@ -23,18 +23,16 @@ export default function CryptoPriceCard() {
     }
   };
 
-  const formatPrice = (price: number | string) => {
-    const num = typeof price === 'string' ? parseFloat(price) : price;
-    if (isNaN(num)) return '$0.00';
+  const formatPrice = (price: string) => {
+    const num = parseFloat(price);
     if (num >= 1000) {
       return `$${num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
     return `$${num.toFixed(2)}`;
   };
 
-  const formatChange = (change: number | string) => {
-    const num = typeof change === 'string' ? parseFloat(change) : change;
-    if (isNaN(num)) return '0.00%';
+  const formatChange = (change: string) => {
+    const num = parseFloat(change);
     return `${num >= 0 ? '+' : ''}${num.toFixed(2)}%`;
   };
 
@@ -100,7 +98,7 @@ export default function CryptoPriceCard() {
                 </div>
                 <div 
                   className={`text-xs ${
-                    parseFloat(String(crypto.price_change_percentage_24h || '0')) >= 0 
+                    parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
                       ? 'text-[#0ECB81]' 
                       : 'text-[#F6465D]'
                   }`}
