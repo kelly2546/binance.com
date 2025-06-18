@@ -2,9 +2,11 @@ import { useCryptoData } from "@/hooks/useCryptoData";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 export default function CryptoPriceCard() {
   const { data: cryptoData, isLoading: cryptoLoading } = useCryptoData();
+  const [showTicker, setShowTicker] = useState(false);
 
   const getCryptoIcon = (symbol: string) => {
     switch (symbol) {
@@ -36,6 +38,14 @@ export default function CryptoPriceCard() {
     return `${num >= 0 ? '+' : ''}${num.toFixed(2)}%`;
   };
 
+  const generateTickerText = () => {
+    if (!cryptoData) return "";
+    return cryptoData.slice(0, 5).map(crypto => {
+      const price = crypto.current_price ? formatPrice(crypto.current_price) : '$0.00';
+      return `${crypto.symbol.toUpperCase()}${crypto.name}${price}`;
+    }).join(' • ');
+  };
+
   return (
     <div className="border border-line rounded-2xl p-6 bg-binance-card pt-[18px] pb-[18px]">
       {/* Tabs */}
@@ -46,15 +56,38 @@ export default function CryptoPriceCard() {
         <button className="pb-4 px-4 text-icon-normal hover:text-secondary font-medium text-sm">
           New Listing
         </button>
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center space-x-4">
+          <Button 
+            variant="ghost" 
+            className="text-icon-normal hover:text-secondary text-sm font-medium p-0"
+            onClick={() => setShowTicker(!showTicker)}
+          >
+            {showTicker ? 'List View' : 'Ticker View'}
+          </Button>
           <Button variant="ghost" className="text-icon-normal hover:text-secondary text-sm font-medium p-0">
             View All 350+ Coins <ChevronRight className="ml-1 h-3 w-3" />
           </Button>
         </div>
       </div>
       {/* Crypto List */}
-      <div className="space-y-4">
-        {cryptoLoading ? (
+      {showTicker && cryptoData ? (
+        <div className="py-4 overflow-hidden bg-binance-card border border-line rounded-lg">
+          <div className="animate-scroll whitespace-nowrap text-secondary text-sm font-medium">
+            <span className="inline-block">{generateTickerText()} • {generateTickerText()}</span>
+          </div>
+          <style jsx>{`
+            @keyframes scroll {
+              0% { transform: translateX(100%); }
+              100% { transform: translateX(-100%); }
+            }
+            .animate-scroll {
+              animation: scroll 30s linear infinite;
+            }
+          `}</style>
+        </div>
+      ) : (
+        <div className="space-y-4 text-[15px] font-bold">
+          {cryptoLoading ? (
           // Loading skeleton
           (Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex items-center justify-between py-2">
@@ -113,7 +146,8 @@ export default function CryptoPriceCard() {
             Failed to load cryptocurrency data
           </div>
         )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
