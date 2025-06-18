@@ -2,13 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/public"
-      }
-    },
-    {
       "src": "api/index.js",
       "use": "@vercel/node"
     }
@@ -23,5 +16,5 @@
       "dest": "/index.html"
     }
   ],
-  "outputDirectory": "dist/public"
+  "outputDirectory": "./dist/public"
 }
