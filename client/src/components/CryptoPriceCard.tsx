@@ -73,7 +73,7 @@ export default function CryptoPriceCard() {
           )))
         ) : cryptoData ? (
           cryptoData.slice(0, 5).map((crypto) => (
-            <div key={crypto.id} className="flex items-center justify-between py-2">
+            <div key={crypto.id} className="flex items-center justify-between py-2 pt-[0px] pb-[0px]">
               <div className="flex items-center">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center mr-3 overflow-hidden">
                   <img 
