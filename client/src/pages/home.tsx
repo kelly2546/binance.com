@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-      <div className="min-h-screen bg-[#181A20]">
+      <div className="min-h-screen bg-binance">
         <Header />
         <HeroSection />
         <MobileAppSection />

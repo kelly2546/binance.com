@@ -18,7 +18,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="bg-[#181A20] pt-20 pb-16">
+    <section className="bg-binance pt-20 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Content */}
@@ -39,10 +39,10 @@ export default function HeroSection() {
                 <Input 
                   type="text" 
                   placeholder="Email/Phone number" 
-                  className="flex-1 bg-[#181a20] border-[#474d57] rounded-2xl text-[#000000] placeholder:text-[#848e9c] focus:border-[#FCD535] focus:ring-0 h-12 px-4"
+                  className="flex-1 bg-binance border-disabled rounded-2xl text-secondary placeholder:text-icon-normal focus:border-primary focus:ring-0 h-12 px-4"
                 />
                 <Button 
-                  className="bg-[#FCD535] text-black rounded-2xl font-semibold hover:bg-[#e6c230] h-12 px-8 border-0 text-sm"
+                  className="bg-primary text-black rounded-2xl font-semibold hover:bg-primary-hover h-12 px-8 border-0 text-sm"
                   onClick={() => setIsSignUpModalOpen(true)}
                 >
                   Sign Up
@@ -52,26 +52,26 @@ export default function HeroSection() {
             
             {/* Or Continue With */}
             <div className="mb-8">
-              <p className="text-[#848e9c] mb-4 text-sm">Or Continue With</p>
+              <p className="text-icon-normal mb-4 text-sm">Or Continue With</p>
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
                   size="icon"
-                  className="w-12 h-12 bg-transparent border-[#2b3139] hover:border-[#FCD535] text-[#848e9c] hover:text-[#EAECEF]"
+                  className="w-12 h-12 bg-transparent border-line hover:border-primary text-icon-normal hover:text-secondary"
                 >
                   <img src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" alt="Google" className="w-6 h-6" />
                 </Button>
                 <Button 
                   variant="outline" 
                   size="icon"
-                  className="w-12 h-12 bg-transparent border-[#2b3139] hover:border-[#FCD535] text-[#848e9c] hover:text-[#EAECEF]"
+                  className="w-12 h-12 bg-transparent border-line hover:border-primary text-icon-normal hover:text-secondary"
                 >
                   <img src="https://www.svgrepo.com/show/303125/apple-logo.svg" alt="Apple" className="w-6 h-6" />
                 </Button>
                 <Button 
                   variant="outline" 
                   size="icon"
-                  className="w-12 h-12 bg-transparent border-[#2b3139] hover:border-[#FCD535] text-[#848e9c] hover:text-[#EAECEF]"
+                  className="w-12 h-12 bg-transparent border-line hover:border-primary text-icon-normal hover:text-secondary"
                 >
                   <img src="https://www.svgrepo.com/show/339458/qr-code.svg" alt="QR Code" className="w-6 h-6" />
                 </Button>
@@ -80,19 +80,19 @@ export default function HeroSection() {
             
             {/* Download App */}
             <div>
-              <p className="text-[#848e9c] mb-4 text-sm">Download App</p>
+              <p className="text-icon-normal mb-4 text-sm">Download App</p>
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
                   size="icon"
-                  className="w-12 h-12 bg-transparent border-[#2b3139] hover:border-[#FCD535] text-[#848e9c] hover:text-[#EAECEF]"
+                  className="w-12 h-12 bg-transparent border-line hover:border-primary text-icon-normal hover:text-secondary"
                 >
                   <i className="fab fa-google-play text-xl"></i>
                 </Button>
                 <Button 
                   variant="outline" 
                   size="icon"
-                  className="w-12 h-12 bg-transparent border-[#2b3139] hover:border-[#FCD535] text-[#848e9c] hover:text-[#EAECEF]"
+                  className="w-12 h-12 bg-transparent border-line hover:border-primary text-icon-normal hover:text-secondary"
                 >
                   <i className="fab fa-apple text-xl"></i>
                 </Button>
