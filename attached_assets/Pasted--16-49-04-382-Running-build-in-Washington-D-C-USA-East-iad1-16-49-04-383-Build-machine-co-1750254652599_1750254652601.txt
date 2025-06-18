@@ -1,0 +1,38 @@
+[16:49:04.382] Running build in Washington, D.C., USA (East) – iad1
+[16:49:04.383] Build machine configuration: 2 cores, 8 GB
+[16:49:04.421] Retrieving list of deployment files...
+[16:49:04.560] Previous build caches not available
+[16:49:04.859] Downloading 273 deployment files...
+[16:49:06.879] Running "vercel build"
+[16:49:07.324] Vercel CLI 43.1.0
+[16:49:07.510] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[16:49:08.060] Installing dependencies...
+[16:49:12.394] npm warn deprecated path-match@1.2.4: This package is archived and no longer maintained. For support, visit https://github.com/expressjs/express/discussions
+[16:49:15.118] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[16:49:15.120] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[16:49:27.120] 
+[16:49:27.121] added 755 packages in 19s
+[16:49:27.121] 
+[16:49:27.122] 78 packages are looking for funding
+[16:49:27.122]   run `npm fund` for details
+[16:49:27.151] Running "npm run vercel-build"
+[16:49:27.279] 
+[16:49:27.279] > rest-express@1.0.0 vercel-build
+[16:49:27.279] > npm run build
+[16:49:27.279] 
+[16:49:27.409] 
+[16:49:27.410] > rest-express@1.0.0 build
+[16:49:27.411] > vite build && tsc server/index.ts --outDir dist/server --target es2020 --module commonjs --esModuleInterop --allowSyntheticDefaultImports --skipLibCheck
+[16:49:27.411] 
+[16:49:28.005] [36mvite v5.4.14 [32mbuilding for production...[36m[39m
+[16:49:28.038] [32m✓[39m 0 modules transformed.
+[16:49:28.040] [31mx[39m Build failed in 9ms
+[16:49:28.041] [31merror during build:
+[16:49:28.041] [31mCould not resolve entry module "index.html".[31m
+[16:49:28.041]     at getRollupError (file:///vercel/path1/node_modules/rollup/dist/es/shared/parseAst.js:396:41)
+[16:49:28.041]     at error (file:///vercel/path1/node_modules/rollup/dist/es/shared/parseAst.js:392:42)
+[16:49:28.041]     at ModuleLoader.loadEntryModule (file:///vercel/path1/node_modules/rollup/dist/es/shared/node-entry.js:20086:20)
+[16:49:28.041]     at async Promise.all (index 0)[39m
+[16:49:28.060] Error: Command "npm run vercel-build" exited with 1
+[16:49:28.379] 
+[16:49:31.261] Exiting build container

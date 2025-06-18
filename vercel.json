@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "buildCommand": "vite build --config vite.config.prod.js",
+  "outputDirectory": "dist/public",
   "builds": [
     {
       "src": "api/index.js",
