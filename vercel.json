@@ -10,14 +10,22 @@
       }
     },
     {
-      "src": "api/index.js",
+      "src": "api/crypto.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/news.js", 
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
+      "src": "/api/crypto",
+      "dest": "/api/crypto.js"
+    },
+    {
+      "src": "/api/news",
+      "dest": "/api/news.js"
     },
     {
       "src": "/(.*)",
