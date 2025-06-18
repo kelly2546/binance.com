@@ -61,6 +61,12 @@ export default function Header() {
         
         {/* Right side */}
         <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Mobile search button */}
+          <Button variant="ghost" size="icon" className="sm:hidden text-icon-normal hover:text-white h-10 w-10 touch-manipulation">
+            <Search className="h-4 w-4" />
+          </Button>
+          
+          {/* Desktop buttons */}
           <Button variant="ghost" size="icon" className="hidden sm:flex text-icon-normal hover:text-white h-10 w-10 touch-manipulation">
             <Search className="h-4 w-4" />
           </Button>
@@ -76,10 +82,11 @@ export default function Header() {
               <span className="hidden md:inline text-secondary text-sm truncate max-w-20">Welcome, {userProfile?.displayName || 'User'}</span>
               <Button 
                 variant="outline"
-                className="hidden sm:flex text-secondary border-line hover:bg-primary hover:text-black text-sm font-medium h-10 px-4 touch-manipulation"
+                className="text-secondary border-line hover:bg-primary hover:text-black text-xs sm:text-sm font-medium h-10 px-2 sm:px-4 touch-manipulation"
                 onClick={() => setLocation("/dashboard")}
               >
-                Dashboard
+                <span className="hidden sm:inline">Dashboard</span>
+                <span className="sm:hidden">Dash</span>
               </Button>
               <Button 
                 variant="ghost"
@@ -93,7 +100,7 @@ export default function Header() {
             <>
               <Button 
                 variant="outline" 
-                className="hidden sm:flex text-secondary hover:text-primary border-line hover:border-primary bg-transparent text-sm font-medium h-10 px-4 touch-manipulation"
+                className="text-secondary hover:text-primary border-line hover:border-primary bg-transparent text-xs sm:text-sm font-medium h-10 px-2 sm:px-4 touch-manipulation"
                 onClick={() => setIsLoginModalOpen(true)}
               >
                 Log In
