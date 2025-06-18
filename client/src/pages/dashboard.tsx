@@ -8,7 +8,7 @@ import { useAssetsData } from "@/hooks/useAssetsData";
 import { useUserHoldings } from "@/hooks/useUserHoldings";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy, Edit3 } from "lucide-react";
+import { Search, Bell, Settings, Globe, MoreHorizontal, ChevronDown, TrendingUp, Copy, Edit3, Menu, ChevronLeft, ChevronRight } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useLocation } from "wouter";
 import CryptoPriceCard from "@/components/CryptoPriceCard";
@@ -22,6 +22,7 @@ export default function Dashboard() {
   const [isProfileEditOpen, setIsProfileEditOpen] = useState(false);
   const [userSticker, setUserSticker] = useState("🦊");
   const [userName, setUserName] = useState("");
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [, setLocation] = useLocation();
 
   const toggleMenu = (menuName: string) => {
@@ -1212,18 +1213,31 @@ export default function Dashboard() {
       </header>
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-48 bg-[#181a20] min-h-[calc(100vh-56px)]">
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-48'} bg-[#181a20] min-h-[calc(100vh-56px)] transition-all duration-300 relative`}>
+          {/* Sidebar Toggle Button */}
+          <div className="absolute -right-3 top-6 z-10">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className="h-6 w-6 bg-[#2b3139] hover:bg-[#474d57] border border-[#474d57] rounded-full text-white"
+            >
+              {sidebarCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
+            </Button>
+          </div>
+
           <div className="p-4">
             {/* Dashboard */}
             <div className="mb-6">
               <div 
                 onClick={() => setActiveSection("Dashboard")}
                 className="flex items-center px-3 py-2 rounded text-sm cursor-pointer transition-colors text-white bg-[#1E2026]"
+                title="Dashboard"
               >
-                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                 </svg>
-                Dashboard
+                {!sidebarCollapsed && <span>Dashboard</span>}
               </div>
             </div>
             
@@ -1237,18 +1251,19 @@ export default function Dashboard() {
                       ? "text-white bg-[#474d57]" 
                       : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                   }`}
+                  title="Assets"
                 >
                   <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
                     </svg>
-                    Assets
+                    {!sidebarCollapsed && <span>Assets</span>}
                   </div>
-                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Assets"] ? "rotate-180" : ""}`} />
+                  {!sidebarCollapsed && <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Assets"] ? "rotate-180" : ""}`} />}
                 </div>
                 
                 {/* Assets Submenu */}
-                {expandedMenus["Assets"] && (
+                {expandedMenus["Assets"] && !sidebarCollapsed && (
                   <div className="ml-4 mt-1 space-y-1">
                     <div 
                       onClick={() => setActiveSection("Overview")}
@@ -1332,18 +1347,19 @@ export default function Dashboard() {
                       ? "text-white bg-[#474d57]" 
                       : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                   }`}
+                  title="Orders"
                 >
                   <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                     </svg>
-                    Orders
+                    {!sidebarCollapsed && <span>Orders</span>}
                   </div>
-                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Orders"] ? "rotate-180" : ""}`} />
+                  {!sidebarCollapsed && <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Orders"] ? "rotate-180" : ""}`} />}
                 </div>
                 
                 {/* Orders Submenu */}
-                {expandedMenus["Orders"] && (
+                {expandedMenus["Orders"] && !sidebarCollapsed && (
                   <div className="ml-4 mt-1 space-y-1">
                     <div 
                       onClick={() => setActiveSection("Spot Order")}
@@ -1426,11 +1442,12 @@ export default function Dashboard() {
                     ? "text-white bg-[#474d57]" 
                     : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                 }`}
+                title="Rewards Hub"
               >
-                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
                 </svg>
-                Rewards Hub
+                {!sidebarCollapsed && <span>Rewards Hub</span>}
               </div>
               
               <div 
@@ -1440,11 +1457,12 @@ export default function Dashboard() {
                     ? "text-white bg-[#474d57]" 
                     : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                 }`}
+                title="Referral"
               >
-                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                 </svg>
-                Referral
+                {!sidebarCollapsed && <span>Referral</span>}
               </div>
               
               <div>
@@ -1455,18 +1473,19 @@ export default function Dashboard() {
                       ? "text-white bg-[#474d57]" 
                       : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                   }`}
+                  title="Account"
                 >
                   <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
                     </svg>
-                    Account
+                    {!sidebarCollapsed && <span>Account</span>}
                   </div>
-                  <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Account"] ? "rotate-180" : ""}`} />
+                  {!sidebarCollapsed && <ChevronDown className={`h-3 w-3 transition-transform ${expandedMenus["Account"] ? "rotate-180" : ""}`} />}
                 </div>
                 
                 {/* Account Submenu */}
-                {expandedMenus["Account"] && (
+                {expandedMenus["Account"] && !sidebarCollapsed && (
                   <div className="ml-4 mt-1 space-y-1">
                     <div 
                       onClick={() => setActiveSection("Identification")}
@@ -1539,11 +1558,12 @@ export default function Dashboard() {
                     ? "text-white bg-[#474d57]" 
                     : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                 }`}
+                title="Sub Accounts"
               >
-                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                 </svg>
-                Sub Accounts
+                {!sidebarCollapsed && <span>Sub Accounts</span>}
               </div>
               
               <div 
@@ -1553,11 +1573,12 @@ export default function Dashboard() {
                     ? "text-white bg-[#474d57]" 
                     : "text-[#848e9c] hover:text-white hover:bg-[#2b3139]"
                 }`}
+                title="Settings"
               >
-                <svg className="w-4 h-4 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
                 </svg>
-                Settings
+                {!sidebarCollapsed && <span>Settings</span>}
               </div>
             </nav>
           </div>
