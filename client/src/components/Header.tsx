@@ -24,7 +24,7 @@ export default function Header() {
         </div>
         
         {/* Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden lg:flex items-center space-x-6">
             <a href="#" className="text-secondary hover:text-primary transition-colors text-sm font-medium">
               Buy Crypto
             </a>
@@ -59,30 +59,30 @@ export default function Header() {
         </nav>
         
         {/* Right side */}
-        <div className="flex items-center space-x-3">
-          <Button variant="ghost" size="icon" className="text-icon-normal hover:text-white h-8 w-8">
+        <div className="flex items-center space-x-2 sm:space-x-3">
+          <Button variant="ghost" size="icon" className="hidden sm:flex text-icon-normal hover:text-white h-10 w-10 touch-manipulation">
             <Search className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="icon" className="text-icon-normal hover:text-white h-8 w-8">
+          <Button variant="ghost" size="icon" className="hidden sm:flex text-icon-normal hover:text-white h-10 w-10 touch-manipulation">
             <Globe className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="icon" className="text-icon-normal hover:text-white h-8 w-8">
+          <Button variant="ghost" size="icon" className="hidden sm:flex text-icon-normal hover:text-white h-10 w-10 touch-manipulation">
             <Moon className="h-4 w-4" />
           </Button>
           
           {isAuthenticated ? (
             <>
-              <span className="text-secondary text-sm">Welcome, {userProfile?.displayName || 'User'}</span>
+              <span className="hidden md:inline text-secondary text-sm truncate max-w-20">Welcome, {userProfile?.displayName || 'User'}</span>
               <Button 
                 variant="outline"
-                className="text-secondary border-line hover:bg-primary hover:text-black text-sm font-medium h-8 px-4"
+                className="hidden sm:flex text-secondary border-line hover:bg-primary hover:text-black text-sm font-medium h-10 px-4 touch-manipulation"
                 onClick={() => setLocation("/dashboard")}
               >
                 Dashboard
               </Button>
               <Button 
                 variant="ghost"
-                className="text-icon-normal hover:text-white text-sm font-medium h-8 px-4"
+                className="hidden sm:flex text-icon-normal hover:text-white text-sm font-medium h-10 px-4 touch-manipulation"
                 onClick={logout}
               >
                 Logout
@@ -92,13 +92,13 @@ export default function Header() {
             <>
               <Button 
                 variant="outline" 
-                className="text-secondary hover:text-primary border-line hover:border-primary bg-transparent text-sm font-medium h-8 px-4"
+                className="hidden sm:flex text-secondary hover:text-primary border-line hover:border-primary bg-transparent text-sm font-medium h-10 px-4 touch-manipulation"
                 onClick={() => setIsLoginModalOpen(true)}
               >
                 Log In
               </Button>
               <Button 
-                className="bg-primary text-black hover:bg-primary-hover font-semibold text-sm h-8 px-4"
+                className="bg-primary text-black hover:bg-primary-hover font-semibold text-sm h-10 px-4 touch-manipulation"
                 onClick={() => setIsSignUpModalOpen(true)}
               >
                 Sign Up
@@ -106,7 +106,7 @@ export default function Header() {
             </>
           )}
           
-          <Button variant="ghost" size="icon" className="md:hidden text-white h-8 w-8">
+          <Button variant="ghost" size="icon" className="lg:hidden text-white h-10 w-10 touch-manipulation">
             <Menu className="h-4 w-4" />
           </Button>
         </div>
