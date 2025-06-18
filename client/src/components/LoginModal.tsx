@@ -40,7 +40,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#1e2329] border-[#474d57] text-white max-w-md">
+      <DialogContent className="bg-[#202630] border-[#474d57] text-white max-w-md">
         <DialogHeader className="relative">
           <Button
             variant="ghost"
@@ -50,21 +50,12 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           >
             <X className="h-4 w-4" />
           </Button>
-          <div className="flex items-center justify-between mt-4">
-            <div className="flex items-center">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" 
-                alt="Binance" 
-                className="h-8 w-auto mr-2"
-              />
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-[#474d57]"
-            >
-              <QrCode className="h-5 w-5" />
-            </Button>
+          <div className="flex items-center mt-4">
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" 
+              alt="Binance" 
+              className="h-8 w-auto mr-2"
+            />
           </div>
           <DialogTitle className="text-3xl font-bold text-left mt-4">
             Log in
@@ -121,7 +112,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           </div>
 
           <Button
-            className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-10"
+            className="w-full bg-[#fcd535] text-black font-medium hover:bg-yellow-400 h-10"
             disabled={!email || !password}
             onClick={handleLogin}
           >
