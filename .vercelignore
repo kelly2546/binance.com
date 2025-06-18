@@ -1,5 +1,14 @@
 node_modules
 .env*
 *.log
-dist
 .next
+.DS_Store
+server/
+client/node_modules/
+attached_assets/
+*.tar.gz
+.vercel
+*.md
+deploy.sh
+vercel-deploy.sh
+build-for-vercel.js
