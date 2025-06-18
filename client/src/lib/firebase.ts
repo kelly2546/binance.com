@@ -284,8 +284,8 @@ export const createOrUpdateUserProfile = async (user: User) => {
       return userSnap.data() as UserProfile;
     }
   } catch (error) {
-    console.error("Error creating/updating user profile:", error);
-    // Return a basic profile using Firebase user data if Firestore fails
+    console.warn("Firestore access limited, using Firebase Auth data only:", error);
+    // Don't throw error - continue with fallback profile
     return {
       uid: generateNumericUID(),
       email: user.email || '',

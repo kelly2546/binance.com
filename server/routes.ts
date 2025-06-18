@@ -76,10 +76,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         id: coin.id,
         symbol: coin.symbol.toUpperCase(),
         name: coin.name,
-        current_price: coin.current_price.toString(),
-        price_change_percentage_24h: coin.price_change_percentage_24h?.toFixed(2) || "0.00",
-        market_cap: coin.market_cap.toString(),
-        total_volume: coin.total_volume?.toString() || "0",
+        current_price: coin.current_price || 0,
+        price_change_percentage_24h: coin.price_change_percentage_24h || 0,
+        market_cap: coin.market_cap || 0,
+        total_volume: coin.total_volume || 0,
         image: coin.image,
       }));
       
