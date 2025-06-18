@@ -20,10 +20,10 @@ export default function HeroSection() {
   return (
     <section className="bg-binance pt-20 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* Left Content */}
-          <div className="flex flex-col h-full">
-            {/* Hero Stats - Aligned with Popular section */}
+          <div className="flex-1 flex flex-col justify-between bg-binance-card border border-line rounded-2xl p-6 lg:p-8">
+            {/* Hero Stats */}
             <div className="py-4 mb-6">
               <div className="hero-number mb-4">
                 {userCount.toLocaleString()}
@@ -34,12 +34,12 @@ export default function HeroSection() {
             </div>
             
             {/* Sign Up Form */}
-            <div className="mb-4">
+            <div className="mb-6">
               <div className="flex max-w-md gap-2">
                 <Input 
                   type="text" 
                   placeholder="Email/Phone number" 
-                  className="flex-1 bg-binance border-disabled rounded-2xl text-secondary placeholder:text-icon-normal focus:border-primary focus:ring-0 h-12 px-4"
+                  className="flex-1 bg-binance border-line rounded-2xl text-secondary placeholder:text-icon-normal focus:border-primary focus:ring-0 h-12 px-4"
                 />
                 <Button 
                   className="bg-primary text-black rounded-2xl font-semibold hover:bg-primary-hover h-12 px-8 border-0 text-sm"
@@ -51,8 +51,8 @@ export default function HeroSection() {
             </div>
             
             {/* Or Continue With */}
-            <div className="mb-4">
-              <p className="text-icon-normal mb-2 text-sm">Or Continue With</p>
+            <div className="mb-6">
+              <p className="text-icon-normal mb-4 text-sm">Or Continue With</p>
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
@@ -79,8 +79,8 @@ export default function HeroSection() {
             </div>
             
             {/* Download App */}
-            <div className="flex-1">
-              <p className="text-icon-normal mb-2 text-sm">Download App</p>
+            <div>
+              <p className="text-icon-normal mb-4 text-sm">Download App</p>
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
@@ -101,7 +101,7 @@ export default function HeroSection() {
           </div>
           
           {/* Right Content - Popular Coins */}
-          <div className="flex flex-col h-full">
+          <div className="flex-1">
             <CryptoPriceCard />
           </div>
         </div>
