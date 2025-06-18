@@ -76,8 +76,9 @@ export default function CryptoPriceCard() {
           )))
         ) : cryptoData ? (
           cryptoData.slice(0, 5).map((crypto) => (
-            <div key={crypto.id} className="flex items-center justify-between py-2 pt-[0px] pb-[0px]">
-              <div className="flex items-center">
+            <div key={crypto.id} className="flex items-center py-2 pt-[0px] pb-[0px]">
+              {/* Left: Coin Icon and Name */}
+              <div className="flex items-center flex-1">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center mr-3 overflow-hidden">
                   <img 
                     src={crypto.image || ''} 
@@ -95,12 +96,18 @@ export default function CryptoPriceCard() {
                   <div className="text-icon-normal text-xs">{crypto.name}</div>
                 </div>
               </div>
-              <div className="text-right">
+              
+              {/* Middle: Price */}
+              <div className="flex-1 text-center">
                 <div className="font-medium text-secondary text-sm">
                   {crypto.current_price ? formatPrice(crypto.current_price) : 'N/A'}
                 </div>
+              </div>
+              
+              {/* Right: Percentage Change */}
+              <div className="flex-1 text-right">
                 <div 
-                  className={`text-xs ${
+                  className={`text-sm font-medium ${
                     parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
                       ? 'text-success' 
                       : 'text-error'
