@@ -280,8 +280,8 @@ export default function Dashboard() {
                   onClick={() => setAssetsViewType("Coin View")}
                   className={`pb-3 text-sm font-medium ${
                     assetsViewType === "Coin View" 
-                      ? "text-white border-b-2 border-[#f0b90b]" 
-                      : "text-[#848e9c] hover:text-white"
+                      ? "text-white border-b-2 border-primary" 
+                      : "text-icon-normal hover:text-white"
                   }`}
                 >
                   Coin View
@@ -290,8 +290,8 @@ export default function Dashboard() {
                   onClick={() => setAssetsViewType("Account View")}
                   className={`pb-3 text-sm font-medium ${
                     assetsViewType === "Account View" 
-                      ? "text-white border-b-2 border-[#f0b90b]" 
-                      : "text-[#848e9c] hover:text-white"
+                      ? "text-white border-b-2 border-primary" 
+                      : "text-icon-normal hover:text-white"
                   }`}
                 >
                   Account View
@@ -302,7 +302,7 @@ export default function Dashboard() {
               {assetsViewType === "Coin View" ? (
                 <>
                   {/* Coin View Table Header */}
-                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-[#848e9c] mb-4 px-0">
+                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-icon-normal mb-4 px-0">
                     <div className="flex items-center">
                       <span>Coin</span>
                       <ChevronDown className="h-3 w-3 ml-1" />
@@ -313,7 +313,7 @@ export default function Dashboard() {
                     </div>
                     <div className="flex items-center">
                       <span>Coin Price / Cost Price</span>
-                      <svg className="w-3 h-3 ml-1 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-3 h-3 ml-1 text-icon-normal" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                       </svg>
                     </div>
@@ -327,7 +327,7 @@ export default function Dashboard() {
                   <div className="space-y-2">
                     {isAuthenticated && userProfile?.cryptoBalances ? (
                       userProfile.cryptoBalances.map((crypto) => (
-                        <div key={crypto.symbol} className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                        <div key={crypto.symbol} className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-binance-card rounded">
                           <div className="flex items-center space-x-3">
                             <img 
                               src={crypto.icon} 
@@ -339,27 +339,27 @@ export default function Dashboard() {
                               }}
                             />
                             <div>
-                              <div className="text-[#EAECEF] text-sm font-semibold">{crypto.symbol}</div>
-                              <div className="text-[#848e9c] text-xs">{crypto.name}</div>
+                              <div className="text-secondary text-sm font-semibold">{crypto.symbol}</div>
+                              <div className="text-icon-normal text-xs">{crypto.name}</div>
                             </div>
                           </div>
                           <div>
-                            <div className="text-[#EAECEF] text-sm">{crypto.balance.toFixed(8)}</div>
-                            <div className="text-[#848e9c] text-xs">{crypto.symbol}</div>
+                            <div className="text-secondary text-sm">{crypto.balance.toFixed(8)}</div>
+                            <div className="text-icon-normal text-xs">{crypto.symbol}</div>
                           </div>
                           <div>
-                            <div className="text-[#EAECEF] text-sm">$0.00 / $0.00</div>
-                            <div className="text-[#848e9c] text-xs">0.00%</div>
+                            <div className="text-secondary text-sm">$0.00 / $0.00</div>
+                            <div className="text-icon-normal text-xs">0.00%</div>
                           </div>
                           <div className="flex items-center space-x-1">
-                            <span className="text-[#0ecb81] text-sm">+$0.00</span>
-                            <span className="text-[#0ecb81] text-xs">(0.00%)</span>
+                            <span className="text-success text-sm">+$0.00</span>
+                            <span className="text-success text-xs">(0.00%)</span>
                           </div>
                         </div>
                       ))
                     ) : (
                       <div className="text-center py-8">
-                        <div className="text-[#848e9c] text-sm">
+                        <div className="text-icon-normal text-sm">
                           {isAuthenticated ? 'Loading balances...' : 'Please sign in to view your crypto balances'}
                         </div>
                       </div>
@@ -369,7 +369,7 @@ export default function Dashboard() {
               ) : (
                 <>
                   {/* Account View Table Header */}
-                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-[#848e9c] mb-4 px-0">
+                  <div className="grid grid-cols-4 gap-4 text-xs font-medium text-icon-normal mb-4 px-0">
                     <div className="flex items-center">
                       <span>Account</span>
                       <ChevronDown className="h-3 w-3 ml-1" />
@@ -390,104 +390,104 @@ export default function Dashboard() {
                   {/* Account View Rows */}
                   <div className="space-y-2">
                     {/* Funding */}
-                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-binance-card rounded">
                       <div className="flex items-center space-x-3">
                         <div className="w-6 h-6 rounded-full bg-transparent flex items-center justify-center">
-                          <svg className="w-4 h-4 text-[#EAECEF]" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
                           </svg>
                         </div>
                         <div>
-                          <div className="text-[#EAECEF] text-sm font-semibold">Funding</div>
+                          <div className="text-secondary text-sm font-semibold">Funding</div>
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-xs">{totalBalance.toFixed(8)}</div>
-                        <div className="text-[#848e9c] text-xs">${totalBalance.toFixed(2)}</div>
+                        <div className="text-secondary text-xs">{totalBalance.toFixed(8)}</div>
+                        <div className="text-icon-normal text-xs">${totalBalance.toFixed(2)}</div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-xs">0.00%</div>
+                        <div className="text-secondary text-xs">0.00%</div>
                       </div>
                       <div>
-                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                        <Button variant="ghost" size="sm" className="text-icon-normal hover:text-white h-6 w-6 p-0">
                           <MoreHorizontal className="h-3 w-3" />
                         </Button>
                       </div>
                     </div>
 
                     {/* Spot */}
-                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-binance-card rounded">
                       <div className="flex items-center space-x-3">
                         <div className="w-6 h-6 rounded-full bg-transparent flex items-center justify-center">
-                          <svg className="w-4 h-4 text-[#EAECEF]" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                           </svg>
                         </div>
                         <div>
-                          <div className="text-[#EAECEF] text-sm font-semibold">Spot</div>
+                          <div className="text-secondary text-sm font-semibold">Spot</div>
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">{totalBalance.toFixed(8)}</div>
-                        <div className="text-[#848e9c] text-xs">${totalBalance.toFixed(2)}</div>
+                        <div className="text-secondary text-sm font-medium">{totalBalance.toFixed(8)}</div>
+                        <div className="text-icon-normal text-xs">${totalBalance.toFixed(2)}</div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                        <div className="text-secondary text-sm font-medium">0.00%</div>
                       </div>
                       <div>
-                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                        <Button variant="ghost" size="sm" className="text-icon-normal hover:text-white h-6 w-6 p-0">
                           <MoreHorizontal className="h-3 w-3" />
                         </Button>
                       </div>
                     </div>
 
                     {/* Cross Margin */}
-                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-binance-card rounded">
                       <div className="flex items-center space-x-3">
                         <div className="w-6 h-6 rounded-full bg-transparent flex items-center justify-center">
-                          <svg className="w-4 h-4 text-[#EAECEF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                           </svg>
                         </div>
                         <div>
-                          <div className="text-[#EAECEF] text-sm font-semibold">Cross Margin</div>
+                          <div className="text-secondary text-sm font-semibold">Cross Margin</div>
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">{totalBalance.toFixed(8)}</div>
-                        <div className="text-[#848e9c] text-xs">${totalBalance.toFixed(2)}</div>
+                        <div className="text-secondary text-sm font-medium">{totalBalance.toFixed(8)}</div>
+                        <div className="text-icon-normal text-xs">${totalBalance.toFixed(2)}</div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                        <div className="text-secondary text-sm font-medium">0.00%</div>
                       </div>
                       <div>
-                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                        <Button variant="ghost" size="sm" className="text-icon-normal hover:text-white h-6 w-6 p-0">
                           <MoreHorizontal className="h-3 w-3" />
                         </Button>
                       </div>
                     </div>
 
                     {/* Isolated Margin */}
-                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-[#1e2329] rounded">
+                    <div className="grid grid-cols-4 gap-4 items-center py-3 px-0 hover:bg-binance-card rounded">
                       <div className="flex items-center space-x-3">
                         <div className="w-6 h-6 rounded-full bg-transparent flex items-center justify-center">
-                          <svg className="w-4 h-4 text-[#EAECEF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                           </svg>
                         </div>
                         <div>
-                          <div className="text-[#EAECEF] text-sm font-semibold">Isolated Margin</div>
+                          <div className="text-secondary text-sm font-semibold">Isolated Margin</div>
                         </div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">{totalBalance.toFixed(8)}</div>
-                        <div className="text-[#848e9c] text-xs">${totalBalance.toFixed(2)}</div>
+                        <div className="text-secondary text-sm font-medium">{totalBalance.toFixed(8)}</div>
+                        <div className="text-icon-normal text-xs">${totalBalance.toFixed(2)}</div>
                       </div>
                       <div>
-                        <div className="text-[#EAECEF] text-sm font-medium">0.00%</div>
+                        <div className="text-secondary text-sm font-medium">0.00%</div>
                       </div>
                       <div>
-                        <Button variant="ghost" size="sm" className="text-[#848e9c] hover:text-white h-6 w-6 p-0">
+                        <Button variant="ghost" size="sm" className="text-icon-normal hover:text-white h-6 w-6 p-0">
                           <MoreHorizontal className="h-3 w-3" />
                         </Button>
                       </div>

@@ -7,11 +7,11 @@ export default function NewsSection() {
   const { data: newsData, isLoading: newsLoading } = useNewsData();
 
   return (
-    <div className="border border-[#2b3139] rounded-2xl p-6 text-[#1E2026] bg-[#1e2329]">
+    <div className="border border-line rounded-2xl p-6 bg-binance-card">
       {/* News Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base font-semibold text-[#EAECEF]">News</h3>
-        <Button variant="ghost" className="text-[#848e9c] hover:text-[#EAECEF] text-sm font-medium p-0">
+        <h3 className="text-base font-semibold text-secondary">News</h3>
+        <Button variant="ghost" className="text-icon-normal hover:text-secondary text-sm font-medium p-0">
           View All News <ChevronRight className="ml-1 h-3 w-3" />
         </Button>
       </div>
@@ -28,13 +28,13 @@ export default function NewsSection() {
               href={news.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-sm text-[#EAECEF] hover:text-[#FCD535] cursor-pointer transition-colors"
+              className="block text-sm text-secondary hover:text-primary cursor-pointer transition-colors"
             >
               {news.title}
             </a>
           ))
         ) : (
-          <div className="text-[#848e9c] text-sm">
+          <div className="text-icon-normal text-sm">
             No news available at the moment.
           </div>
         )}
