@@ -12,7 +12,7 @@ export default function Header() {
   const { isAuthenticated, userProfile, logout } = useFirebaseAuth();
   const [, setLocation] = useLocation();
   return (
-    <header className="bg-binance border-b border-line sticky top-0 z-50">
+    <header className="bg-binance sticky top-0 z-50">
       <div className="flex items-center justify-between h-16 px-6">
         {/* Logo */}
         <div className="flex items-center">
