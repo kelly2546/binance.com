@@ -100,7 +100,7 @@ export default function CryptoPriceCard() {
                 </div>
                 <div 
                   className={`text-xs ${
-                    parseFloat(crypto.price_change_percentage_24h || '0') >= 0 
+                    parseFloat(String(crypto.price_change_percentage_24h || '0')) >= 0 
                       ? 'text-[#0ECB81]' 
                       : 'text-[#F6465D]'
                   }`}

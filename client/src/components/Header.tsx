@@ -12,16 +12,16 @@ export default function Header() {
   const { isAuthenticated, userProfile, logout } = useFirebaseAuth();
   const [, setLocation] = useLocation();
   return (
-    <header className="bg-[#181A20] border-b border-[#2b3139] sticky top-0 z-50">
+    <header className="bg-[#0B0E11] border-b border-[#2b3139] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-[#FCD535] to-[#F7B500] rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-lg">₿</span>
+              <div className="w-8 h-8 bg-[#FCD535] rounded flex items-center justify-center">
+                <span className="text-black font-bold text-sm">B</span>
               </div>
-              <span className="text-white font-bold text-xl">CryptoTrade</span>
+              <span className="text-white font-bold text-xl">Binance</span>
             </div>
           </div>
           
