@@ -1,0 +1,139 @@
+Thanks for sharing the build logs. Here's a clear breakdown of what went wrong and how to fix it to successfully deploy to **Vercel**.
+
+---
+
+## 🔴 **Problem Summary**
+
+The key error is:
+
+```
+Could not resolve entry module "index.html".
+```
+
+This is a **Vite-related error**, indicating that it's expecting an `index.html` as the entry point — typical for Vite **frontend apps**, not backend APIs like Express.
+
+---
+
+## 🧠 Why This Happens
+
+You’re deploying an **Express API** that uses:
+
+* `vite` for building (likely for frontend assets)
+* `tsc` for TypeScript compilation
+
+However, Vite is failing because it's trying to build a **frontend app** but cannot find `index.html`. This means your project might be:
+
+1. A backend-only app that doesn’t need Vite
+2. A fullstack app where Vite is misconfigured
+
+---
+
+## ✅ Fix Instructions (Based on Your Setup)
+
+### 1. 🔍 **Review `package.json` scripts**
+
+You have:
+
+```json
+"vercel-build": "npm run build",
+"build": "vite build && tsc server/index.ts ..."
+```
+
+But if you're **not building a frontend app**, Vite shouldn't be part of this.
+
+#### ✅ Solution:
+
+Update the `build` script to skip Vite if unnecessary:
+
+```json
+"build": "tsc server/index.ts --outDir dist/server --target es2020 --module commonjs --esModuleInterop --allowSyntheticDefaultImports --skipLibCheck"
+```
+
+Or, if using Vite for a frontend app, make sure `index.html` exists in the project root and your file structure supports it.
+
+---
+
+### 2. 🛠️ **Check `vercel.json`**
+
+If you're deploying an Express API with custom build logic, your `vercel.json` might look like this:
+
+```json
+{
+  "version": 2,
+  "builds": [
+    { "src": "server/index.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "server/index.ts" }
+  ]
+}
+```
+
+If you’re using Vite just for a frontend, it would be:
+
+```json
+{
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}
+```
+
+Make sure the `"builds"` matches your actual file structure and purpose.
+
+---
+
+### 3. 🧪 **Try Building Locally**
+
+Run this locally to test:
+
+```bash
+npm run build
+```
+
+If it fails:
+
+* You know Vite is misconfigured.
+* Check if `index.html` exists or if the project is purely backend and doesn't need Vite.
+
+---
+
+### 4. 🚀 **Redeploy via Vercel CLI**
+
+After fixing the above:
+
+```bash
+vercel login
+vercel
+```
+
+---
+
+## 🟢 Optional: Disable Vite for Backend-Only Projects
+
+If you're using Express with TypeScript and don’t need Vite, just remove it:
+
+```bash
+npm uninstall vite
+```
+
+And clean up `package.json` and `vercel.json` accordingly.
+
+---
+
+## Final Recap
+
+| Task                         | Action                          |
+| ---------------------------- | ------------------------------- |
+| 🔧 Remove Vite if not needed | Adjust `build` script           |
+| 📝 Add `vercel.json`         | Tailored to Express or frontend |
+| ✅ Test locally               | `npm run build`                 |
+| 🚀 Deploy again              | `vercel`                        |
+
+---
+
+If you share your folder structure (`index.html`, `server/`, `src/`, etc.), I can give an exact fix.
