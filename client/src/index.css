@@ -37,6 +37,7 @@
   --color-outlineHover: #6A4403;
   --color-primary: #FCD535;
   --color-primaryHover: #F0B90B;
+  --color-primaryGold: #F0B90B;
   --color-error: #F6465D;
   --color-errorBg: #35141D;
   --color-success: #0ECB81;
@@ -169,6 +170,10 @@
     color: var(--color-primary);
   }
   
+  .text-primary-gold {
+    color: var(--color-primaryGold);
+  }
+  
   .text-secondary {
     color: var(--color-textSecondary);
   }
@@ -248,7 +253,7 @@
   .hero-number {
     font-size: 2.5rem; /* 2.5x larger than base text */
     font-weight: bold;
-    color: var(--golden-yellow);
+    color: var(--color-primaryGold);
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     line-height: 1.1;
   }

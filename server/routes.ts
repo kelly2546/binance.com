@@ -62,10 +62,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/crypto", async (req, res) => {
     try {
       const response = await fetch(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false",
+        {
+          headers: {
+            'Accept': 'application/json',
+            'User-Agent': 'CryptoTradingApp/1.0'
+          }
+        }
       );
       
       if (!response.ok) {
+        if (response.status === 429) {
+          console.log("CoinGecko rate limit reached, implementing delay");
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
         throw new Error(`CoinGecko API error: ${response.status}`);
       }
       
