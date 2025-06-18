@@ -75,15 +75,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
     <>
       <Dialog open={isOpen && !showEmailVerification && !showPasswordSetup} onOpenChange={handleMainModalClose}>
         <DialogContent className="bg-[#1e2329] border-[#474d57] text-white max-w-md">
-          <DialogHeader className="relative">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleMainModalClose}
-              className="absolute -top-4 -right-4 text-white hover:bg-[#474d57]"
-            >
-              <X className="h-4 w-4" />
-            </Button>
+          <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-center mt-4">
               Welcome to Binance
             </DialogTitle>

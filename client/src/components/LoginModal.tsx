@@ -41,15 +41,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="bg-[#202630] border-[#474d57] text-white max-w-md">
-        <DialogHeader className="relative">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            className="absolute -top-4 -right-4 text-white hover:bg-[#474d57]"
-          >
-            <X className="h-4 w-4" />
-          </Button>
+        <DialogHeader>
           <div className="flex items-center mt-4">
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" 
