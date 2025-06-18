@@ -4,7 +4,7 @@ node_modules
 .next
 .DS_Store
 server/
-client/node_modules/
+client/
 attached_assets/
 *.tar.gz
 .vercel
@@ -12,3 +12,11 @@ attached_assets/
 deploy.sh
 vercel-deploy.sh
 build-for-vercel.js
+vercel-build.js
+dist/
+vite.config.ts
+tailwind.config.ts
+postcss.config.js
+components.json
+shared/
+drizzle.config.ts
