@@ -137,6 +137,20 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               />
               {loading ? 'Redirecting...' : 'Continue with Google'}
             </Button>
+
+            <Button
+              variant="outline"
+              className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-9"
+              onClick={handleLogin}
+              disabled={!email}
+            >
+              <img 
+                src="https://www.svgrepo.com/show/303125/apple-logo.svg" 
+                alt="Apple" 
+                className="w-4 h-4 mr-2" 
+              />
+              Continue with Apple
+            </Button>
           </div>
         </div>
       </DialogContent>
