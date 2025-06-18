@@ -37,7 +37,7 @@ export default function CryptoPriceCard() {
   };
 
   return (
-    <div className="border border-line rounded-2xl p-6 bg-binance-card">
+    <div className="border border-line rounded-2xl p-6 bg-binance-card pt-[18px] pb-[18px]">
       {/* Tabs */}
       <div className="flex mb-6 border-b border-line">
         <button className="pb-4 px-1 border-b-2 border-primary text-secondary font-medium text-sm">
