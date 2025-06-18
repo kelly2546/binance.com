@@ -1,0 +1,65 @@
+~/workspace$ npm run vercel-build
+
+> rest-express@1.0.0 vercel-build
+> npm run build
+
+
+> rest-express@1.0.0 build
+> vite build && tsc server/index.ts --outDir dist/server --target es2020 --module commonjs --esModuleInterop --allowSyntheticDefaultImports --skipLibCheck
+
+vite v5.4.14 building for production...
+transforming (3) src/main.tsxBrowserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 2556 modules transformed.
+../dist/public/index.html                                   1.03 kB │ gzip:   0.57 kB
+../dist/public/assets/image_1750071666454-BNOBz02U.png     38.21 kB
+../dist/public/assets/index-DykPGi6h.css                   69.89 kB │ gzip:  12.39 kB
+../dist/public/assets/index-Bvi2FDma.js                 1,295.03 kB │ gzip: 343.75 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 11.37s
+server/vite.ts:49:9 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+49         import.meta.dirname,
+           ~~~~~~~~~~~
+
+server/vite.ts:71:33 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+71   const distPath = path.resolve(import.meta.dirname, "public");
+                                   ~~~~~~~~~~~
+
+vite.config.ts:21:25 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+21       "@": path.resolve(import.meta.dirname, "client", "src"),
+                           ~~~~~~~~~~~
+
+vite.config.ts:22:31 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+22       "@shared": path.resolve(import.meta.dirname, "shared"),
+                                 ~~~~~~~~~~~
+
+vite.config.ts:23:31 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+23       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+                                 ~~~~~~~~~~~
+
+vite.config.ts:26:22 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+26   root: path.resolve(import.meta.dirname, "client"),
+                        ~~~~~~~~~~~
+
+vite.config.ts:28:26 - error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+28     outDir: path.resolve(import.meta.dirname, "dist/public"),
+                            ~~~~~~~~~~~
+
+
+Found 7 errors in 2 files.
+
+Errors  Files
+     2  server/vite.ts:49
+     5  vite.config.ts:21
