@@ -212,7 +212,7 @@ export default function Dashboard() {
           <div className="px-4 lg:px-6 py-4">
             {/* Mobile Quick Actions Bar */}
             <div className="lg:hidden mb-4">
-              <div className="flex space-x-2 overflow-x-auto pb-2">
+              <div className="flex space-x-2 overflow-x-auto pb-2 hide-scrollbar">
                 <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
                   <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z" />
@@ -274,14 +274,27 @@ export default function Dashboard() {
                 </div>
               </div>
               
-              <div className="flex items-baseline space-x-2 mb-2">
-                <span className="text-secondary text-xl font-semibold">{totalBalance.toFixed(8)}</span>
-                <span className="text-icon-normal text-sm">USDT</span>
-                <ChevronDown className="h-4 w-4 text-icon-normal mt-1" />
+              <div className="flex items-baseline space-x-3 mb-3">
+                <span className="text-white text-3xl lg:text-2xl font-bold">{totalBalance.toFixed(2)}</span>
+                <span className="text-icon-normal text-base lg:text-sm">USD</span>
               </div>
               
-              <div className="text-icon-normal text-xs mb-3">
-                ≈ ${totalBalance.toFixed(2)}
+              <div className="text-icon-normal text-base lg:text-sm mb-4">
+                ≈ {totalBalance.toFixed(8)} BTC
+              </div>
+              
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-2">
+                  <span className="text-icon-normal text-sm">Today's PnL:</span>
+                  <span className="text-success text-sm font-medium">
+                    +$0.00 (0.00%)
+                  </span>
+                </div>
+                <div className="lg:hidden">
+                  <Button variant="ghost" size="sm" className="text-primary text-sm font-medium h-8 px-3">
+                    View All →
+                  </Button>
+                </div>
               </div>
               
               <div className="flex items-center space-x-2 mb-4">
@@ -333,7 +346,7 @@ export default function Dashboard() {
               </div>
               
               {/* Assets Tabs */}
-              <div className="flex space-x-6 sm:space-x-8 mb-6 border-b border-line overflow-x-auto">
+              <div className="flex space-x-6 sm:space-x-8 mb-6 border-b border-line overflow-x-auto hide-scrollbar">
                 <button 
                   onClick={() => setAssetsViewType("Coin View")}
                   className={`pb-3 text-sm font-medium whitespace-nowrap touch-manipulation ${
