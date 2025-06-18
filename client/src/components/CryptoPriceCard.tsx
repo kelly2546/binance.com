@@ -6,7 +6,6 @@ import { useState } from "react";
 
 export default function CryptoPriceCard() {
   const { data: cryptoData, isLoading: cryptoLoading } = useCryptoData();
-  const [showTicker, setShowTicker] = useState(false);
 
   const getCryptoIcon = (symbol: string) => {
     switch (symbol) {
@@ -38,16 +37,10 @@ export default function CryptoPriceCard() {
     return `${num >= 0 ? '+' : ''}${num.toFixed(2)}%`;
   };
 
-  const generateTickerText = () => {
-    if (!cryptoData) return "";
-    return cryptoData.slice(0, 5).map(crypto => {
-      const price = crypto.current_price ? formatPrice(crypto.current_price) : '$0.00';
-      return `${crypto.symbol.toUpperCase()}${crypto.name}${price}`;
-    }).join(' • ');
-  };
+  
 
   return (
-    <div className="border border-line rounded-2xl p-6 bg-binance-card pt-[18px] pb-[18px]">
+    <div className="border border-line rounded-2xl bg-binance-card p-6 m-4 shadow-sm hover:shadow-md transition-shadow duration-200">
       {/* Tabs */}
       <div className="flex mb-6 border-b border-line">
         <button className="pb-4 px-1 border-b-2 border-primary text-secondary font-medium text-sm">
@@ -57,36 +50,13 @@ export default function CryptoPriceCard() {
           New Listing
         </button>
         <div className="ml-auto flex items-center space-x-4">
-          <Button 
-            variant="ghost" 
-            className="text-icon-normal hover:text-secondary text-sm font-medium p-0"
-            onClick={() => setShowTicker(!showTicker)}
-          >
-            {showTicker ? 'List View' : 'Ticker View'}
-          </Button>
           <Button variant="ghost" className="text-icon-normal hover:text-secondary text-sm font-medium p-0">
             View All 350+ Coins <ChevronRight className="ml-1 h-3 w-3" />
           </Button>
         </div>
       </div>
       {/* Crypto List */}
-      {showTicker && cryptoData ? (
-        <div className="py-4 overflow-hidden bg-binance-card border border-line rounded-lg">
-          <div className="animate-scroll whitespace-nowrap text-secondary text-sm font-medium">
-            <span className="inline-block">{generateTickerText()} • {generateTickerText()}</span>
-          </div>
-          <style jsx>{`
-            @keyframes scroll {
-              0% { transform: translateX(100%); }
-              100% { transform: translateX(-100%); }
-            }
-            .animate-scroll {
-              animation: scroll 30s linear infinite;
-            }
-          `}</style>
-        </div>
-      ) : (
-        <div className="space-y-4 text-[15px] font-bold">
+      <div className="space-y-4 text-[15px] font-bold">
           {cryptoLoading ? (
           // Loading skeleton
           (Array.from({ length: 5 }).map((_, i) => (
@@ -147,7 +117,6 @@ export default function CryptoPriceCard() {
           </div>
         )}
         </div>
-      )}
     </div>
   );
 }
