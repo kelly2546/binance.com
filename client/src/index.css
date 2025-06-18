@@ -24,7 +24,31 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
 
-  /* Binance Custom Colors */
+  /* Binance Design System Colors */
+  --color-sell: #F6465D;
+  --color-textSell: #F6465D;
+  --color-sellHover: #FF707E;
+  --color-depthSellBg: #35141D;
+  --color-buy: #0ECB81;
+  --color-textBuy: #0ECB81;
+  --color-buyHover: #32D993;
+  --color-depthBuyBg: #102821;
+  --color-line: #2B3139;
+  --color-outlineHover: #6A4403;
+  --color-primary: #FCD535;
+  --color-primaryHover: #F0B90B;
+  --color-error: #F6465D;
+  --color-errorBg: #35141D;
+  --color-success: #0ECB81;
+  --color-successBg: #102821;
+  --color-disable: #474D57;
+  --color-iconNormal: #848E9C;
+  --color-textWhite: #FFFFFF;
+  --color-textSecondary: #EAECEF;
+  --color-bg: #181A20;
+  --color-cardBg: #1E2329;
+  
+  /* Legacy Binance Colors (keeping for compatibility) */
   --binance-dark: hsl(214, 24%, 6%);
   --binance-card: hsl(220, 13%, 18%);
   --binance-yellow: hsl(45, 93%, 50%);
@@ -66,7 +90,9 @@
   }
 
   body {
-    @apply font-sans antialiased bg-[var(--binance-dark)] text-white text-sm;
+    @apply font-sans antialiased text-sm;
+    background-color: var(--color-bg);
+    color: var(--color-textWhite);
     line-height: 1.5;
     letter-spacing: 0.2px;
   }
@@ -113,6 +139,83 @@
 }
 
 @layer utilities {
+  /* Background Colors */
+  .bg-binance {
+    background-color: var(--color-bg);
+  }
+  
+  .bg-binance-card {
+    background-color: var(--color-cardBg);
+  }
+  
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  
+  .bg-primary-hover {
+    background-color: var(--color-primaryHover);
+  }
+  
+  .bg-success {
+    background-color: var(--color-success);
+  }
+  
+  .bg-error {
+    background-color: var(--color-error);
+  }
+  
+  /* Text Colors */
+  .text-primary {
+    color: var(--color-primary);
+  }
+  
+  .text-secondary {
+    color: var(--color-textSecondary);
+  }
+  
+  .text-white {
+    color: var(--color-textWhite);
+  }
+  
+  .text-success {
+    color: var(--color-success);
+  }
+  
+  .text-error {
+    color: var(--color-error);
+  }
+  
+  .text-icon-normal {
+    color: var(--color-iconNormal);
+  }
+  
+  .text-disabled {
+    color: var(--color-disable);
+  }
+  
+  /* Border Colors */
+  .border-line {
+    border-color: var(--color-line);
+  }
+  
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  
+  /* Hover States */
+  .hover\:bg-primary-hover:hover {
+    background-color: var(--color-primaryHover);
+  }
+  
+  .hover\:text-primary:hover {
+    color: var(--color-primary);
+  }
+  
+  .hover\:text-white:hover {
+    color: var(--color-textWhite);
+  }
+  
+  /* Legacy utilities (keeping for compatibility) */
   .binance-dark {
     background-color: var(--binance-dark);
   }
