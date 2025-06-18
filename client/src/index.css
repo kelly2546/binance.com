@@ -251,41 +251,35 @@
 
   /* Custom Typography Classes */
   .hero-number {
-    font-size: 2.5rem; /* 2.5x larger than base text */
+    font-size: 84px;
+    line-height: 88px;
     font-weight: bold;
     color: var(--color-primaryGold);
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    line-height: 1.1;
   }
 
   .hero-text {
-    font-size: 1.8rem; /* 1.8x larger than base text */
+    font-size: 84px;
+    line-height: 88px;
     font-weight: bold;
     color: #FFFFFF;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     text-transform: uppercase;
-    line-height: 0.8; /* Tight spacing between lines */
     letter-spacing: normal;
   }
 
-  /* Responsive sizing */
-  @media (min-width: 768px) {
+  /* Responsive sizing for mobile devices */
+  @media (max-width: 768px) {
     .hero-number {
-      font-size: 4rem;
+      font-size: 48px;
+      line-height: 52px;
+      text-align: center;
     }
     
     .hero-text {
-      font-size: 2.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .hero-number {
-      font-size: 5rem;
-    }
-    
-    .hero-text {
-      font-size: 3rem;
+      font-size: 48px;
+      line-height: 52px;
+      text-align: center;
     }
   }
 }
