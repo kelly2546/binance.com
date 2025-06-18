@@ -8,7 +8,7 @@ export default function Footer() {
       <section className="border border-[#2b3139] rounded-lg mx-4 sm:mx-6 lg:mx-8 my-20 py-20 text-[#1E2026] bg-[#1e2329]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-[#EAECEF]">Start earning today</h2>
-          <Button className="bg-[#FCD535] text-black px-6 py-3 text-sm font-semibold hover:bg-[#e6c230]">
+          <Button className="text-black px-6 py-3 text-sm font-semibold hover:bg-[#e6c230] bg-[#fcd535]">
             Sign Up Now
           </Button>
         </div>

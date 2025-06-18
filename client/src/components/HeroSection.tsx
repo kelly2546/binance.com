@@ -42,7 +42,7 @@ export default function HeroSection() {
                   className="flex-1 bg-binance border-disabled rounded-2xl text-secondary placeholder:text-icon-normal focus:border-primary focus:ring-0 h-12 px-4"
                 />
                 <Button 
-                  className="bg-primary text-black rounded-2xl font-semibold hover:bg-primary-hover h-12 px-8 border-0 text-sm"
+                  className="bg-[#fcd535] text-black rounded-2xl font-semibold hover:bg-primary-hover h-12 px-8 border-0 text-sm"
                   onClick={() => setIsSignUpModalOpen(true)}
                 >
                   Sign Up

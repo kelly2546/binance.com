@@ -74,15 +74,15 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 pt-4">
+        <div className="space-y-4 pt-2">
           {error && (
-            <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-3">
+            <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-2">
               <p className="text-red-400 text-sm">{error}</p>
             </div>
           )}
 
           <div>
-            <label className="text-sm font-medium mb-2 block">
+            <label className="text-sm font-medium mb-1 block">
               Email
             </label>
             <Input
@@ -93,12 +93,12 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 setEmail(e.target.value);
                 setIsEmailLogin(true);
               }}
-              className="bg-[#2b3139] border-[#474d57] text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-12"
+              className="bg-[#2b3139] border-[#474d57] text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-10"
             />
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-2 block">
+            <label className="text-sm font-medium mb-1 block">
               Password
             </label>
             <div className="relative">
@@ -107,81 +107,58 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-[#2b3139] border-[#474d57] text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-12"
+                className="bg-[#2b3139] border-[#474d57] text-white placeholder:text-[#848e9c] focus:border-[var(--binance-yellow)] focus:ring-0 h-10"
               />
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute top-1/2 right-2 -translate-y-1/2 text-white hover:bg-[#474d57]"
+                className="absolute top-1/2 right-2 -translate-y-1/2 text-white hover:bg-[#474d57] h-6 w-6"
               >
-                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showPassword ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
               </Button>
             </div>
           </div>
 
-
           <Button
-            className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-12"
+            className="w-full bg-[var(--binance-yellow)] text-black font-medium hover:bg-yellow-400 h-10"
             disabled={!email || !password}
             onClick={handleLogin}
           >
             Log In
           </Button>
 
-          <div className="text-center">
-            <span className="text-[#848e9c]">or</span>
+          <div className="text-center py-1">
+            <span className="text-[#848e9c] text-sm">or</span>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             <Button
               variant="outline"
-              className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
-            >
-              <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7v10c0 5.55 3.84 9.95 9 11 5.16-1.05 9-5.45 9-11V7l-10-5z"/>
-              </svg>
-              Continue with Passkey
-            </Button>
-
-            <Button
-              variant="outline"
-              className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
+              className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-9"
               onClick={handleGoogleLogin}
               disabled={loading}
             >
               <img 
                 src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" 
                 alt="Google" 
-                className="w-5 h-5 mr-3" 
+                className="w-4 h-4 mr-2" 
               />
               {loading ? 'Redirecting...' : 'Continue with Google'}
             </Button>
 
             <Button
               variant="outline"
-              className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
+              className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-9"
               onClick={handleLogin}
               disabled={!email}
             >
               <img 
                 src="https://www.svgrepo.com/show/303125/apple-logo.svg" 
                 alt="Apple" 
-                className="w-5 h-5 mr-3" 
+                className="w-4 h-4 mr-2" 
               />
               Continue with Apple
-            </Button>
-
-            <Button
-              variant="outline"
-              className="w-full bg-transparent border-[#474d57] text-white hover:bg-[#474d57] h-12"
-              onClick={handleLogin}
-              disabled={!email}
-            >
-              <svg className="w-5 h-5 mr-3 text-blue-400" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7v10c0 5.55 3.84 9.95 9 11 5.16-1.05 9-5.45 9-11V7l-10-5z"/>
-              </svg>
-              Continue with Telegram
             </Button>
           </div>
         </div>
