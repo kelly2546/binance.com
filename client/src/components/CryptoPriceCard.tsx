@@ -40,7 +40,7 @@ export default function CryptoPriceCard() {
   
 
   return (
-    <div className="border border-line rounded-2xl bg-binance-card p-6 m-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+    <div className="border border-line rounded-2xl bg-binance-card p-6 m-4 shadow-sm hover:shadow-md transition-shadow duration-200 text-[20px] font-medium">
       {/* Tabs */}
       <div className="flex mb-6 border-b border-line">
         <button className="pb-4 px-1 border-b-2 border-primary text-secondary font-medium text-sm">
