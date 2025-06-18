@@ -208,74 +208,74 @@ export default function Dashboard() {
         return (
           <div className="px-6 py-4">
             {/* Estimated Balance Section */}
-            <div className="rounded-lg p-6 mb-6 border border-[#2b3139]">
+            <div className="rounded-lg p-6 mb-6 border border-line">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-2">
-                  <h2 className="text-[#EAECEF] text-base font-semibold">Estimated Balance</h2>
-                  <svg className="w-4 h-4 text-[#848e9c]" fill="currentColor" viewBox="0 0 20 20">
+                  <h2 className="text-secondary text-base font-semibold">Estimated Balance</h2>
+                  <svg className="w-4 h-4 text-icon-normal" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#2b3139] text-[#EAECEF] hover:bg-[#3a404a] text-xs h-7 px-4 rounded font-medium">
+                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-7 px-4 rounded font-medium">
                     Transfer
                   </Button>
                 </div>
               </div>
               
               <div className="flex items-baseline space-x-2 mb-2">
-                <span className="text-[#EAECEF] text-xl font-semibold">{totalBalance.toFixed(8)}</span>
-                <span className="text-[#848e9c] text-sm">USDT</span>
-                <ChevronDown className="h-4 w-4 text-[#848e9c] mt-1" />
+                <span className="text-secondary text-xl font-semibold">{totalBalance.toFixed(8)}</span>
+                <span className="text-icon-normal text-sm">USDT</span>
+                <ChevronDown className="h-4 w-4 text-icon-normal mt-1" />
               </div>
               
-              <div className="text-[#848e9c] text-xs mb-3">
+              <div className="text-icon-normal text-xs mb-3">
                 ≈ ${totalBalance.toFixed(2)}
               </div>
               
               <div className="flex items-center space-x-2 mb-4">
-                <span className="text-[#848e9c] text-xs">Today's PnL</span>
+                <span className="text-icon-normal text-xs">Today's PnL</span>
                 <div className="flex items-center space-x-1">
-                  <svg className={`w-3 h-3 ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`} fill="currentColor" viewBox="0 0 20 20">
+                  <svg className={`w-3 h-3 ${todayPnL >= 0 ? 'text-success' : 'text-error'}`} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d={todayPnL >= 0 ? "M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" : "M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"} clipRule="evenodd" />
                   </svg>
-                  <span className={`text-xs ${todayPnL >= 0 ? 'text-[#0ecb81]' : 'text-[#f6465d]'}`}>
+                  <span className={`text-xs ${todayPnL >= 0 ? 'text-success' : 'text-error'}`}>
                     {todayPnL >= 0 ? '+' : ''}${Math.abs(todayPnL).toFixed(3)} ({pnlPercentage.toFixed(1)}%)
                   </span>
                 </div>
               </div>
               
               {/* Chart */}
-              <div className="h-12 bg-[#1e2329] rounded-lg relative overflow-hidden">
+              <div className="h-12 bg-binance-card rounded-lg relative overflow-hidden">
                 <svg className="absolute bottom-0 right-0 w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
-                  <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="#FCD535" strokeWidth="2" fill="none"/>
+                  <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="var(--color-primary)" strokeWidth="2" fill="none"/>
                 </svg>
               </div>
             </div>
 
             {/* My Assets Section */}
-            <div className="rounded-lg p-6 border border-[#2b3139]">
+            <div className="rounded-lg p-6 border border-line">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-[#EAECEF] text-base font-semibold">My Assets</h2>
+                <h2 className="text-secondary text-base font-semibold">My Assets</h2>
                 <div className="flex items-center space-x-4">
-                  <Button variant="ghost" size="icon" className="text-[#848e9c] hover:text-white h-8 w-8">
+                  <Button variant="ghost" size="icon" className="text-icon-normal hover:text-white h-8 w-8">
                     <Search className="h-4 w-4" />
                   </Button>
-                  <div className="flex items-center space-x-2 text-sm text-[#848e9c]">
-                    <input type="checkbox" className="w-4 h-4 rounded border-[#2b3139]" />
+                  <div className="flex items-center space-x-2 text-sm text-icon-normal">
+                    <input type="checkbox" className="w-4 h-4 rounded border-line" />
                     <span>Hide assets &lt;1 USD</span>
                   </div>
                 </div>
               </div>
               
               {/* Assets Tabs */}
-              <div className="flex space-x-8 mb-6 border-b border-[#1e2329]">
+              <div className="flex space-x-8 mb-6 border-b border-line">
                 <button 
                   onClick={() => setAssetsViewType("Coin View")}
                   className={`pb-3 text-sm font-medium ${
