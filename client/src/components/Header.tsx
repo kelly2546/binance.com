@@ -5,6 +5,7 @@ import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
 import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 import { useLocation } from "wouter";
+import MobileNavDrawer from "./MobileNavDrawer";
 
 export default function Header() {
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
@@ -106,9 +107,12 @@ export default function Header() {
             </>
           )}
           
-          <Button variant="ghost" size="icon" className="lg:hidden text-white h-10 w-10 touch-manipulation">
-            <Menu className="h-4 w-4" />
-          </Button>
+          <MobileNavDrawer 
+            activeSection=""
+            setActiveSection={() => {}}
+            expandedMenus={{}}
+            toggleMenu={() => {}}
+          />
         </div>
       </div>
       

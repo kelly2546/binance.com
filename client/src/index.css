@@ -282,4 +282,75 @@
       text-align: center;
     }
   }
+
+  @media (max-width: 480px) {
+    .hero-number {
+      font-size: 36px;
+      line-height: 40px;
+      text-align: center;
+    }
+    
+    .hero-text {
+      font-size: 36px;
+      line-height: 40px;
+      text-align: center;
+    }
+  }
+
+  /* Mobile-specific optimizations */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Improve tap targets for mobile */
+  button, input[type="button"], input[type="submit"], input[type="reset"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Prevent zoom on input focus in iOS */
+  input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], input[type="url"], input[type="search"], textarea, select {
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], input[type="url"], input[type="search"], textarea, select {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Smooth scrolling for mobile */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hide scrollbars but keep functionality */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--color-line);
+    border-radius: 2px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-iconNormal);
+  }
 }
