@@ -17,11 +17,12 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" 
-              alt="Binance" 
-              className="h-8 w-auto"
-            />
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-r from-[#FCD535] to-[#F7B500] rounded-lg flex items-center justify-center">
+                <span className="text-black font-bold text-lg">₿</span>
+              </div>
+              <span className="text-white font-bold text-xl">CryptoTrade</span>
+            </div>
           </div>
           
           {/* Navigation */}
