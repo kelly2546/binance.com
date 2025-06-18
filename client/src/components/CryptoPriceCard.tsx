@@ -37,13 +37,13 @@ export default function CryptoPriceCard() {
   };
 
   return (
-    <div className="border border-line rounded-2xl p-6 bg-binance-card">
+    <div className="border border-line rounded-2xl p-4 bg-binance-card h-full flex flex-col">
       {/* Tabs */}
-      <div className="flex mb-6 border-b border-line">
-        <button className="pb-4 px-1 border-b-2 border-primary text-secondary font-medium text-sm">
+      <div className="flex mb-4 border-b border-line">
+        <button className="pb-2 px-1 border-b-2 border-primary text-secondary font-medium text-sm">
           Popular
         </button>
-        <button className="pb-4 px-4 text-icon-normal hover:text-secondary font-medium text-sm">
+        <button className="pb-2 px-4 text-icon-normal hover:text-secondary font-medium text-sm">
           New Listing
         </button>
         <div className="ml-auto">
@@ -53,11 +53,11 @@ export default function CryptoPriceCard() {
         </div>
       </div>
       {/* Crypto List */}
-      <div className="space-y-4">
+      <div className="space-y-2 flex-1">
         {cryptoLoading ? (
           // Loading skeleton
-          (Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="flex items-center justify-between py-2">
+          (Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="flex items-center justify-between py-1">
               <div className="flex items-center">
                 <Skeleton className="w-8 h-8 rounded-full mr-3" />
                 <div>
@@ -72,8 +72,8 @@ export default function CryptoPriceCard() {
             </div>
           )))
         ) : cryptoData ? (
-          cryptoData.slice(0, 5).map((crypto) => (
-            <div key={crypto.id} className="flex items-center justify-between py-2">
+          cryptoData.slice(0, 4).map((crypto) => (
+            <div key={crypto.id} className="flex items-center justify-between py-1">
               <div className="flex items-center">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center mr-3 overflow-hidden">
                   <img 
@@ -109,7 +109,7 @@ export default function CryptoPriceCard() {
             </div>
           ))
         ) : (
-          <div className="text-center py-8 text-icon-normal text-lg font-semibold">
+          <div className="text-center py-4 text-icon-normal text-sm font-semibold">
             Failed to load cryptocurrency data
           </div>
         )}

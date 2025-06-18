@@ -20,11 +20,11 @@ export default function HeroSection() {
   return (
     <section className="bg-binance pt-20 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Content */}
-          <div className="flex flex-col">
+          <div className="flex flex-col h-full">
             {/* Hero Stats - Aligned with Popular section */}
-            <div className="py-6 mb-8">
+            <div className="py-4 mb-6">
               <div className="hero-number mb-4">
                 {userCount.toLocaleString()}
               </div>
@@ -34,7 +34,7 @@ export default function HeroSection() {
             </div>
             
             {/* Sign Up Form */}
-            <div className="mb-8">
+            <div className="mb-4">
               <div className="flex max-w-md gap-2">
                 <Input 
                   type="text" 
@@ -51,8 +51,8 @@ export default function HeroSection() {
             </div>
             
             {/* Or Continue With */}
-            <div className="mb-8">
-              <p className="text-icon-normal mb-4 text-sm">Or Continue With</p>
+            <div className="mb-4">
+              <p className="text-icon-normal mb-2 text-sm">Or Continue With</p>
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
@@ -79,8 +79,8 @@ export default function HeroSection() {
             </div>
             
             {/* Download App */}
-            <div>
-              <p className="text-icon-normal mb-4 text-sm">Download App</p>
+            <div className="flex-1">
+              <p className="text-icon-normal mb-2 text-sm">Download App</p>
               <div className="flex space-x-4">
                 <Button 
                   variant="outline" 
@@ -100,10 +100,9 @@ export default function HeroSection() {
             </div>
           </div>
           
-          {/* Right Content - Crypto Prices and News */}
-          <div className="space-y-6">
+          {/* Right Content - Popular Coins */}
+          <div className="flex flex-col h-full">
             <CryptoPriceCard />
-            <NewsSection />
           </div>
         </div>
       </div>
