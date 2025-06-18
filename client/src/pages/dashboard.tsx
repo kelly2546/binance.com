@@ -13,6 +13,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useLocation } from "wouter";
 import CryptoPriceCard from "@/components/CryptoPriceCard";
 import NewsSection from "@/components/NewsSection";
+import MobileBottomNavigation from "@/components/MobileBottomNavigation";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("Holding");
@@ -23,6 +24,7 @@ export default function Dashboard() {
   const [userSticker, setUserSticker] = useState("🦊");
   const [userName, setUserName] = useState("");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [viewMode, setViewMode] = useState<"lite" | "pro">("lite");
   const [, setLocation] = useLocation();
 
   const toggleMenu = (menuName: string) => {
@@ -207,24 +209,66 @@ export default function Dashboard() {
     switch (activeSection) {
       case "Overview":
         return (
-          <div className="px-6 py-4">
+          <div className="px-4 lg:px-6 py-4">
+            {/* Mobile Quick Actions Bar */}
+            <div className="lg:hidden mb-4">
+              <div className="flex space-x-2 overflow-x-auto pb-2">
+                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
+                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z" />
+                  </svg>
+                  <span className="text-xs text-secondary">Trade</span>
+                </button>
+                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
+                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z" />
+                    <path d="M3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6z" />
+                  </svg>
+                  <span className="text-xs text-secondary">Markets</span>
+                </button>
+                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
+                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                  </svg>
+                  <span className="text-xs text-secondary">Earn</span>
+                </button>
+                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
+                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path d="M18 8a2 2 0 11-4 0 2 2 0 014 0z" />
+                    <path d="M14 15a4 4 0 00-8 0v3h8v-3z" />
+                  </svg>
+                  <span className="text-xs text-secondary">P2P</span>
+                </button>
+                <button className="flex flex-col items-center justify-center min-w-[70px] h-16 bg-[#2b3139] rounded-lg touch-manipulation hover:bg-[#474d57] transition-colors">
+                  <svg className="w-5 h-5 text-primary mb-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-xs text-secondary">Convert</span>
+                </button>
+              </div>
+            </div>
+
             {/* Estimated Balance Section */}
-            <div className="rounded-lg p-6 mb-6 border border-line">
+            <div className="rounded-lg p-4 lg:p-6 mb-6 border border-line bg-gradient-to-r from-[#1e2026] to-[#181a20]">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
                 <div className="flex items-center space-x-2">
-                  <h2 className="text-secondary text-base font-semibold">Estimated Balance</h2>
-                  <svg className="w-4 h-4 text-icon-normal" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
+                  <h2 className="text-secondary text-lg lg:text-base font-semibold">Total Balance</h2>
+                  <button className="touch-manipulation">
+                    <svg className="w-4 h-4 text-icon-normal hover:text-white transition-colors" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clipRule="evenodd" />
+                      <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                    </svg>
+                  </button>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-10 sm:h-7 px-4 rounded font-medium touch-manipulation">
+                  <Button variant="outline" size="sm" className="bg-primary text-black hover:bg-yellow-500 text-xs h-12 lg:h-8 px-4 rounded-lg font-medium touch-manipulation min-w-[80px]">
                     Deposit
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-10 sm:h-7 px-4 rounded font-medium touch-manipulation">
+                  <Button variant="outline" size="sm" className="bg-[#2b3139] border-[#474d57] text-secondary hover:bg-[#474d57] text-xs h-12 lg:h-8 px-4 rounded-lg font-medium touch-manipulation min-w-[80px]">
                     Withdraw
                   </Button>
-                  <Button variant="outline" size="sm" className="bg-binance-card border-line text-secondary hover:bg-primary hover:text-black text-xs h-10 sm:h-7 px-4 rounded font-medium touch-manipulation">
+                  <Button variant="outline" size="sm" className="lg:inline-flex hidden bg-[#2b3139] border-[#474d57] text-secondary hover:bg-[#474d57] text-xs h-8 px-4 rounded-lg font-medium touch-manipulation">
                     Transfer
                   </Button>
                 </div>
@@ -252,11 +296,23 @@ export default function Dashboard() {
                 </div>
               </div>
               
-              {/* Chart */}
-              <div className="h-16 sm:h-12 bg-binance-card rounded-lg relative overflow-hidden">
-                <svg className="absolute bottom-0 right-0 w-full sm:w-40 h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
-                  <path d="M0,20 L40,35 L80,36 L120,36 L160,36" stroke="var(--color-primary)" strokeWidth="2" fill="none"/>
-                </svg>
+              {/* Chart - Enhanced for mobile */}
+              <div className="h-20 lg:h-16 bg-gradient-to-r from-[#2b3139] to-[#1e2026] rounded-lg relative overflow-hidden border border-[#474d57]">
+                <div className="absolute inset-0 flex items-end justify-end p-3">
+                  <svg className="w-full h-full" viewBox="0 0 160 48" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.3"/>
+                        <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,30 L40,25 L80,20 L120,15 L160,10" stroke="var(--color-primary)" strokeWidth="2" fill="none"/>
+                    <path d="M0,30 L40,25 L80,20 L120,15 L160,10 L160,48 L0,48 Z" fill="url(#chartGradient)"/>
+                  </svg>
+                </div>
+                <div className="absolute top-3 left-3 text-success text-xs font-medium">
+                  +2.45%
+                </div>
               </div>
             </div>
 
@@ -1239,8 +1295,10 @@ export default function Dashboard() {
         </div>
       </header>
       <div className="flex">
-        {/* Sidebar */}
-        <div className={`${sidebarCollapsed ? 'w-16' : 'w-48'} bg-[#181a20] min-h-[calc(100vh-56px)] transition-all duration-300 relative`}>
+        {/* Sidebar - Hidden on mobile in Lite mode */}
+        <div className={`${
+          viewMode === "lite" ? "hidden lg:block" : "block"
+        } ${sidebarCollapsed ? 'w-16' : 'w-48'} bg-[#181a20] min-h-[calc(100vh-56px)] transition-all duration-300 relative`}>
           {/* Sidebar Toggle Button */}
           <div className="absolute -right-3 top-6 z-10">
             <Button
@@ -1612,10 +1670,44 @@ export default function Dashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 bg-[#181A20] pb-20 lg:pb-0">
+        <div className="flex-1 bg-[#181A20] pb-20 lg:pb-4">
+          {/* Mobile Mode Toggle */}
+          <div className="lg:hidden flex items-center justify-between p-4 border-b border-line">
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setViewMode("lite")}
+                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors touch-manipulation ${
+                  viewMode === "lite"
+                    ? "bg-primary text-black"
+                    : "bg-[#2b3139] text-secondary hover:bg-[#474d57]"
+                }`}
+              >
+                Lite
+              </button>
+              <button
+                onClick={() => setViewMode("pro")}
+                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors touch-manipulation ${
+                  viewMode === "pro"
+                    ? "bg-primary text-black"
+                    : "bg-[#2b3139] text-secondary hover:bg-[#474d57]"
+                }`}
+              >
+                Pro
+              </button>
+            </div>
+            <div className="text-xs text-icon-normal">
+              {viewMode === "lite" ? "Optimized for speed" : "Full features"}
+            </div>
+          </div>
           {renderMainContent()}
         </div>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNavigation 
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+      />
 
       {/* Profile Edit Modal */}
       <ProfileEditModal
